@@ -1,5 +1,6 @@
 pre {
     color: white;
     background-color: black;
-    padding: 10px;
+    padding: 0.75rem 1.25rem;
+    border-radius: 5px;
 }
