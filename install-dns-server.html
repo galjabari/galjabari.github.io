@@ -55,7 +55,7 @@
         <pre>sudo systemctl restart bind9.service</pre>
         <p>Verify that BIND is running without errors.</p>
         <pre>sudo systemctl status bind9.service</pre>
-        <p>Finally, test DNS resolution for your domain.</p>
+        <p>Finally, test DNS resolution for your domain name.</p>
         <pre>dig example.com</pre>
         <p>You should see the DNS records returned by your authoritative DNS server.</p>
         <p>To add a new DNS record for "www.example.com" pointing to "example.com", edit the zone file.</p>
@@ -64,7 +64,7 @@
         <pre>www IN CNAME example.com.</pre>
         <p>After adding the new DNS record, restart the BIND service to apply the changes.</p>
         <pre>sudo systemctl restart bind9.service</pre>
-        <p>Finally, test DNS resolution for the newly added subdomain.</p>
+        <p>Finally, test DNS resolution for the newly added domain name.</p>
         <pre>dig www.example.com</pre>
         <p>You should see the DNS records returned by your authoritative DNS server.</p>
     </div>
