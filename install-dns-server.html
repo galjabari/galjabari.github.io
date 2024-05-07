@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Install and configure an authoritative DNS Server on Ubuntu</h5>
+        <p>Before installing the DNS server, ensure that your system's has a static IP address (for example, 192.168.1.10/24).</p>
+        <p>First, update the package lists to ensure you install the latest versions of packages.</p>
+        <pre>sudo apt update</pre>
+        <p>Install the BIND DNS server package.</p>
+        <pre>sudo apt install bind9</pre>
+        <p>Edit the BIND configuration file to define the zone.</p> 
+        <pre>sudo nano /etc/bind/named.conf.local</pre>
+        <p>Add the following configuration for your domain, replacing "example.com" with your actual domain name:</p>
+        <pre>zone "example.com" {<br>  type master;<br>  file "/etc/bind/db.example.com";<br>};</pre>
+        <p>Copy the default zone file and create a new one for your domain.</p>
+        <pre>sudo cp /etc/bind/db.local /etc/bind/db.example.com</pre>
+        <p>Edit the newly created zone file for your domain.</p>
+        <pre>sudo nano /etc/bind/db.example.com</pre>
+        <p>Replace the contents with the following, updating with your actual domain name and IP addresses:</p>
+        <pre>;<br>; BIND data file for example.com<br>;<br>$TTL 604800<br>@  IN SOA example.com. root.example.com. (<br> 2 ; Serial<br> 604800 ; Refresh<br> 86400 ; Retry<br> 2419200 ; Expire<br> 604800 ) ; Negative Cache TTL
+            <br>@  IN NS ns.example.com.<br>@  IN A  192.168.1.10<br>ns IN A  192.168.1.10</pre>
+        <p>After making changes, restart the BIND9 service to apply the configuration.</p>
+        <pre>sudo systemctl restart bind9.service</pre>
+        <p>Verify that BIND is running without errors.</p>
+        <pre>sudo systemctl status bind9.service</pre>
+        <p>Finally, test DNS resolution for your domain.</p>
+        <pre>dig example.com</pre>
+        <p>You should see the DNS records returned by your authoritative DNS server.</p>
+        <p>To add a new DNS record for "www.example.com" pointing to "example.com", edit the zone file.</p>
+        <pre>sudo nano /etc/bind/db.example.com</pre>
+        <p>Add the following line under the existing records:</p>
+        <pre>www IN CNAME example.com.</pre>
+        <p>After adding the new DNS record, restart the BIND service to apply the changes.</p>
+        <pre>sudo systemctl restart bind9.service</pre>
+        <p>Finally, test DNS resolution for the newly added subdomain.</p>
+        <pre>dig www.example.com</pre>
+        <p>You should see the DNS records returned by your authoritative DNS server.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
