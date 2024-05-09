@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Install and configure LDAP Server on Ubuntu</h5>
+        <p>First, set hostname within your domain. Replace "example.com" with your actual domain.</p>
+        <pre>sudo hostname ldap.example.com</pre>
+        <p>Next, update package lists and install OpenLDAP and related utilities.</p>
+        <pre>sudo apt update<br>sudo apt install slapd ldap-utils</pre>
+        <p>After installation, you will be prompted to configure OpenLDAP server. When prompted to set up your LDAP administrator password, enter a new password and then confirm the password.</p>
+        <p>You can also reconfigure OpenLDAP server anytime using:</p>
+        <pre>sudo dpkg-reconfigure slapd</pre>
+        <p>Step 1: Select No if you want to omit the OpenLDAP server configuration.</p>
+        <p>Step 2: Enter your domain name that will become your base Distinguished Name (DN). If you enter "example.com", it is converted to "dc=example,dc=com"</p>
+        <p>Step 3: Select Yes if you want to remove the database files.</p>
+        <p>Step 4: Select Yes if you want to move existing LDAP files.</p>
+        <p>Create a file named <code>base.ldif</code> using your preferred text editor. This file defines the base organizational units for your LDAP directory.</p>
+        <pre>sudo nano base.ldif</pre>
+        <p>Add the following content to the file:</p>
+        <pre>dn: ou=People,dc=example,dc=com<br>objectClass: organizationalUnit<br>ou: People
+            <br>dn: ou=Groups,dc=example,dc=com<br>objectClass: organizationalUnit<br>ou: Groups</pre>
+        <p>Use <code>ldapadd</code> command to add entries to the LDAP directory.</p>
+        <pre>ldapadd -x -D cn=admin,dc=example,dc=com -W -f base.ldif</pre>
+        <p>You will be prompted to enter the password of LDAP administrator.</p>
+        <p>Create a file named <code>account.ldif</code> to define user entries.</p>
+        <pre>sudo nano account.ldif</pre>
+        <p>Add the following content to the file:</p>
+        <pre>dn: uid=user1,ou=People,dc=example,dc=com<br>objectClass: inetOrgPerson<br>uid: user1<br>cn: User 1<br>gn: User<br>sn: 1<br>userPassword: secret
+            <br>dn: uid=user2,ou=People,dc=example,dc=com<br>objectClass: inetOrgPerson<br>uid: user2<br>cn: User 2<br>gn: User<br>sn: 2<br>userPassword: secret</pre>
+        <p>Use <code>ldapadd</code> command to add entries to the LDAP directory.</p>
+        <pre>ldapadd -x -D cn=admin,dc=example,dc=com -W -f account.ldif</pre>
+        <p>Create a file named <code>group.ldif</code> to define group entries.</p>
+        <pre>sudo nano group.ldif</pre>
+        <p>Use <code>ldapadd</code> command to add entries to the LDAP directory.</p>
+        <pre>ldapadd -x -D cn=admin,dc=example,dc=com -W -f group.ldif</pre>
+        <p>You can use <code>ldapsearch</code> command to test the LDAP connection and perform queries.</p>
+        <p>Here's how you can test:</p>
+        <pre>ldapsearch -x -LLL -H ldap://ldap.example.com -b dc=example,dc=com</pre>
+        <p>This command queries the LDAP server for all entries under the base DN. Replace ldap.example.com with your LDAP server's hostname or IP address.</p>
+        <p>You can also test binding to the LDAP server using a specific user's credentials.</p>
+        <pre>ldapsearch -x -LLL -H ldap://ldap.example.com -D "uid=user1,ou=People,dc=example,dc=com" -W</pre>
+        <p>This command will prompt you to enter the password of <code>user1</code> to test bind authentication.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
