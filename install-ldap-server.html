@@ -63,6 +63,8 @@
         <pre>ldapadd -x -D cn=admin,dc=example,dc=com -W -f account.ldif</pre>
         <p>Create a file named <code>group.ldif</code> to define group entries.</p>
         <pre>sudo nano group.ldif</pre>
+        <p>Add the following content to the file:</p>
+        <pre>dn: cn=group1,ou=Groups,dc=example,dc=com<br>objectClass: groupOfNames<br>member: uid=user1,ou=People,dc=example,dc=com<br>member: uid=user2,ou=People,dc=example,dc=com</pre>
         <p>Use <code>ldapadd</code> command to add entries to the LDAP directory.</p>
         <pre>ldapadd -x -D cn=admin,dc=example,dc=com -W -f group.ldif</pre>
         <p>You can use <code>ldapsearch</code> command to test the LDAP connection and perform queries.</p>
