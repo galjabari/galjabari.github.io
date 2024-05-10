@@ -69,11 +69,8 @@
         <pre>ldapadd -x -D cn=admin,dc=example,dc=com -W -f group.ldif</pre>
         <p>You can use <code>ldapsearch</code> command to test the LDAP connection and perform queries.</p>
         <p>Here's how you can test:</p>
-        <pre>ldapsearch -x -LLL -H ldap://ldap.example.com -b dc=example,dc=com</pre>
-        <p>This command queries the LDAP server for all entries under the base DN. Replace ldap.example.com with your LDAP server's hostname or IP address.</p>
-        <p>You can also test binding to the LDAP server using a specific user's credentials.</p>
-        <pre>ldapsearch -x -LLL -H ldap://ldap.example.com -D "uid=user1,ou=People,dc=example,dc=com" -W</pre>
-        <p>This command will prompt you to enter the password of <code>user1</code> to test bind authentication.</p>
+        <pre>ldapsearch -x -LLL -H ldap://localhost -b dc=example,dc=com</pre>
+        <p>This command queries the LDAP server for all entries under the base DN. Replace <code>localhost</code> with your LDAP server's hostname or IP address.</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
