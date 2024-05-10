@@ -38,7 +38,7 @@
         <p>First, set hostname within your domain. Replace "example.com" with your actual domain.</p>
         <pre>sudo hostname ldap.example.com</pre>
         <p>Next, update package lists and install OpenLDAP and related utilities.</p>
-        <pre>sudo apt update<br>sudo apt install slapd ldap-utils</pre>
+        <pre>sudo apt update<br>sudo apt install slapd ldap-utils -y</pre>
         <p>After installation, you will be prompted to configure OpenLDAP server. When prompted to set up your LDAP administrator password, enter a new password and then confirm the password.</p>
         <p>You can also reconfigure OpenLDAP server anytime using:</p>
         <pre>sudo dpkg-reconfigure slapd</pre>

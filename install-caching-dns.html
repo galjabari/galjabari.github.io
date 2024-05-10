@@ -39,7 +39,7 @@
         <p>First, update the package list to ensure you have the latest version of packages available:</p>
         <pre>sudo apt update</pre>
         <p>Install the BIND9 package, which is the DNS server software:</p>
-        <pre>sudo apt install bind9</pre>
+        <pre>sudo apt install bind9 -y</pre>
         <p>Edit the BIND9 configuration file named <code>named.conf.options</code> using a text editor. Here, we'll use <code>nano</code>:</p>
         <pre>sudo nano /etc/bind/named.conf.options</pre>
         <p>Inside the file, locate the <code>forwarders</code> section and add the following lines with the IP addresses of your desired DNS servers (for example, Google's public DNS servers):</p>

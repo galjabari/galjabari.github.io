@@ -38,9 +38,9 @@
         <p>Run the following command in your terminal to make sure your package lists are up to date:</p>
         <pre>sudo apt update</pre>
         <p>Next, install the OpenSSH server package by executing the following command:</p>
-        <pre>sudo apt install openssh-server</pre>
+        <pre>sudo apt install openssh-server -y</pre>
         <p>Once the installation is complete, you can verify that the SSH server is running by checking its status. Run the command:</p>
-        <pre>sudo systemctl status ssh</pre>
+        <pre>sudo systemctl status ssh.service</pre>
         <p>If the SSH server is active and running, you'll see a message indicating its status.</p>
         <p>To connect to the SSH server, you'll need its IP address and your username. Assuming the IP address of your system is <code>192.168.1.5</code> and your username is <code>ubuntu</code>, you can connect using the following command:</p>
         <pre>ssh ubuntu@192.168.1.5</pre>
