@@ -44,21 +44,21 @@
         <pre>sudo dpkg-reconfigure slapd</pre>
         <p>Step 1: Select No if you want to omit the OpenLDAP server configuration.</p>
         <p>Step 2: Enter your domain name that will become your base Distinguished Name (DN). If you enter "example.com", it is converted to "dc=example,dc=com"</p>
-        <p>Step 3: Select Yes if you want to remove the database files.</p>
-        <p>Step 4: Select Yes if you want to move existing LDAP files.</p>
+        <p>Step 3: Enter your organization name such as "Example".</p>
+        <p>Step 4: Enter your LDAP administrator password and confirm it.</p>
+        <p>Step 5: Select Yes if you want to remove the database files.</p>
+        <p>Step 6: Select Yes if you want to move existing LDAP files.</p>
         <p>Create a file named <code>base.ldif</code> using your preferred text editor. This file defines the base organizational units for your LDAP directory.</p>
         <pre>sudo nano base.ldif</pre>
         <p>Add the following content to the file:</p>
-        <pre>dn: ou=People,dc=example,dc=com<br>objectClass: organizationalUnit<br>ou: People
-            <br>dn: ou=Groups,dc=example,dc=com<br>objectClass: organizationalUnit<br>ou: Groups</pre>
+        <pre>dn: ou=People,dc=example,dc=com<br>objectClass: organizationalUnit<br>ou: People<br><br>dn: ou=Groups,dc=example,dc=com<br>objectClass: organizationalUnit<br>ou: Groups</pre>
         <p>Use <code>ldapadd</code> command to add entries to the LDAP directory.</p>
         <pre>ldapadd -x -D cn=admin,dc=example,dc=com -W -f base.ldif</pre>
         <p>You will be prompted to enter the password of LDAP administrator.</p>
         <p>Create a file named <code>account.ldif</code> to define user entries.</p>
         <pre>sudo nano account.ldif</pre>
         <p>Add the following content to the file:</p>
-        <pre>dn: uid=user1,ou=People,dc=example,dc=com<br>objectClass: inetOrgPerson<br>uid: user1<br>cn: User 1<br>gn: User<br>sn: 1<br>userPassword: secret
-            <br>dn: uid=user2,ou=People,dc=example,dc=com<br>objectClass: inetOrgPerson<br>uid: user2<br>cn: User 2<br>gn: User<br>sn: 2<br>userPassword: secret</pre>
+        <pre>dn: uid=user1,ou=People,dc=example,dc=com<br>objectClass: inetOrgPerson<br>uid: user1<br>cn: User 1<br>gn: User<br>sn: 1<br>userPassword: secret<br><br>dn: uid=user2,ou=People,dc=example,dc=com<br>objectClass: inetOrgPerson<br>uid: user2<br>cn: User 2<br>gn: User<br>sn: 2<br>userPassword: secret</pre>
         <p>Use <code>ldapadd</code> command to add entries to the LDAP directory.</p>
         <pre>ldapadd -x -D cn=admin,dc=example,dc=com -W -f account.ldif</pre>
         <p>Create a file named <code>group.ldif</code> to define group entries.</p>
