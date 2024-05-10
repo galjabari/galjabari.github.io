@@ -49,20 +49,20 @@
         <p>Step 5: Select Yes if you want to remove the database files.</p>
         <p>Step 6: Select Yes if you want to move existing LDAP files.</p>
         <p>Create a file named <code>base.ldif</code> using your preferred text editor. This file defines the base organizational units for your LDAP directory.</p>
-        <pre>sudo nano base.ldif</pre>
+        <pre>nano base.ldif</pre>
         <p>Add the following content to the file:</p>
         <pre>dn: ou=People,dc=example,dc=com<br>objectClass: organizationalUnit<br>ou: People<br><br>dn: ou=Groups,dc=example,dc=com<br>objectClass: organizationalUnit<br>ou: Groups</pre>
         <p>Use <code>ldapadd</code> command to add entries to the LDAP directory.</p>
         <pre>ldapadd -x -D cn=admin,dc=example,dc=com -W -f base.ldif</pre>
         <p>You will be prompted to enter the password of LDAP administrator.</p>
         <p>Create a file named <code>account.ldif</code> to define user entries.</p>
-        <pre>sudo nano account.ldif</pre>
+        <pre>nano account.ldif</pre>
         <p>Add the following content to the file:</p>
         <pre>dn: uid=user1,ou=People,dc=example,dc=com<br>objectClass: inetOrgPerson<br>uid: user1<br>cn: User 1<br>gn: User<br>sn: 1<br>userPassword: secret<br><br>dn: uid=user2,ou=People,dc=example,dc=com<br>objectClass: inetOrgPerson<br>uid: user2<br>cn: User 2<br>gn: User<br>sn: 2<br>userPassword: secret</pre>
         <p>Use <code>ldapadd</code> command to add entries to the LDAP directory.</p>
         <pre>ldapadd -x -D cn=admin,dc=example,dc=com -W -f account.ldif</pre>
         <p>Create a file named <code>group.ldif</code> to define group entries.</p>
-        <pre>sudo nano group.ldif</pre>
+        <pre>nano group.ldif</pre>
         <p>Add the following content to the file:</p>
         <pre>dn: cn=group1,ou=Groups,dc=example,dc=com<br>objectClass: groupOfNames<br>member: uid=user1,ou=People,dc=example,dc=com<br>member: uid=user2,ou=People,dc=example,dc=com</pre>
         <p>Use <code>ldapadd</code> command to add entries to the LDAP directory.</p>
