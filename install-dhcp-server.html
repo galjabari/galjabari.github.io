@@ -44,7 +44,7 @@
         <pre>sudo nano /etc/dhcp/dhcpd.conf</pre>
         <p>Inside the editor, replace any existing content with the following configuration:</p>
         <pre>subnet 192.168.1.0 netmask 255.255.255.0 {<br>  range 192.168.1.100 192.168.1.200;<br>  option routers 192.168.1.1;<br>  option domain-name-servers 192.168.1.10, 192.168.1.11;<br>  option domain-name "example.com";<br>  default-lease-time 600;<br>  max-lease-time 7200;<br>}</pre>
-        <p>This configuration specifies the default lease time, maximum lease time, subnet, IP range, default gateway (router), DNS servers, and domain name.</p>
+        <p>This configuration specifies the subnet, IP range, default gateway (router), DNS servers, domain name, default lease time, and maximum lease time.</p>
         <p>After making changes, save the file by pressing Ctrl + O, then press Enter, and exit nano by pressing Ctrl + X.</p>
         <p>Restart the DHCP service to apply the new configuration:</p>
         <pre>sudo systemctl restart isc-dhcp-server.service</pre>
