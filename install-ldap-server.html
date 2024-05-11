@@ -58,7 +58,7 @@
         <p>Create a file named <code>account.ldif</code> to define user entries.</p>
         <pre>nano account.ldif</pre>
         <p>Add the following content to the file:</p>
-        <pre>dn: uid=user1,ou=People,dc=example,dc=com<br>objectClass: inetOrgPerson<br>uid: user1<br>cn: User 1<br>gn: User<br>sn: 1<br>userPassword: secret<br><br>dn: uid=user2,ou=People,dc=example,dc=com<br>objectClass: inetOrgPerson<br>uid: user2<br>cn: User 2<br>gn: User<br>sn: 2<br>userPassword: secret</pre>
+        <pre>dn: uid=user1,ou=People,dc=example,dc=com<br>objectClass: inetOrgPerson<br>uid: user1<br>cn: User 1<br>sn: 1<br>userPassword: secret<br><br>dn: uid=user2,ou=People,dc=example,dc=com<br>objectClass: inetOrgPerson<br>uid: user2<br>cn: User 2<br>sn: 2<br>userPassword: secret</pre>
         <p>Use <code>ldapadd</code> command to add entries to the LDAP directory.</p>
         <pre>ldapadd -x -D cn=admin,dc=example,dc=com -W -f account.ldif</pre>
         <p>Create a file named <code>group.ldif</code> to define group entries.</p>
