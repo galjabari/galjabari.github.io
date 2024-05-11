@@ -38,17 +38,17 @@
         <p>Before installing the DNS server, ensure that your system's has a static IP address (for example, 192.168.1.10/24).</p>
         <p>First, update the package list to ensure you have the latest version of packages available:</p>
         <pre>sudo apt update</pre>
-        <p>Install the BIND9 package, which is the DNS server software:</p>
+        <p>Install the BIND package, which is the DNS server software:</p>
         <pre>sudo apt install bind9 -y</pre>
-        <p>Edit the BIND9 configuration file named <code>named.conf.options</code> using a text editor. Here, we'll use <code>nano</code>:</p>
+        <p>Edit the BIND configuration file named <code>named.conf.options</code> using a text editor. Here, we'll use <code>nano</code>:</p>
         <pre>sudo nano /etc/bind/named.conf.options</pre>
         <p>Inside the file, locate the <code>forwarders</code> section and add the following lines with the IP addresses of your desired DNS servers (for example, Google's public DNS servers):</p>
         <pre>forwarders {<br>  8.8.8.8;<br>  8.8.4.4;<br>};</pre>
         <p>Replace 8.8.8.8 and 8.8.4.4 with your preferred DNS server IPs if desired.</p>
         <p>Save the changes and exit the text editor (in <code>nano</code>, press Ctrl + X, then Y, and Enter to confirm).</p>
-        <p>To apply the changes made to the configuration file, restart the BIND9 service:</p>
+        <p>To apply the changes made to the configuration file, restart the BIND service:</p>
         <pre>sudo systemctl restart bind9.service</pre>
-        <p>Check the status of the BIND9 service to ensure it restarted without errors:</p>
+        <p>Check the status of the BIND service to ensure it restarted without errors:</p>
         <pre>sudo systemctl status bind9.service</pre>
         <p>Finally, test the DNS resolution using the <code>dig</code> command. Here's an example with www.google.com:</p>
         <pre>dig www.google.com</pre>

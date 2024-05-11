@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Install Proxy Server on Ubuntu</h5>
+        <p>Update package lists and install Squid proxy server.</p>
+        <pre>sudo apt update<br>sudo apt install squid</pre>
+        <p>Edit the Squid configuration file using a text editor.</p>
+        <pre>sudo nano /etc/squid/squid.conf</pre>
+        <p>Inside the file, locate the <code>acl localnet</code> section and uncomment the following line:</p>
+        <pre>http_access allow localnet</pre>
+        <p>To apply the changes made to the configuration file, restart the Squid service.</p>
+        <pre>sudo systemctl restart squid.service</pre>
+        <p>Check the status of the Squid service to ensure it restarted without errors.</p>
+        <pre>sudo systemctl status squid.service</pre>
+        <p>You can now connect to this proxy server from your client devices. Enter the IP address of your proxy server running Squid and the port number (default port for Squid is 3128) on the proxy settings of your device.</p>
+        <p>Once you've configured the proxy settings on your device, it should route all internet traffic through the Squid proxy server.</p>
+        <p>To monitor access to your proxy server in real-time, you can tail the access log.</p>
+        <pre>sudo tail -f /var/log/squid/access.log</pre>
+        <p>To block specific websites, edit the Squid configuration file again.</p>
+        <pre>sudo nano /etc/squid/squid.conf</pre>
+        <p>Add the following lines to block Facebook and YouTube, ensure to place deny ACL above ACLs that allow network access:</p>
+        <pre>acl blocklist dstdomain .facebook.com .youtube.com<br>http_access deny blocklist</pre>
+        <p>After updating the configuration, reload Squid service for changes to take effect.</p>
+        <pre>sudo systemctl reload squid.service</pre>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
