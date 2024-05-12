@@ -39,9 +39,9 @@
         <pre>sudo apt update<br>sudo apt install squid -y</pre>
         <p>Edit the Squid configuration file using a text editor.</p>
         <pre>sudo nano /etc/squid/squid.conf</pre>
+        <p>In <code>nano</code> text editor, you can search for a term by pressing Ctrl + W, then press Enter.</p>
         <p>Inside the file, locate the <code>http_access</code> section and uncomment the following line to allow access from your local network:</p>
         <pre>http_access allow localnet</pre>
-        <p>In <code>nano</code> text editor, you can search for the term "INSERT" by pressing Ctrl + W, then press Enter.</p>
         <p>To apply the changes made to the configuration file, save the file and restart the Squid service.</p>
         <pre>sudo systemctl restart squid.service</pre>
         <p>Check the status of the Squid service to ensure it restarted without errors.</p>
