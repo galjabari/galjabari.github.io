@@ -36,17 +36,17 @@
     <div class="container">
         <h5>Install Proxy Server on Ubuntu</h5>
         <p>Update package lists and install Squid proxy server.</p>
-        <pre>sudo apt update<br>sudo apt install squid</pre>
+        <pre>sudo apt update<br>sudo apt install squid -y</pre>
         <p>Edit the Squid configuration file using a text editor.</p>
         <pre>sudo nano /etc/squid/squid.conf</pre>
-        <p>Inside the file, locate the <code>acl localnet</code> section  and uncomment the following line:</p>
+        <p>Inside the file, locate the <code>http_access</code> section and uncomment the following line to allow access from your local network:</p>
         <pre>http_access allow localnet</pre>
-        <p>In <code>nano</code> text editor, you can search for the term by pressing Ctrl + W, then press Enter.</p>
-        <p>To apply the changes made to the configuration file, restart the Squid service.</p>
+        <p>In <code>nano</code> text editor, you can search for the term "INSERT" by pressing Ctrl + W, then press Enter.</p>
+        <p>To apply the changes made to the configuration file, save the file and restart the Squid service.</p>
         <pre>sudo systemctl restart squid.service</pre>
         <p>Check the status of the Squid service to ensure it restarted without errors.</p>
         <pre>sudo systemctl status squid.service</pre>
-        <p>You can now connect to this proxy server from your client devices. Enter the IP address of your proxy server running Squid and the port number (default port for Squid is 3128) on the proxy settings of your device.</p>
+        <p>You can now connect to this proxy server from your client devices. Enter the IP address of your proxy server and the port number (default port for Squid is 3128) on the proxy settings of your device.</p>
         <p>Once you've configured the proxy settings on your device, it should route all internet traffic through the Squid proxy server.</p>
         <p>To monitor access to your proxy server in real-time, you can tail the access log.</p>
         <pre>sudo tail -f /var/log/squid/access.log</pre>
