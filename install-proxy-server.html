@@ -52,7 +52,7 @@
         <pre>sudo tail -f /var/log/squid/access.log</pre>
         <p>To block specific websites, edit the Squid configuration file again.</p>
         <pre>sudo nano /etc/squid/squid.conf</pre>
-        <p>As am example, add the following lines to the top of the <code>http_access</code> that allow network access:</p>
+        <p>As an example, add the following lines to the top of the <code>http_access</code> that allow network access:</p>
         <pre>acl blocklist dstdomain .facebook.com .youtube.com<br>http_access deny blocklist</pre>
         <p>After updating the configuration file, you will need to save the file and reload Squid service for changes to take effect.</p>
         <pre>sudo systemctl reload squid.service</pre>
