@@ -47,6 +47,7 @@
         <pre>#http_access allow localnet</pre>
         <p>After making changes, reload the Squid service to apply the configuration:</p>
         <pre>sudo systemctl relaod squid.service</pre>
+        <p>You can now connect to proxy server from your client devices using LDAP username and password.</p>
         <p>To configure Squid for group-based access control using LDAP, you need to define an external ACL type for LDAP group.</p>
         <p>Edit the Squid configuration file using the following command:</p>
         <pre>sudo nano /etc/squid/squid.conf</pre>
