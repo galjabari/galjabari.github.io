@@ -43,7 +43,7 @@
         <p>Add the following lines to the top of <code>http_access</code> section to configure LDAP authentication:</p>
         <pre>auth_param basic program /usr/lib/squid/basic_ldap_auth -v 3 \<br>-b "dc=example,dc=com" \<br>-D "cn=admin,dc=example,dc=com" -w secret \<br>-f "uid=%s" localhost<br>auth_param basic children 5 startup=5 idle=1<br>auth_param basic realm Proxy Authentication Required<br>auth_param basic credentialsttl 30 minute<br>acl ldap-auth proxy_auth REQUIRED<br>http_access allow ldap-auth</pre>
         <p>Make sure to replace the LDAP server details such as base DN, admin credentials, and LDAP server hostname with your actual LDAP server information.</p>
-        <p>Remove the following line by commented it to allow only authenticated users to use the proxy:</p>
+        <p>Remove the following line by commenting it out to allow only authenticated users to use the proxy:</p>
         <pre>#http_access allow localnet</pre>
         <p>After making changes, reload the Squid service to apply the configuration:</p>
         <pre>sudo systemctl relaod squid.service</pre>
