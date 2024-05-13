@@ -54,7 +54,7 @@
         <p>Add the following lines to define an external ACL type named <code>ldap_group</code>:</p>
         <pre>external_acl_type ldap_group %LOGIN /usr/lib/squid/ext_ldap_group_acl -v 3 \ <br>-b "ou=Groups,dc=example,dc=com" \<br>-D "cn=admin,dc=example,dc=com" -w secret \<br>-f "(&(cn=%g)(member=uid=%u,ou=People,dc=example,dc=com))" localhost <br>acl ldap-group1 external ldap_group group1<br>http_access allow ldap-group1</pre>
         <p>This configuration allow access for users that are members of the group named <code>group1</code> in the LDAP directory. Replace LDAP server details such as base DN, admin credentials, and hostname with your actual LDAP server information. You can create multiple ACLs for different LDAP groups by adding more <code>http_access</code> rules accordingly.</p>
-        <p>Make sure to remove the following line by commenting it out to restrict access to members of LDAP group:</p>
+        <p>Make sure to remove the following line by commenting it out to restrict access to members of the LDAP group:</p>
         <pre>#http_access allow ldap-auth</pre>
         <p>After making changes, reload the Squid service to apply the configuration:</p>
         <pre>sudo systemctl relaod squid.service</pre>
