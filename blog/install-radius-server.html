@@ -55,8 +55,9 @@
         <p>Replace <code>bob</code> user with your own username and password.</p>
         <p>Edit the EAP configuration file:</p>
         <pre>sudo nano /etc/freeradius/3.0/mods-available/eap</pre>
-        <p>Add or modify the following line to ensure compatibility with a broader range of devices such smartphones, tablets, and computers.</p>
-        <pre>default_eap_type = peap </pre>
+        <p>Add or modify the following line to set the default EAP type to PEAP:</p>
+        <pre>default_eap_type = peap</pre>
+        <p>This configuration is used to ensure compatibility with a broader range of devices such as smartphones, tablets, and computers.</p>
         <p>Restart the FreeRADIUS service to apply the changes:</p>
         <pre>service freeradius restart</pre>
         <p>Enable the FreeRADIUS service to start automatically on system boot:</p>
