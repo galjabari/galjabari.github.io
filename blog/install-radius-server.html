@@ -39,9 +39,8 @@
         <pre>sudo apt update</pre>
         <p>Install FreeRADIUS server using the following command:</p>
         <pre>sudo apt-get install freeradius</pre>
-        <p>Before editing configuration files of FreeRADIUS, switch to the <code>root</code> user:</p>
+        <p>Switch to the <code>root</code> user to modify the configuration files of FreeRADIUS:</p>
         <pre>sudo -i</pre>
-        <p>This command is used to ensure that the user has the necessary permissions to modify configuration files.</p>
         <p>Edit the clients configuration file using a text editor:</p>
         <pre>nano /etc/freeradius/3.0/clients.conf</pre>
         <p>You need to define each client that will communicate with the server  to authenticate users. This could include devices such as access points, VPN servers, switches, or routers.</p>
@@ -50,11 +49,11 @@
         <p>Replace <code>access-point-1</code> client with your own client identifier, IP address, and shared secret.</p>
         <p>Edit the users configuration file:</p>
         <pre>nano /etc/freeradius/3.0/users</pre>        
-        <p>Add user authentication information. For example uncomment the following line:</p>
+        <p>Add user authentication information. For example:</p>
         <pre>bob Cleartext-Password := "hello"</pre>
         <p>Replace <code>bob</code> user with your own username and password.</p>
         <p>Edit the EAP configuration file:</p>
-        <pre>sudo nano /etc/freeradius/3.0/mods-available/eap</pre>
+        <pre>nano /etc/freeradius/3.0/mods-available/eap</pre>
         <p>Add or modify the following line to set the default EAP type to PEAP:</p>
         <pre>default_eap_type = peap</pre>
         <p>This configuration is used to ensure compatibility with a broader range of devices such as smartphones, tablets, and computers.</p>
