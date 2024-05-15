@@ -47,7 +47,7 @@
         <p>Inside the configuration file, uncomment the following lines:</p>
         <pre>Auth-Type LDAP {<br>    ldap<br>}</pre>
         <p>Edit the LDAP module configuration file to add LDAP server settings:</p>
-        <pre>nano /etc/freeradius/3.0/mods-available/lda</pre>
+        <pre>nano /etc/freeradius/3.0/mods-available/ldap</pre>
         <p>Then, modify the following parameters:</p>
         <pre>server = 'localhost'<br>identity = 'cn=admin,dc=example,dc=com'<br>password = secret<br>base_dn = 'dc=example,dc=com'</pre>
         <p>Replace the LDAP server details such as base DN, admin credentials, and hostname with your actual LDAP server information.</p>
