@@ -44,14 +44,14 @@
         <p>Edit the clients configuration file using a text editor:</p>
         <pre>nano /etc/freeradius/3.0/clients.conf</pre>
         <p>You need to define each client that will communicate with the server  to authenticate users. This could include devices such as access points, VPN servers, switches, or routers.</p>
-        <p>Add your client information. For example:</p>
+        <p>Add your client information. For example, add the following lines:</p>
         <pre>client access-point-1 {<br>    ipaddr          = 192.168.1.254<br>    secret          = pass@123<br>}</pre>
         <p>Replace <code>access-point-1</code> client with your own client identifier, IP address, and shared secret.</p>
         <p>Edit the users configuration file:</p>
         <pre>nano /etc/freeradius/3.0/users</pre>        
-        <p>Add user authentication information. For example:</p>
+        <p>Add user authentication information. For example, uncomment the following line:</p>
         <pre>bob Cleartext-Password := "hello"</pre>
-        <p>Replace <code>bob</code> user with your own username and password.</p>
+        <p>Replace <code>bob</code> user and <code>secret</code> password with your own username and password.</p>
         <p>Edit the EAP configuration file:</p>
         <pre>nano /etc/freeradius/3.0/mods-available/eap</pre>
         <p>Add or modify the following line to set the default EAP type to PEAP:</p>

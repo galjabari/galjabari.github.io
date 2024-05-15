@@ -38,7 +38,7 @@
         <p>Before configuring Squid proxy to use an LDAP server for authentication, you need to complete the following tutorials:</p>
         <p><a href="install-ldap-server.html" target="_blank"> Install and configure LDAP Server on Ubuntu</a></p>
         <p><a href="install-proxy-server.html" target="_blank"> Install and configure Proxy Server on Ubuntu</a></p>
-        <p>Edit the Squid configuration file using the following command:</p>
+        <p>Next, edit the Squid configuration file using the following command:</p>
         <pre>sudo nano /etc/squid/squid.conf</pre>
         <p>Add the following lines to the top of <code>http_access</code> section to configure LDAP authentication:</p>
         <pre>auth_param basic program /usr/lib/squid/basic_ldap_auth -v 3 \<br>-b "dc=example,dc=com" \<br>-D "cn=admin,dc=example,dc=com" -w secret \<br>-f "uid=%s" localhost<br>auth_param basic children 5 startup=5 idle=1<br>auth_param basic realm Proxy Authentication Required<br>auth_param basic credentialsttl 30 minute<br>acl ldap-auth proxy_auth REQUIRED<br>http_access allow ldap-auth</pre>
