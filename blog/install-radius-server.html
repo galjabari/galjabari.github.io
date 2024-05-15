@@ -60,7 +60,7 @@
         <p>Restart the FreeRADIUS service to apply the changes:</p>
         <pre>service freeradius restart</pre>
         <p>Enable the FreeRADIUS service to start automatically on system boot:</p>
-        <pre>sudo systemctl enable freeradius.service</pre>
+        <pre>systemctl enable freeradius.service</pre>
         <p>To verify that your RADIUS server is configured correctly, run the following command:</p>
         <pre>radtest bob hello localhost 0 testing123</pre>
         <p>The output of <code>radtest</code> will indicate whether the authentication message was successful or not.</p>
