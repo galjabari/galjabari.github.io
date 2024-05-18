@@ -73,7 +73,7 @@
         <pre>sudo systemctl status postfix.service</pre>
         <h6>Install and configure SMTP Authentication</h6>
         <p>First, install Dovecot SASL for authenticating users when they send emails through the SMTP server.</p>
-        <p>Edit the Dovecot master configuration file.</p>
+        <p>Next, edit the Dovecot master configuration file.</p>
         <pre>sudo nano /etc/dovecot/conf.d/10-master.conf</pre>
         <p>Add or update the following lines to set up the authentication socket for Postfix:</p>
         <pre># Postfix smtp-auth<br>unix_listener /var/spool/postfix/private/auth {<br>  mode = 0660<br>  user = postfix<br>  group = postfix<br>}</pre>
