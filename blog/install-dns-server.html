@@ -43,7 +43,7 @@
         <p>Edit the BIND configuration file to define the zone.</p> 
         <pre>sudo nano /etc/bind/named.conf.local</pre>
         <p>Add the following configuration for your domain, replacing "example.com" with your actual domain name:</p>
-        <pre>zone "example.com" {<br>  type master;<br>  file "/etc/bind/db.example.com";<br>};</pre>
+        <pre>zone "example.com" {<br>    type master;<br>    file "/etc/bind/db.example.com";<br>};</pre>
         <p>Copy the default zone file and create a new one for your domain.</p>
         <pre>sudo cp /etc/bind/db.local /etc/bind/db.example.com</pre>
         <p>Edit the newly created zone file for your domain.</p>

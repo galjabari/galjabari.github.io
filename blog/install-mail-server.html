@@ -67,7 +67,11 @@
         <p>Step 9: Enter <code>all</code></p>
         <p>Set the mailbox format to Maildir using the following command:</p>
         <pre>sudo postconf -e 'home_mailbox = Maildir/'</pre>
-        <p></p>
+        <p>Restart the Postfix service to apply the changes.</p>
+        <pre>sudo systemctl restart postfix.service</pre>
+        <p>Check the status of the Postfix service to ensure it restarted without errors.</p>
+        <pre>sudo systemctl status postfix.service</pre>
+        <h6>Install and configure SMTP Authentication</h6>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
