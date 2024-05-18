@@ -41,14 +41,13 @@
         <pre>sudo nano /etc/bind/db.example.com</pre>
         <p>Add the following lines under the existing records:</p>
         <pre>@       IN      MX 10   mail.example.com.<br>mail    IN      A       192.168.1.10<br>smtp    IN      CNAME   mail.example.com.<br>imap    IN      CNAME   mail.example.com.</pre>
-        <p>Replace <code>mail.example.com</code> with your mail server's hostname.</p>
+        <p>Replace <code>mail.example.com</code>  and <code>192.168.1.10</code> with your mail server's hostname and IP address.</address>.</p>
         <p>After making changes, restart the BIND service to apply the configuration.</p>
         <pre>sudo systemctl restart bind9.service</pre>
         <p>Verify that BIND is running without errors.</p>
         <pre>sudo systemctl status bind9.service</pre>
-        <p>Finally, test DNS resolution for your domain:</p>
+        <p>Finally, test DNS resolution to list MX records for your domain:</p>
         <pre>dig MX example.com</pre>
-        <p>This test will list MX records for a domain.</p>
         <h6>Install and configure SMTP Server</h6>
         <p>First, set the hostname for your mail server.</p>
         <pre>sudo hostname mail.example.com</pre>        
