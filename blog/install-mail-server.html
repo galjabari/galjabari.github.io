@@ -51,27 +51,43 @@
         <h6>Install and configure SMTP Server</h6>
         <p>First, set the hostname for your mail server.</p>
         <pre>sudo hostname mail.example.com</pre>        
-        <p>Update package lists and install Postfix, which is the SMTP server.</p>
+        <p>Update package lists and install Postfix which functions as an SMTP server.</p>
         <pre>sudo apt update<br>sudo apt install postfix -y</pre></p>
-        <p>After installation, you will be prompted to configure Postfix. Accept default configuration by pressing Enter for each question.</p>
+        <p>During installation, you will be prompted to configure Postfix. Choose "Internet Site" as the mail configuration type and set the system mail name "example.com".</p>
         <p>To reconfigure Postfix, run the following command:</p>
         <pre>sudo dpkg-reconfigure postfix</pre>
-        <p>Step 1: Select <code>Internet Site</code>.</p>
+        <p>Step 1: Select Internet Site.</p>
         <p>Step 2: Enter <code>example.com</code>.</p>
         <p>Step 3: Enter <code>admin</code>.</p>
         <p>Step 4: Enter <code>example.com, localhost</code></p>
-        <p>Step 5: Select <code>No</code>.</p>
+        <p>Step 5: Select No.</p>
         <p>Step 6: Enter <code>127.0.0.0/8 [::1]/128</code></p>
         <p>Step 7: Enter <code>0</code></p>
         <p>Step 8: Enter <code>+</code></p>
         <p>Step 9: Enter <code>all</code></p>
-        <p>Set the mailbox format to Maildir using the following command:</p>
+        <p>Set the mailbox format to <code>Maildir</code> using the following command:</p>
         <pre>sudo postconf -e 'home_mailbox = Maildir/'</pre>
         <p>Restart the Postfix service to apply the changes.</p>
         <pre>sudo systemctl restart postfix.service</pre>
         <p>Check the status of the Postfix service to ensure it restarted without errors.</p>
         <pre>sudo systemctl status postfix.service</pre>
         <h6>Install and configure SMTP Authentication</h6>
+        <p>First, install Dovecot SASL for authenticating users when they send emails through the SMTP server.</p>
+        <p>Edit the Dovecot master configuration file.</p>
+        <pre>sudo nano /etc/dovecot/conf.d/10-master.conf</pre>
+        <p>Add or update the following lines to set up the authentication socket for Postfix:</p>
+        <pre># Postfix smtp-auth<br>unix_listener /var/spool/postfix/private/auth {<br>  mode = 0660<br>  user = postfix<br>  group = postfix<br>}</pre>
+        <p>Edit the Postfix main configuration file.</p>
+        <pre>sudo nano /etc/postfix/main.cf</pre>
+        <p>Add or update the following lines to enable and configure SMTP authentication using Dovecot:</p>
+        <pre>smtpd_sasl_type = dovecot<br>smtpd_sasl_path = private/auth<br>smtpd_sasl_auth_enable = yes<br>smtpd_recipient_restrictions = permit_sasl_authenticated, permit_mynetworks, reject_unauth_destination</pre>
+        <p>Restart Dovecot and Postfix to apply the new configurations:</p>
+        <pre>sudo systemctl restart dovecot.service<br>sudo systemctl restart postfix.service</pre>
+        <p>To test SMTP authentication, you can use the <code>telnet</code> command:</p>
+        <pre>telnet mail.example.com 25</pre>
+        <p>After connecting, you can issue the following command:</p>
+        <pre>EHLO mail.example.com</pre>
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
