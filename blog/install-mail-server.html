@@ -83,11 +83,30 @@
         <pre>smtpd_sasl_type = dovecot<br>smtpd_sasl_path = private/auth<br>smtpd_sasl_auth_enable = yes<br>smtpd_recipient_restrictions = permit_sasl_authenticated, permit_mynetworks, reject_unauth_destination</pre>
         <p>Restart Dovecot and Postfix to apply the new configurations:</p>
         <pre>sudo systemctl restart dovecot.service<br>sudo systemctl restart postfix.service</pre>
-        <p>To test the SMTP server, you can use the <code>telnet</code> command:</p>
+        <p>To test the SMTP server, you can use the <code>telnet</code> command.</p>
         <pre>telnet mail.example.com 25</pre>
         <p>After connecting, you can issue the following command:</p>
         <pre>EHLO mail.example.com</pre>
+        <p>Exit the connection by pressing Ctrl + ] and Type quit.</p>
         <h6>Install and configure IMAP/POP3 Server</h6>
+        <p>First, install Dovecot which functions as an IMAP and POP3 server.</p>
+        <pre>sudo apt install dovecot-imapd dovecot-pop3d</pre>
+        <p>Edit the mail configuration file.</p>
+        <pre>sudo nano /etc/dovecot/conf.d/10-mail.conf</pre>
+        <p>Set the mail storage location using <code>Maildir</code> format:</p>
+        <pre>mail_location = maildir:~/Maildir</pre>
+        <p>Edit the authentication configuration file.</p>
+        <pre>sudo nano /etc/dovecot/conf.d/10-auth.conf</pre>
+        <p>Ensure the following lines are present:</p>
+        <pre>auth_mechanisms = plain login</pre>
+        <p>Restart the Dovecot service to apply the changes.</p>
+        <pre>sudo systemctl restart dovecot.service</pre>
+        <p>Check the status of the Dovecot service to ensure it restarted without errors.</p>
+        <pre>sudo systemctl status dovecot.service</pre>
+        <p>You can test the IMAP server using <code>telnet</code> command.</p>
+        <pre>telnet mail.example.com 143</pre>
+        <p>Similarly, you can test the POP3 server.</p>
+        <pre>telnet mail.example.com 110</pre>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
