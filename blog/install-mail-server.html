@@ -83,7 +83,7 @@
         <pre>smtpd_sasl_type = dovecot<br>smtpd_sasl_path = private/auth<br>smtpd_sasl_auth_enable = yes<br>smtpd_recipient_restrictions = permit_sasl_authenticated, permit_mynetworks, reject_unauth_destination</pre>
         <p>Restart Dovecot and Postfix to apply the new configurations:</p>
         <pre>sudo systemctl restart dovecot.service<br>sudo systemctl restart postfix.service</pre>
-        <p>To test SMTP authentication, you can use the <code>telnet</code> command:</p>
+        <p>To test the SMTP server, you can use the <code>telnet</code> command:</p>
         <pre>telnet mail.example.com 25</pre>
         <p>After connecting, you can issue the following command:</p>
         <pre>EHLO mail.example.com</pre>
