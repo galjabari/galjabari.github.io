@@ -97,7 +97,7 @@
         <pre>mail_location = maildir:~/Maildir</pre>
         <p>Edit the authentication configuration file.</p>
         <pre>sudo nano /etc/dovecot/conf.d/10-auth.conf</pre>
-        <p>Ensure the following lines are present:</p>
+        <p>Ensure the following line is present:</p>
         <pre>auth_mechanisms = plain login</pre>
         <p>Restart the Dovecot service to apply the changes.</p>
         <pre>sudo systemctl restart dovecot.service</pre>
