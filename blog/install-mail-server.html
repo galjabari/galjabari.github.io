@@ -71,7 +71,7 @@
         <pre>sudo systemctl restart postfix.service</pre>
         <p>Check the status of the Postfix service to ensure it restarted without errors.</p>
         <pre>sudo systemctl status postfix.service</pre>
-        <h6>Install and configure SMTP Authentication</h6>
+        <h6>Configure SMTP Authentication</h6>
         <p>First, install Dovecot SASL for authenticating users when they send emails through the SMTP server.</p>
         <pre>sudo apt install dovecot-core -y</pre>
         <p>Next, edit the Dovecot master configuration file.</p>
@@ -90,7 +90,7 @@
         <pre>EHLO mail.example.com</pre>
         <p>Exit the connection by pressing Ctrl + ] and Type quit.</p>
         <h6>Install and configure IMAP/POP3 Server</h6>
-        <p>First, install Dovecot which functions as an IMAP and POP3 server.</p>
+        <p>First, install Dovecot IMAP and POP3 server.</p>
         <pre>sudo apt install dovecot-imapd dovecot-pop3d -y</pre>
         <p>Edit the mail configuration file.</p>
         <pre>sudo nano /etc/dovecot/conf.d/10-mail.conf</pre>
@@ -108,8 +108,8 @@
         <pre>telnet mail.example.com 143</pre>
         <p>Similarly, you can test the POP3 server.</p>
         <pre>telnet mail.example.com 110</pre>
-        <h6>Install Email client</h6>
-        <p>To test sending and receiving emails using the mail server, you can install an email client such as Thunderbird.</p>
+        <h6>Configure Email client</h6>
+        <p>To test sending and receiving emails using the mail server, you can configure an email client such as Thunderbird.</p>
         <pre>sudo apt-get install thunderbird -y</pre>
         <p>Each email account corresponds to a system user on the mail server. Create users using the <code>adduser</code> command:</p>
         <pre>sudo adduser user1</pre>
