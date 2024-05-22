@@ -87,7 +87,7 @@
         <p>To test the SMTP server, you can use the <code>telnet</code> command.</p>
         <pre>telnet mail.example.com 25</pre>
         <p>After connecting, you can issue the following command:</p>
-        <pre>EHLO mail.example.com</pre>
+        <pre>ehlo mail.example.com</pre>
         <p>Exit the connection by pressing Ctrl + ] and Type quit.</p>
         <h6>Install and configure IMAP/POP3 Server</h6>
         <p>First, install Dovecot IMAP and POP3 server.</p>
@@ -115,6 +115,8 @@
         <p>To test sending and receiving emails using the mail server, you can configure an email client such as Thunderbird. Install Thunderbird on Ubuntu using the following command:</p>
         <pre>sudo apt-get install thunderbird -y</pre>        
         <p>Configure the email client to connect to the mail server's hostname. Use the full email address as the username (such as <code>user1@example.com</code>) and the password set during user creation.</p>
+        <p>To monitor logs related to email services in real time, you can use the following command:</p>
+        <pre>tail -f /var/log/mail.log</pre>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
