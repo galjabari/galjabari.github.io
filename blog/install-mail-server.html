@@ -48,10 +48,8 @@
         <pre>sudo systemctl status bind9.service</pre>
         <p>Finally, test DNS resolution to list MX records for your domain:</p>
         <pre>dig MX example.com</pre>
-        <h6>Install and configure SMTP Server</h6>
-        <p>First, set the hostname for your mail server.</p>
-        <pre>sudo hostname mail.example.com</pre>        
-        <p>Update package lists and install Postfix which functions as an SMTP server.</p>
+        <h6>Install and configure SMTP Server</h6>       
+        <p>First, update package lists and install Postfix which functions as an SMTP server.</p>
         <pre>sudo apt update<br>sudo apt install postfix -y</pre></p>
         <p>During installation, you will be prompted to configure Postfix. Choose "Internet Site" as the mail configuration type and set the system mail name "example.com".</p>
         <p>To reconfigure Postfix, run the following command:</p>
@@ -65,6 +63,8 @@
         <p>Step 7: Enter <code>0</code> for mailbox size limit (no limit).</p>
         <p>Step 8: Enter <code>+</code> as local address extension character.</p>
         <p>Step 9: Enter <code>all</code> to use both IPv4 and IPv6 addresses.</p>
+        <p>Set the hostname for your mail server.</p>
+        <pre>sudo postconf -e 'myhostname = mail.example.com'</pre>         
         <p>Set the mailbox format to <code>Maildir</code> using the following command:</p>
         <pre>sudo postconf -e 'home_mailbox = Maildir/'</pre>
         <p>Restart the Postfix service to apply the changes.</p>
