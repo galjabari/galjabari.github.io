@@ -43,6 +43,7 @@
         <pre>curl -sSL https://galjabari.github.io/install-docker.sh | bash</pre>
         <p>Next, run the following command to install and configure Roundcube Docker container:</p>
         <pre>docker run -d \<br>  --name roundcube \<br>  -e ROUNDCUBEMAIL_DEFAULT_HOST=mail.example.com \<br>  -e ROUNDCUBEMAIL_DEFAULT_PORT=143 \<br>  -e ROUNDCUBEMAIL_SMTP_SERVER=mail.example.com \<br>  -e ROUNDCUBEMAIL_SMTP_PORT=25 \<br>  -e ROUNDCUBEMAIL_USERNAME_DOMAIN=example.com \<br>  -p 80:80 \<br>  roundcube/roundcubemail</pre>
+        <p>To access Roundcube webmail, type your server's hostname or IP address into a web browser.</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
