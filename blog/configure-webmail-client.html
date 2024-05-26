@@ -35,14 +35,14 @@
     </nav>
     <div class="container">
         <h5>Configure Webmail client on Ubuntu</h5>
-        <p>Before configuring Roundcube webmail client with the mail server, you need to complete the following guides:</p>
+        <p>Before setting up Roundcube webmail client with Docker, you need to complete the following guides:</p>
         <p><a href="install-mail-server.html" target="_blank"> Install and configure Mail Server on Ubuntu</a></p>
         <p><a href="configure-mail-ldap.html" target="_blank"> Configure Mail server with LDAP authentication</a></p>
         <p>This guide assume that you have an existing mail server with the hostname <code>mail.example.com</code>.</p>
         <p>First, install Docker on your server to deploy Roundcube webmail using the following script:</p>
         <pre>curl -sSL https://galjabari.github.io/install-docker.sh | bash</pre>
-        <p>Next, </p>
-
+        <p>Next, run the following command to install and configure your Roundcube Docker container:</p>
+        <pre>docker run -d \<br>  --name roundcube \<br>  -e ROUNDCUBEMAIL_DEFAULT_HOST=mail.example.com \<br>  -e ROUNDCUBEMAIL_DEFAULT_PORT=143 \<br>  -e ROUNDCUBEMAIL_SMTP_SERVER=mail.example.com \<br>  -e ROUNDCUBEMAIL_SMTP_PORT=25 \<br>  -e ROUNDCUBEMAIL_USERNAME_DOMAIN=example.com \<br>  -p 80:80 \<br>  roundcube/roundcubemail</pre>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
