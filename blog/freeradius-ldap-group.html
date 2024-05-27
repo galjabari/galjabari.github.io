@@ -41,7 +41,7 @@
         <p>Edit the FreeRADIUS configuration file:</p>
         <pre>nano /etc/freeradius/3.0/sites-enabled/default</pre>
         <p>Uncomment the following line in the <code>authorize</code> section:</p>
-        <pre>authorize {<br><br>    ldap<br>}</pre>
+        <pre>authorize {<br>...<br>    ldap<br>}</pre>
         <p>Edit the LDAP module configuration file to include the LDAP group configuration:</p>
         <pre>nano /etc/freeradius/3.0/mods-enabled/ldap</pre>
         <p>Uncomment and modify the following lines:</p>
