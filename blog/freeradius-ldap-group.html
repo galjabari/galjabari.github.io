@@ -49,7 +49,7 @@
         <p>Define the access policies that grant or deny access based on the group membership by editing the FreeRADIUS configuration file:</p>
         <pre>nano /etc/freeradius/3.0/sites-available/default</pre>
         <p>Look for <code>authorize</code> section and add the following lines under <code>ldap</code>:</p>
-        <pre>if (LDAP-Group == "group1") {<br>    ok<br>} else {<br>    reject<br>}</pre>
+        <pre>if (LDAP-Group == "group1") {<br>    noop<br>} else {<br>    reject<br>}</pre>
         <p>To apply the changes, restart the FreeRADIUS service:</p>
         <pre>systemctl restart freeradius.service</pre>
         <p>Check the status of the FreeRADIUS service to ensure it restarted without errors.</p>
