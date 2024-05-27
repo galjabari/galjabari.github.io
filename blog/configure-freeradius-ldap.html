@@ -44,7 +44,7 @@
         <pre>sudo -i</pre>
         <p>Edit the FreeRADIUS configuration file to add LDAP support:</p>
         <pre>nano /etc/freeradius/3.0/sites-available/default</pre>
-        <p>Inside the configuration file, uncomment the following lines:</p>
+        <p>Inside the configuration file, uncomment the following lines in the <code>authenticate</code> section:</p>
         <pre>Auth-Type LDAP {<br>    ldap<br>}</pre>
         <p>Edit the LDAP module configuration file to add LDAP server settings:</p>
         <pre>nano /etc/freeradius/3.0/mods-available/ldap</pre>
