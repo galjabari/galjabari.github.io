@@ -58,15 +58,17 @@
         <pre>default_eap_type = peap</pre>
         <p>This configuration is used to ensure compatibility with a broader range of devices such as smartphones, tablets, and computers.</p>
         <p>Restart the FreeRADIUS service to apply the changes:</p>
-        <pre>service freeradius restart</pre>
+        <pre>systemctl restart freeradius.service</pre>
         <p>Enable the FreeRADIUS service to start automatically on system boot:</p>
         <pre>systemctl enable freeradius.service</pre>
         <p>To verify that your RADIUS server is configured correctly, run the following command:</p>
         <pre>radtest bob hello localhost 0 testing123</pre>
         <p>The output of <code>radtest</code> will indicate whether the authentication message was successful or not.</p>
         <p>To monitor the RADIUS server's activity in real-time, stop the FreeRADIUS service temporarily and run the FreeRADIUS in debug mode:</p>
-        <pre>service freeradius stop<br>freeradius -X</pre>
+        <pre>systemctl stop freeradius.service<br>freeradius -X</pre>
         <p>Open another terminal window and test the connection using the <code>radtest</code> command. Exit FreeRADIUS debug mode by pressing Ctrl + C in the terminal running FreeRADIUS.</p>
+        <p>Start the FreeRADIUS service:</p>
+        <pre>systemctl start freeradius.service</pre>
         <p>If everything is configured correctly, you can use the RADIUS server to setup your client or any other network device that requires user authentication.</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
