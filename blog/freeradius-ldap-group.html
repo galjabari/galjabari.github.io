@@ -57,7 +57,7 @@
         <p>Finally, use <code>radtest</code> command to ensure that users are being authenticated and authorized correctly based on LDAP group membership.</p>
         <pre>radtest user1 secret localhost 0 testing123</pre>
         <p>If <code>user1</code> is a member of the <code>group1</code> group, FreeRADIUS should grant access. If not, access is rejected.</p>
-        <p>To restrict access based on LDAP group membership, you can also define a policy in user profiles by editing the following file:</p>
+        <p>To restrict access based on LDAP groups, you can also define a policy in user profiles by editing the following file:</p>
         <pre>nano /etc/freeradius/3.0/mods-config/files/authorize</pre>
         <p>For example, add the following line to reject access to users belonging to <code>group2</code> group:</p>
         <pre>DEFAULT LDAP-Group == "group2", Auth-Type := Reject</pre>
