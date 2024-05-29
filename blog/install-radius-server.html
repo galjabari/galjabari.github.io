@@ -66,8 +66,7 @@
         <p>The output of <code>radtest</code> will indicate whether the authentication message was successful or not.</p>
         <p>To monitor the RADIUS server's activity in real-time, stop the FreeRADIUS service temporarily and run the FreeRADIUS in debug mode:</p>
         <pre>systemctl stop freeradius.service<br>freeradius -X</pre>
-        <p>Open another terminal window and test the connection using the <code>radtest</code> command. Exit FreeRADIUS debug mode by pressing Ctrl + C in the terminal running FreeRADIUS.</p>
-        <p>Start the FreeRADIUS service:</p>
+        <p>Open another terminal window and test the connection using the <code>radtest</code> command. Exit FreeRADIUS debug mode by pressing Ctrl + C in the terminal running FreeRADIUS and start the FreeRADIUS service:</p>
         <pre>systemctl start freeradius.service</pre>
         <p>If everything is configured correctly, you can use the RADIUS server to setup your client or any other network device that requires user authentication.</p>
     </div>
