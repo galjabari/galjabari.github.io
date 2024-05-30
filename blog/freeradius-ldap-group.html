@@ -46,6 +46,7 @@
         <pre>nano /etc/freeradius/3.0/mods-available/ldap</pre>
         <p>Uncomment and update the following lines:</p>
         <pre>filter = '(objectClass=groupOfNames)'<br>name_attribute = cn<br>membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-User-Name}:-%{User-Name}}))"</pre>
+        <h6>Method 1</h6>
         <p>To define the access policies that grant or deny access based on LDAP group membership, edit the FreeRADIUS configuration file:</p>
         <pre>nano /etc/freeradius/3.0/sites-available/default</pre>
         <p>Look for <code>authorize</code> section and add the following lines under <code>ldap</code> to grant access to only users belonging to <code>group1</code> group:</p>
@@ -57,6 +58,7 @@
         <p>Finally, use <code>radtest</code> command to ensure that users are being authenticated and authorized correctly based on LDAP group membership.</p>
         <pre>radtest user1 secret localhost 0 testing123</pre>
         <p>If <code>user1</code> is a member of the <code>group1</code> group, FreeRADIUS should grant access. If not, access is rejected.</p>
+        <h6>Method 2</h6>
         <p>To restrict access based on LDAP groups, you can also define a policy in user profiles by editing the following file:</p>
         <pre>nano /etc/freeradius/3.0/mods-config/files/authorize</pre>
         <p>For example, add the following line to reject access to users belonging to <code>group2</code> group:</p>
