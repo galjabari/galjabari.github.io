@@ -41,7 +41,7 @@
         <p>Edit the FreeRADIUS configuration file:</p>
         <pre>nano /etc/freeradius/3.0/sites-available/default</pre>
         <p>Enable LDAP module by removing <code>-</code> from <code>-ldap</code> in the <code>authorize</code> section:</p>
-        <pre>authorize {<br>    ...<br>    ldap<br>}</pre>
+        <pre>authorize {<br>    ...<br>    ldap<br>    ...<br>}</pre>
         <p>Edit the LDAP module configuration file to configure group lookups:</p>
         <pre>nano /etc/freeradius/3.0/mods-available/ldap</pre>
         <p>Uncomment and update the following lines:</p>
