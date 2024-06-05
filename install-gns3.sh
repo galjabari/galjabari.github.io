@@ -6,7 +6,7 @@ sudo apt install gns3-gui gns3-server -y
 #sudo dpkg --add-architecture i386
 #sudo apt update
 #sudo apt install gns3-iou -y
-sudo apt install  xtightvncviewer -y 
+sudo apt install tigervnc-standalone-server tigervnc-viewer -y 
 #sudo usermod -aG ubridge $USER 
 #sudo usermod -aG libvirt $USER
 ## Install Docker
