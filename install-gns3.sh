@@ -7,8 +7,8 @@ sudo apt install gns3-gui gns3-server -y
 #sudo apt update
 #sudo apt install gns3-iou -y
 sudo apt install tigervnc-viewer -y 
-sudo usermod -aG ubridge $USER 
-sudo usermod -aG libvirt $USER
+#sudo usermod -aG ubridge $USER 
+#sudo usermod -aG libvirt $USER
 ## Install Docker
 sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y
 sudo apt-get install curl -y
