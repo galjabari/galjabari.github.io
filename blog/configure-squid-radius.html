@@ -42,7 +42,7 @@
         <pre>sudo nano /etc/squid/squid.conf</pre>
         <p>Add the following lines to the top of <code>http_access</code> section to configure RADIUS authentication:</p>
         <pre>auth_param basic program /usr/lib/squid/basic_radius_auth -h localhost -w testing123<br>auth_param basic children 5<br>auth_param basic realm Proxy Authentication Required<br>auth_param basic credentialsttl 30 minute<br>acl radius-auth proxy_auth REQUIRED<br>http_access allow radius-auth</pre>
-        <p>Replace <code>localhost</code> with the hostname or IP address of your RADIUS server and <code>testing123</code> with your shared secret key.</p>
+        <p>Replace <code>localhost</code> with the hostname or IP address of your RADIUS server and <code>testing123</code> with your shared secret key. Make sure to define Squid proxy as a client in RADIUS server.</p>
         <p>Remove the following line by commenting it out to restrict access to authenticated users:</p>
         <pre>#http_access allow localnet</pre>
         <p>After making changes, reload the Squid service to apply the configuration:</p>
