@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../blog.html">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Configure Squid proxy with RADIUS authentication</h5>
+        <p>Before configuring Squid proxy to use RADIUS server to authenticate users before allowing them to access the web, you need to complete the following guides:</p>
+        <p><a href="install-radius-server.html" target="_blank"> Install and configure RADIUS Server on Ubuntu</a></p>
+        <p><a href="install-proxy-server.html" target="_blank"> Install and configure Proxy Server on Ubuntu</a></p>
+        <p>Next, edit the Squid configuration file using the following command:</p>
+        <pre>sudo nano /etc/squid/squid.conf</pre>
+        <p>Add the following lines to the top of <code>http_access</code> section to configure RADIUS authentication:</p>
+        <pre>auth_param basic program /usr/lib/squid/basic_radius_auth -h localhost -w testing123<br>auth_param basic children 5<br>auth_param basic realm Proxy Authentication Required<br>auth_param basic credentialsttl 30 minute<br>acl radius-auth proxy_auth REQUIRED<br>http_access allow radius-auth</pre>
+        <pre>Replace <code>localhost</code> with the IP address of your RADIUS server and <code>testing123</code> with your shared secret key.</pre>
+        <p>Remove the following line by commenting it out to restrict access to authenticated users:</p>
+        <pre>#http_access allow localnet</pre>
+        <p>After making changes, reload the Squid service to apply the configuration:</p>
+        <pre>sudo systemctl relaod squid.service</pre>
+        <p>You can now connect to proxy server from your client devices using RADIUS for authentication.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
