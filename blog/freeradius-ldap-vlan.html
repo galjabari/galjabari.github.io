@@ -46,6 +46,10 @@
         <pre>nano /etc/freeradius/3.0/mods-available/ldap</pre>
         <p>Uncomment and update the following lines:</p>
         <pre>filter = '(objectClass=groupOfNames)'<br>name_attribute = cn<br>membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-User-Name}:-%{User-Name}}))"</pre>
+        <p>To enable VLAN assignment when using PEAP authentication method, edit the EAP configuration file:</p>
+        <pre>nano /etc/freeradius/3.0/mods-available/eap</pre>
+        <p>Look for <code>peap</code> section, ensure to modify the following line:</p>
+        <pre>peap {<br>    ...<br>    use_tunneled_reply = yes<br>    ...<br>}</pre>
         <p>To define VLAN assignment rules based on LDAP group membership, edit the following file:</p>
         <pre>nano /etc/freeradius/3.0/mods-config/files/authorize</pre>
         <p>For example, add the following lines:</p>
