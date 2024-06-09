@@ -54,7 +54,8 @@
         <pre>dig ns2.example.com</pre>
         <p>You should see the DNS records returned by your primary DNS server.</p>
         <h6>Configure secondary DNS server</h6>
-        <p>Next, on the secondary server, update the package lists.</p>
+        <p>Before setting up the secondary DNS server, ensure that your system's has a static IP address (192.168.1.11/24)</p>
+        <p>Next, update the package lists.</p>
         <pre>sudo apt update</pre>
         <p>Install the BIND DNS server package.</p>
         <pre>sudo apt install bind9 -y</pre>
