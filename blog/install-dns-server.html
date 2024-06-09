@@ -49,7 +49,7 @@
         <p>Edit the newly created zone file for your domain.</p>
         <pre>sudo nano /etc/bind/db.example.com</pre>
         <p>Replace the contents with the following, updating with your actual domain name and IP addresses:</p>
-        <pre>$TTL    604800<br>@       IN      SOA     example.com. root.example.com. (<br>                              2         ; Serial<br>                         604800         ; Refresh<br>                          86400         ; Retry<br>                        2419200         ; Expire<br>                         604800 )       ; Negative Cache TTL<br>@       IN      NS      ns.example.com.<br>ns      IN      A       192.168.1.10<br>@       IN      A       192.168.1.10</pre>        
+        <pre>$TTL    604800<br>@       IN      SOA     example.com. root.example.com. (<br>                              2         ; Serial<br>                         604800         ; Refresh<br>                          86400         ; Retry<br>                        2419200         ; Expire<br>                         604800 )       ; Negative Cache TTL<br>@       IN      NS      ns.example.com.<br>ns      IN      A       192.168.1.10<br>@       IN      A       192.168.1.12</pre>        
         <p>After making changes, restart the BIND service to apply the configuration.</p>
         <pre>sudo systemctl restart bind9.service</pre>
         <p>Verify that BIND is running without errors.</p>
