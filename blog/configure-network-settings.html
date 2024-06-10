@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../blog.html">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Configure network settings on Ubuntu</h5>
+        <p>You can configure network interfaces on Ubuntu using graphical utilities.</p>
+        <p>To manage the network using a CLI, you can use popular tools like <code>ip addr</code> or <code>ifconfig</code>.</p>
+        <p>To quickly identify all available network interfaces, run the following command:</p>
+        <pre>ip a</pre>
+        <p>Ethernet interfaces are identified by the system using logical names such as <code>ens3</code> or <code>enp2s0</code>.</p>
+        <p>To configure your system to use DHCP, edit a Netplan configuration file located in <code>/etc/netplan/</code> with <code>.yaml</code> format. For example:</p>
+        <pre>sudo nano /etc/netplan/50-cloud-init.yaml</pre>
+        <p>Add the following configuration:</p>
+        <pre>network:<br>  version: 2<br>  renderer: networkd<br>  ethernets:<br>    ens3:<br>      dhcp4: true</pre>
+        <p>This configuration use dynamic IP address assignment for Ethernet interface identified as <code>ens3</code>.</p>
+        <p>To apply the configuration, run the following command:</p>
+        <pre>sudo netplan apply</pre>
+        <p>To configure your system to use static IP address, edit the Netplan configuration file:</p>
+        <pre>sudo nano /etc/netplan/50-cloud-init.yaml</pre>
+        <p>For example, add the following configuration:</p> 
+        <pre>network:<br>  version: 2<br>  renderer: networkd<br>  ethernets:<br>    ens3:<br>      addresses:<br>        - 192.168.1.10/24<br>      routes:<br>        - to: default<br>          via: 192.168.1.1<br>      nameservers:<br>          addresses: [8.8.8.8, 8.8.4.4]</pre>
+        <p>Change the settings to meet the requirements of your network such as IP address, default gateway, and DNS servers.</p>
+        <p>To apply the configuration, run the following command:</p>
+        <pre>sudo netplan apply</pre>        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
