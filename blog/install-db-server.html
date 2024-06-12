@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A step-by-step guide on how to install amd manage a database server on Ubuntu 20.04/22.04 using MariaDB">
+    <meta name="description" content="A step-by-step guide on how to install and manage a database server on Ubuntu 20.04/22.04 using MariaDB">
     <title>Ghannam Aljabari</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -44,14 +44,13 @@
         <pre>sudo systemctl status mariadb.service</pre>
         <p>Log in to the MariaDB server:</p>
         <pre>sudo mysql -u root -p</pre>
-        <p>You can access the MariaDB server without a password. Type <code>exit</code> to quit MariaDB Shell.</p>
+        <p>Press Enter to access the MariaDB server without a password. Type <code>exit</code> to quit MariaDB Shell.</p>
         <p>After installing MariaDB, it's recommended to run the following script to secure the installation:</p>
         <pre>sudo mysql_secure_installation</pre>
         <p>Follow the prompts to set up a root password, remove anonymous users, disallow remote root login, and remove the test database.</p>
-        <p>To manage MariaDB using a web browser, you can use phpMyAdmin web-based tool.</p>
-        <p>You can install phpMyAdmin on Ubuntu using the following command:</p>
+        <p>To manage MariaDB using a web browser, you can use phpMyAdmin tool. To install phpMyAdmin on Ubuntu run the following command:</p>
         <pre>sudo apt install phpmyadmin -y</pre></p>
-        <p>During the installation process, you will be prompted to choose the web server that should be automatically configured to run phpMyAdmin. Select your web server (typically Apache2 or Lighttpd) using the space bar, then press Enter to continue.</p>
+        <p>During the installation process, you will be prompted to choose the web server that should be automatically configured to run phpMyAdmin. Select your web server (typically Apache) using the space bar, then press Enter to continue.</p>
         <p>After selecting the web server, you'll be asked whether to configure the database for phpMyAdmin. Choose 'Yes' and proceed.</p>
         <p>To access phpMyAdmin, navigate to <code>http://localhost/phpmyadmin</code> using a web browser on your database server. Replace <code>localhost</code> with your database server's hostname or IP address to access phpMyAdmin on your machine.</p>
         <p>Log in with MariaDB username and password to manage your database.</p>
