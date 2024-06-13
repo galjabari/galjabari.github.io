@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A step-by-step guide on how to integrate FreeRADIUS with MariaDB on Ubuntu 20.04/22.04 to authenticate and authorize users in the database">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../blog.html">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Configure FreeRADIUS with SQL for Authentication, Authorization, and Accounting</h5>
+        <p>Before configuring FreeRADIUS to use SQL database as the backend for authentication, authorization, and accounting, you need to complete the following guides:</p>
+        <p><a href="install-db-server.html" target="_blank"> Install and manage a Database Server on Ubuntu</a></p>
+        <p><a href="install-radius-server.html" target="_blank"> Install and configure RADIUS Server on Ubuntu</a></p>
+        <h6>Create FreeRADIUS database</h6>
+        <p>Log in to the database server:</p>
+        <pre>sudo mysql -u root -p</pre>
+        <p>When prompted enter the <code>root</code> password to create the RADIUS database and user:</p>
+        <pre>CREATE DATABASE radius;<br>GRANT ALL ON radius.* TO radius@localhost IDENTIFIED BY "radpass";<br>exit</pre>
+        <p>Import the RADIUS database schema using the following command:</p>
+        <pre>sudo mysql -u root -p radius < /etc/freeradius/3.0/mods-config/sql/main/mysql/schema.sql</pre>
+        <h6>Configure FreeRADIUS to use SQL</h6>
+        <p>First, install the SQL module for FreeRADIUS:</p>
+        <pre>sudo apt-get install freeradius-mysql -y</pre>
+        <p>Switch to the <code>root</code> user to modify the configuration files of FreeRADIUS:</p>
+        <pre>sudo -i</pre>
+        <p>Edit the FreeRADIUS configuration file to use SQL as a backend:</p>
+        <pre>nano /etc/freeradius/3.0/sites-available/default</pre>
+        <p>Inside the configuration file, uncomment the following lines by removing <code>-</code> from <code>-sql</code> in the <code>authorize</code> and <code>accounting</code> sections:</p>
+        <pre>authorize {<br>    ...<br>    sql<br>    ...<br>}        <br>accounting {<br>    ...<br>    sql<br>    ...<br>}</pre>
+        <p>Similarly, edit <code>inner-tunnel</code> configuration file and enable <code>sql</code> in the <code>authorize</code> and <code>accounting</code> sections:</p>
+        <pre>nano /etc/freeradius/3.0/sites-available/inner-tunnel</pre>
+        <p>Edit the SQL module configuration file:</p>
+        <pre>nano /etc/freeradius/3.0/mods-available/sql</pre>
+        <p>Modify the following lines to match your database configuration:</p>
+        <pre>dialect = "mysql"<br>driver = "rlm_sql_mysql"<br>server = "localhost"<br>port = 3306<br>login = "radius"<br>password = "radpass"<br>radius_db = "radius"<br>read_clients = yes</pre>
+        <p>Replace <code>localhost</code> with your database server's hostname or IP address.</p>        
+        <p>Create a symbolic link to enable the SQL module:</p>
+        <pre>ln -s /etc/freeradius/3.0/mods-available/sql /etc/freeradius/3.0/mods-enabled/sql</pre>
+        <p>To apply the changes, restart the FreeRADIUS service:</p>
+        <pre>systemctl restart freeradius.service</pre>
+        <p>To verify your configuration, log in to the database server:</p>
+        <pre>mysql -u radius -p</pre>
+        <p>Then, add a new user into the database:</p>
+        <pre>USE radius;<br>INSERT INTO radcheck (username, attribute, op, value) VALUES ('user1', 'Cleartext-Password', ':=', 'secret');</pre>
+        <p>Finally, test the configuration using the <code>radtest</code> command:</p>
+        <pre>radtest user1 secret localhost 0 testing123</pre>
+        <p>You should see an <code>Access-Accept</code> message if your RADIUS server is configured correctly.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
