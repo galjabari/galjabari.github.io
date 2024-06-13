@@ -61,7 +61,7 @@
         <pre>nano /etc/freeradius/3.0/mods-available/sql</pre>
         <p>Modify the following lines to match your database configuration:</p>
         <pre>driver = "rlm_sql_mysql"<br>server = "localhost"<br>port = 3306<br>login = "radius"<br>password = "radpass"<br>radius_db = "radius"<br>read_clients = yes</pre>
-        <p>Replace <code>localhost</code> with your database server's hostname or IP address.</p>        
+        <p>Replace <code>localhost</code> with your database server's hostname or IP address. Ensure to disable TLS encryption by commenting out the entire <code>tls</code> block.</p>
         <p>Create a symbolic link to enable the SQL module:</p>
         <pre>ln -s /etc/freeradius/3.0/mods-available/sql /etc/freeradius/3.0/mods-enabled/sql</pre>
         <p>To apply the changes, restart the FreeRADIUS service:</p>
