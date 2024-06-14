@@ -68,7 +68,7 @@
         <pre>systemctl restart freeradius.service</pre>
         <p>To verify your configuration, log in to the database server:</p>
         <pre>mysql -u radius -p</pre>
-        <p>When prompted enter the password to add a new user into the database:</p>
+        <p>When prompted enter the password and add a new user into the database:</p>
         <pre>USE radius;<br>INSERT INTO radcheck (username, attribute, op, value) VALUES ('user1', 'Cleartext-Password', ':=', 'secret');<br>exit</pre>
         <p>Finally, test the configuration using the <code>radtest</code> command:</p>
         <pre>radtest user1 secret localhost 0 testing123</pre>
