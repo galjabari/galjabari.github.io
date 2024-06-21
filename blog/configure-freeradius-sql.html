@@ -64,6 +64,10 @@
         <p>Replace <code>localhost</code> with your database server's hostname or IP address. Ensure that TLS encryption is disabled in <code>mysql</code> section by commenting out the entire <code>tls</code> block.</p>
         <p>Create a symbolic link to enable the SQL module:</p>
         <pre>ln -s /etc/freeradius/3.0/mods-available/sql /etc/freeradius/3.0/mods-enabled/sql</pre>
+        <p>Edit the EAP configuration file to send reply attributes with PEAP authentication method:</p>
+        <pre>nano /etc/freeradius/3.0/mods-available/eap</pre>
+        <p>Look for <code>peap</code> section, ensure to modify the following line:</p>
+        <pre>peap {<br>    ...<br>    use_tunneled_reply = yes<br>    ...<br>}</pre>
         <p>To apply the changes, restart the FreeRADIUS service:</p>
         <pre>systemctl restart freeradius.service</pre>
         <p>To verify your configuration, log in to the database server:</p>
