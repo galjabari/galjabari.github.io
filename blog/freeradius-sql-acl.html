@@ -37,6 +37,7 @@
     <div class="container">
         <h5>Configure FreeRADIUS with SQL for dynamic ACL assignment</h5>
         <p>This guide assumes you have already configured <a href="configure-freeradius-sql.html" target="_blank">FreeRADIUS with SQL backend</a> and you need to assign access control lists (ACLs) for users in the SQL database based on group membership.</p>
+        <h6>Configure a RADIUS server</h6>
         <p>First, connect to SQL database using your preferred SQL client (like <code>mysql</code> or phpMyAdmin).</p>
         <p>To add users to RADIUS database, insert user credentials into the <code>radcheck</code> table.</p>
         <pre>INSERT INTO radcheck (username, attribute, op, value) VALUES ('user1', 'Cleartext-Password', ':=', 'secret');<br>INSERT INTO radcheck (username, attribute, op, value) VALUES ('user2', 'Cleartext-Password', ':=', 'secret');</pre>
@@ -51,7 +52,8 @@
         <p>In this example, users belong to <code>group1</code> can access all services and users belong to <code>group2</code> can access only DNS, DHCP, and web services.</p>              
         <p>Finally, use <code>radtest</code> command to ensure that users are being authenticated and assigned the correct ACLs.</p>
         <pre>radtest user2 secret localhost 0 testing123</pre>
-        <p>Now, you can use the RADIUS server to configure a Cisco switch to dynamically assign ACLs to users based on their groups.</p> 
+        <h6>Configure a Cisco switch</h6>
+        <p>You can use the RADIUS server to configure a Cisco switch to dynamically assign ACLs to users based on their groups.</p> 
         <p>For example, to configure a Cisco switch with IOS version 15.0 or above, execute the following commands:</p>
         <pre>Switch>en<br>Switch#conf t<br>Switch(config)#interface vlan 1<br>Switch(config-if)#ip address 192.168.1.2 255.255.255.0<br>Switch(config-if)#no shut<br>Switch(config-if)#exit<br>Switch(config)#aaa new-model<br>Switch(config)#radius server RADIUS-SERVER<br>Switch(config-radius-server)#address ipv4 192.168.1.10 auth-port 1812 acct-port 1813<br>Switch(config-radius-server)#key pass@123<br>Switch(config-radius-server)#exit<br>Switch(config)#aaa authentication dot1x default group radius<br>Switch(config)#aaa authorization network default group radius<br>Switch(config)#dot1x system-auth-control<br>Switch(config)#interface gi0/1<br>Switch(config-if)#switchport mode access<br>Switch(config-if)#authentication port-control auto<br>Switch(config-if)#dot1x pae authenticator<br>Switch(config-if)#exit<br>Switch(config)#exit</pre>
         <p>Replace <code>192.168.1.10</code> with the IP address of your RADIUS server and <code>pass@123</code> with your shared secret key.</p>
