@@ -37,7 +37,7 @@
     <div class="container">
         <h5>Configure FreeRADIUS with SQL for dynamic ACL assignment</h5>
         <p>This guide assumes you have already configured <a href="configure-freeradius-sql.html" target="_blank">FreeRADIUS with SQL backend</a> and you need to assign access control lists (ACLs) for users in the SQL database based on group membership.</p>
-        <h6>Configure a RADIUS server</h6>
+        <h6>Configure RADIUS server</h6>
         <p>First, connect to SQL database using your preferred SQL client (like <code>mysql</code> or phpMyAdmin).</p>
         <p>To add users to RADIUS database, insert user credentials into the <code>radcheck</code> table.</p>
         <pre>INSERT INTO radcheck (username, attribute, op, value) VALUES ('user1', 'Cleartext-Password', ':=', 'secret');<br>INSERT INTO radcheck (username, attribute, op, value) VALUES ('user2', 'Cleartext-Password', ':=', 'secret');</pre>
