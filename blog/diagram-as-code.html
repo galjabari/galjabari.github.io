@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../blog.html">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Draw diagrams in Python code</h5>
+        <p>To create system diagrams in Python code without any design tools, you can use <a href="https://diagrams.mingrammer.com" target="_blank"> Diagrams</a>.</p>
+        <p>First, you need to install Graphviz to render the diagram. To install Graphviz on Ubuntu:</p>
+        <pre>sudo apt install graphviz</pre>
+        <p>On Windows, you can download <a href="https://graphviz.gitlab.io/download/" target="_blank"> Graphviz</a> executable packages and install it.</p>
+        <p>After installing Graphviz, create a folder for Pythone code:</p>
+        <pre>mkdir diagrams</pre>
+        <p>Inside the folder, create a virtual environment and activate it:</p>
+        <pre>cd diagrams<br>python3 -m venv .venv<br>source .venv/bin/activate</pre>
+        <p>Install the <code>diagrams</code> using package installer for Python:</p>
+        <pre>pip install diagrams</pre>
+        <p>Now, you can generate diagrams with Python. For example, create a new Python file using your preferred editor:</p>
+        <pre>nano diagram.py</pre>
+        <p>Add the following code to generate a diagram for on-premise web service:</p>
+        <pre>from diagrams import Diagram, Cluster<br>from diagrams.onprem.compute import Server<br>from diagrams.onprem.database import MySQL<br>from diagrams.onprem.network import Nginx<br>from diagrams.onprem.network import Internet<br><br>with Diagram("Web Service", show=False, direction="LR"):<br>    internet = Internet("Internet")<br>    lb = Nginx("Load Balancer")    <br>    with Cluster("Web Cluster"):<br>        web_cluster = [Server("Web 1"),<br>                       Server("Web 2"),<br>                       Server("Web 3")]<br>    with Cluster("Database HA"):<br>        db_primary = MySQL("DB primary")<br>        db_primary - MySQL("DB replica")<br><br>    internet - lb >> web_cluster >> db_primary</pre>
+        <p>After making changes, save the file and run your Python code:</p>
+        <pre>python diagram.py</pre>
+        <p> The diagram should be saved as <code>web_service.png</code> on your working directory.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
