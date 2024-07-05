@@ -41,7 +41,7 @@
         <p>After installing Graphviz, create a folder for Python code:</p>
         <pre>mkdir diagrams</pre>
         <p>Inside the folder, create a virtual environment and activate it:</p>
-        <pre>cd diagrams<br>python -m venv .venv<br>source .venv/bin/activate</pre>
+        <pre>cd diagrams<br>python3 -m venv .venv<br>source .venv/bin/activate</pre>
         <p>Install the <code>diagrams</code> using package installer for Python:</p>
         <pre>pip install diagrams</pre>
         <p>Now, you can generate diagrams with Python. For example, create a new Python file using your preferred editor:</p>
@@ -49,7 +49,7 @@
         <p>Add the following code to generate a diagram for on-premise web service:</p>
         <pre>from diagrams import Diagram, Cluster<br>from diagrams.onprem.compute import Server<br>from diagrams.onprem.database import MySQL<br>from diagrams.onprem.network import Nginx, Internet<br><br>with Diagram("Web Service", show=False, direction="LR"):<br>    internet = Internet("Internet")<br>    lb = Nginx("Load Balancer")    <br>    with Cluster("Web Cluster"):<br>        web_cluster = [Server("Web 1"), Server("Web 2"), Server("Web 3")]<br>    with Cluster("Database HA"):<br>        db_primary = MySQL("DB primary")<br>        db_primary - MySQL("DB replica")<br><br>    internet - lb >> web_cluster >> db_primary</pre>
         <p>After saving and closing the file, run your Python code:</p>
-        <pre>python diagram.py</pre>
+        <pre>python3 diagram.py</pre>
         <p> The diagram will be saved as <code>web_service.png</code> on your working directory.</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
