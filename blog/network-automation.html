@@ -41,7 +41,7 @@
         <pre>Switch>en <br>Switch#conf t<br>Switch(config)#hostname S1<br>S1(config)#ip domain-name example.com<br>S1(config)#crypto key generate rsa<br>S1(config)#ip ssh version 2<br>S1(config)#username admin privilege 15 secret pass@123<br>S1(config)#line vty 0 4<br>S1(config-line)#transport input ssh<br>S1(config-line)#login local<br>S1(config-line)#exit<br>S1(config)#interface vlan 1<br>S1(config-if)#ip address 192.168.1.254 255.255.255.0<br>S1(config-if)#no shut<br>S1(config-if)#exit<br>S1(config)#exit</pre>
         <p>Make sure to choose a key size of 1024 bits or higher when prompted to generate RSA key. Replace <code>192.168.1.254</code> with the IP address of your network device.</p>
 
-        <p>After setting up Cisco switch, create a folder for Python script on your Linux machine connected to the switch:</p>
+        <p>After setting up Cisco switch, connect your Linux machine to the switch and create a folder for Python script:</p>
         <pre>mkdir automation</pre>
         <p>Inside the folder, create a virtual environment and activate it:</p>
         <pre>cd automation<br>python -m venv .venv<br>source .venv/bin/activate</pre>
