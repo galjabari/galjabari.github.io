@@ -49,7 +49,7 @@
         <p>Here's a Python script to configure a Cisco switch. Create a new Python file using your preferred editor:</p>
         <pre>nano config_switch.py</pre>
         <p>Add the following script to configure VLANs:</p>
-        <pre>from netmiko import ConnectHandler<br><br>device = {<br>    'device_type': 'cisco_ios',<br>    'host': '192.168.1.1',<br>    'username': 'admin',<br>    'password': 'pass@123',<br>}<br><br>net_connect = ConnectHandler(**device)<br><br>config_commands = [<br>    'vlan 10',<br>    'name VLAN10',<br>    'exit',<br>    'vlan 20',<br>    'name VLAN20',<br>    'end'<br>]<br><br>output = net_connect.send_config_set(config_commands)<br>print(output)<br>net_connect.disconnect()</pre>
+        <pre>from netmiko import ConnectHandler<br><br>device = {<br>    'device_type': 'cisco_ios',<br>    'host': '192.168.1.1',<br>    'username': 'admin',<br>    'password': 'pass@123',<br>}<br><br>net_connect = ConnectHandler(**device)<br><br>config_commands = [<br>    'vlan 10',<br>    'name VLAN10',<br>    'exit',<br>    'vlan 20',<br>    'name VLAN20',<br>    'end',<br>    'sh vlan brief'<br>]<br><br>output = net_connect.send_config_set(config_commands)<br>print(output)<br>net_connect.disconnect()</pre>
         <p>After saving and closing the file, run your Python script:</p>
         <pre>python3 config_switch.py</pre>
         <p>To save the configuration changes, you can use <code>save_config()</code> method:</p>
