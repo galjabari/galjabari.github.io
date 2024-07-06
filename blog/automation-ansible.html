@@ -53,7 +53,7 @@
         <p>Add the following lines to define VLAN configuration tasks:</p>
         <pre>---<br>- name: Configure VLANs on Cisco switches<br>  hosts: switches<br>  connection: network_cli<br>  gather_facts: false<br>  tasks:<br>    - name: Create VLAN 10<br>      ios_vlan:<br>        vlan_id: 10<br>        name: VLAN10<br>        state: present<br><br>    - name: Create VLAN 20<br>      ios_vlan:<br>        vlan_id: 20<br>        name: VLAN20<br>        state: present</pre>
         <p>Run the playbook to apply the configuration on Cisco switches:</p>
-        <pre>ansible-playbook config_vlans.yml</pre>
+        <pre>ansible-playbook -i hosts.ini config_vlans.yml</pre>
         <p>Ansible will connect to Cisco switches using SSH, configure the specified VLANs, and report the result.</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
