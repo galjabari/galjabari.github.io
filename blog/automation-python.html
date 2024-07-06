@@ -60,11 +60,11 @@
         <h6>Connecting to multiple devices</h6>
         <p>To automate the configurations on multiple network devices, you need to ensure SSH is configured on each device.</p>
         <p>Here's a Python script to configure multiple devices using Netmiko. Create a new Python file:</p>
-        <pre>nano config_switches.py</pre>
+        <pre>nano config_vlans.py</pre>
         <p>Add the following script to configure VLANs on Cisco switches:</p>
         <pre>from netmiko import ConnectHandler<br><br>switch1 = {<br>    'device_type': 'cisco_ios',<br>    'host': '192.168.1.1',<br>    'username': 'admin',<br>    'password': 'pass@123',<br>}<br><br>switch2 = {<br>    'device_type': 'cisco_ios',<br>    'host': '192.168.1.2',<br>    'username': 'admin',<br>    'password': 'pass@123',<br>}<br><br>switch3 = {<br>    'device_type': 'cisco_ios',<br>    'host': '192.168.1.3',<br>    'username': 'admin',<br>    'password': 'pass@123',<br>}<br><br>config_commands = [<br>    'vlan 10',<br>    'name VLAN10',<br>    'exit',<br>    'vlan 20',<br>    'name VLAN20',<br>    'exit'<br>]<br><br>for device in (switch1, switch2, switch3):<br>    net_connect = ConnectHandler(**device)<br>    output = net_connect.send_config_set(config_commands)<br>    print(output)<br>    net_connect.disconnect()</pre>
         <p>Save the script and run it using Python:</p>
-        <pre>python3 config_switches.py</pre>        
+        <pre>python3 config_vlans.py</pre>        
 
 
     </div>
