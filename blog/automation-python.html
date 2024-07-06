@@ -46,7 +46,7 @@
         <pre>cd tasks<br>python3 -m venv .venv<br>source .venv/bin/activate</pre>
         <p>Install the <code>Netmiko</code> via <code>pip</code> if you haven't already:</p>
         <pre>pip install netmiko</pre>
-        <p>Here's a Python script to configure a Cisco switch. Create a new Python file using your preferred editor:</p>
+        <p>Here's a Python script to configure a network device. Create a new Python file using your preferred editor:</p>
         <pre>nano config_switch.py</pre>
         <p>Add the following script to configure VLANs on a Cisco switch:</p>
         <pre>from netmiko import ConnectHandler<br><br>device = {<br>    'device_type': 'cisco_ios',<br>    'host': '192.168.1.1',<br>    'username': 'admin',<br>    'password': 'pass@123',<br>}<br><br>net_connect = ConnectHandler(**device)<br><br>config_commands = [<br>    'vlan 10',<br>    'name VLAN10',<br>    'exit',<br>    'vlan 20',<br>    'name VLAN20',<br>    'exit'<br>]<br><br>output = net_connect.send_config_set(config_commands)<br>print(output)<br>net_connect.disconnect()</pre>
