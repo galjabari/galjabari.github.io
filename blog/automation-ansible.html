@@ -51,7 +51,7 @@
         <p>To automate the configuration of network devices with Ansible, you need to define the configuration tasks using YAML syntax. For example:</p>
         <pre>nano config_vlans.yml</pre>
         <p>Add the following lines to define VLAN configuration tasks:</p>
-        <pre>- hosts: switches<br>  connection: network_cli<br>  gather_facts: false<br><br>  tasks:<br>    - name: Configure VLANs<br>      ios_vlan:<br>        vlan_id: "{{ item.id }}"<br>        name: "{{ item.name }}"<br>      loop:<br>        - { id: 10, name: 'VLAN10' }"<br>        - { id: 20, name: 'VLAN20' }"</pre>
+        <pre>---<br>- name: Configure VLANs on Cisco switches<br>  hosts: switches<br>  connection: network_cli<br>  gather_facts: false<br>  tasks:<br>    - name: Create VLAN 10<br>      ios_vlan:<br>        vlan_id: 10<br>        name: VLAN10<br>        state: present<br><br>    - name: Create VLAN 20<br>      ios_vlan:<br>        vlan_id: 20<br>        name: VLAN20<br>        state: present</pre>
         <p>Run the playbook to apply the configuration on Cisco switches:</p>
         <pre>ansible-playbook config_vlans.yml</pre>
         <p>Ansible will connect to Cisco switches using SSH, configure the specified VLANs, and report the result.</p>
