@@ -36,7 +36,6 @@
     <div class="container">
         <h5>Network Automation with Python</h5>
         <p>To automate network device configuration such as interface settings, VLAN configurations, or routing protocols, you can use Netmiko library in Python.</p>
-        <h6>Connecting to network devices</h6>
         <p>First, ensure your network device supports SSH and has SSH enabled.</p>
         <p>Here's how to setup SSH on a Cisco switch for remote management. Execute the following commands using a console cable:</p>
         <pre>Switch>en <br>Switch#conf t<br>Switch(config)#hostname S1<br>S1(config)#ip domain-name example.com<br>S1(config)#crypto key generate rsa<br>S1(config)#ip ssh version 2<br>S1(config)#username admin privilege 15 secret pass@123<br>S1(config)#line vty 0 4<br>S1(config-line)#transport input ssh<br>S1(config-line)#login local<br>S1(config-line)#exit<br>S1(config)#interface vlan 1<br>S1(config-if)#ip address 192.168.1.1 255.255.255.0<br>S1(config-if)#no shut<br>S1(config-if)#exit<br>S1(config)#exit</pre>
