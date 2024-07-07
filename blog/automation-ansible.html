@@ -53,7 +53,7 @@
         <p>To define the configuration tasks, you need to create a playbook file using YAML syntax:</p>
         <pre>nano config_vlans.yml</pre>
         <p>For example, add the following lines to define VLAN configuration tasks:</p>
-        <pre>---<br>- name: Configure VLANs on Cisco switches<br>  hosts: switches<br>  connection: network_cli<br>  gather_facts: false<br>  tasks:<br>    cisco.ios.ios_vlans:<br>      config:<br>        - name: VLAN10<br>          vlan_id: 10<br>          state: active<br>        - name: VLAN20<br>          vlan_id: 20<br>          state: active</pre>
+        <pre>---<br>- name: Configure VLANs on Cisco switches<br>  hosts: switches<br>  connection: network_cli<br>  gather_facts: false<br>  tasks:<br>    cisco.ios.ios_vlans:<br>      config:<br>        - vlan_id: 10<br>          name: VLAN10<br>        - vlan_id: 20<br>          name: VLAN20<br>      state: merged</pre>
         <p>Run the playbook to apply the configuration on Cisco switches:</p>
         <pre>ansible-playbook -i hosts.ini config_vlans.yml</pre>
         <p>Ansible will connect to Cisco switches using SSH, configure the specified VLANs, and report the result.</p>
