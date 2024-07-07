@@ -47,10 +47,10 @@
         <p>Once installed, create a file that lists the network devices with their settings:</p>
         <pre>nano hosts.ini</pre>
         <p>For example, add the following lines to define Cisco switches:</p>
-        <pre>[switches]<br>switch1 ansible_host=192.168.1.1 ansible_user=admin ansible_password=pass@123 ansible_network_os=cisco.ios.ios<br>switch2 ansible_host=192.168.1.2 ansible_user=admin ansible_password=pass@123 ansible_network_os=cisco.ios.ios<br>switch3 ansible_host=192.168.1.3 ansible_user=admin ansible_password=pass@123 ansible_network_os=cisco.ios.ios</pre>
+        <pre>[switches]<br>switch1 ansible_host=192.168.1.1<br>switch2 ansible_host=192.168.1.2<br>switch3 ansible_host=192.168.1.3<br><br>[switches:vars]<br>ansible_user=admin<br>ansible_password=pass@123<br>ansible_network_os=cisco.ios.ios</pre>
         <p>Make sure that SSH is configured on Cisco switches for remote management.</p>
         <h6>Write an Ansible playbook</h6>
-        <p>To define the configuration tasks, you need to write a playbook using YAML syntax:</p>
+        <p>To define the configuration tasks, you need to create a playbook file using YAML syntax:</p>
         <pre>nano config_vlans.yml</pre>
         <p>For example, add the following lines to define VLAN configuration tasks:</p>
         <pre>---<br>- name: Configure VLANs on Cisco switches<br>  hosts: switches<br>  connection: network_cli<br>  gather_facts: false<br>  tasks:<br>    cisco.ios.ios_vlans:<br>      config:<br>        - name: VLAN10<br>          vlan_id: 10<br>          state: active<br>        - name: VLAN20<br>          vlan_id: 20<br>          state: active</pre>
