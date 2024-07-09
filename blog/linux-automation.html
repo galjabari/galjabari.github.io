@@ -51,7 +51,7 @@
         <p>To verify connectivity with the target servers and ensure that Ansible can execute tasks on the remote systems, you can use the <code>ping</code> module within an Ansible playbook:</p>
         <pre>nano ping.yml</pre>
         <p>Add the following lines in the playbook:</p>
-        <pre>---<br>- hosts: servers<br>  tasks:<br>    - name: Check connectivity<br>      ansible.builtin.ping:</pre>
+        <pre>---<br>- hosts: servers<br>  gather_facts: false<br>  tasks:<br>    - name: Check connectivity<br>      ansible.builtin.ping:</pre>
         <p>Run the playbook using the <code>ansible-playbook</code> command:</p>
         <pre>ansible-playbook -i hosts.ini ping.yml</pre>
         <p>This will ping all hosts defined in the playbook and return a "pong" response for each reachable host.</p>
