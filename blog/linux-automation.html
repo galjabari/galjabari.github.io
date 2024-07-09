@@ -54,7 +54,7 @@
         <pre>---<br>- hosts: servers<br>  gather_facts: false<br>  tasks:<br>    - name: Check connectivity<br>      ansible.builtin.ping:</pre>
         <p>Run the playbook using the <code>ansible-playbook</code> command:</p>
         <pre>ansible-playbook -i hosts.ini ping.yml</pre>
-        <p>This will ping all hosts defined in the playbook and return a "pong" response for each reachable host.</p>
+        <p>This will ping all hosts defined in the playbook and return a response for each reachable host.</p>
         <p>To define system administration tasks using Ansible, you should create a playbook. For example:</p>
         <pre>nano install_apache.yml</pre>
         <p>Add the following lines to install Apache on Ubuntu servers:</p>
