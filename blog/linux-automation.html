@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../blog.html">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Linux Automation with Ansible</h5>
+        <p>To automate tasks on Linux systems such as installing software, configuring services, and managing users, you can use Ansible automation tool.</p>
+        <h6>Install Ansible on Ubuntu</h6>
+        <p>To install Ansible on your Linux machine (control node), run the following commands:</p>
+        <pre>sudo apt update<br>sudo apt install software-properties-common -y<br>sudo add-apt-repository --yes --update ppa:ansible/ansible<br>sudo apt install ansible -y</pre>
+        <p>Verify the installation by checking the Ansible version:</p>
+        <pre>ansible --version</pre>
+        <h6>Create an Ansible inventory file</h6>
+        <p>To manage and configure Linux systems with Ansible, you need to create a file that lists Linux hosts with their settings:</p>
+        <pre>nano hosts.ini</pre>
+        <p>For example, add the following lines to define a group of servers:</p>
+        <pre>[servers]<br>server1 ansible_host=192.168.1.101<br>server2 ansible_host=192.168.1.102<br>[servers:vars]<br>ansible_user=ubuntu<br>ansible_password=ubuntu<br>ansible_host_key_checking=false</pre>
+        <p>Ensure that the SSH service is installed and properly configured on the target servers to enable remote management.</p>
+        <h6>Write an Ansible playbook</h6>
+        <p>To verify connectivity with the target servers and ensure that Ansible can execute tasks on the remote systems, you can use the <code>ping</code> module within an Ansible playbook:</p>
+        <pre>nano ping.yml</pre>
+        <p>Add the following lines in the playbook:</p>
+        <pre>---<br>- hosts: servers<br>  tasks:<br>    - name: Check connectivity<br>      ansible.builtin.ping:</pre>
+        <p>Run the playbook using the <code>ansible-playbook</code> command:</p>
+        <pre>ansible-playbook -i hosts.ini ping.yml</pre>
+        <p>This will ping all hosts defined in the playbook and return a "pong" response for each reachable host.</p>
+        <p>To define system administration tasks using Ansible, you should create a playbook. For example:</p>
+        <pre>nano install_apache.yml</pre>
+        <p>Add the following lines to install Apache on Ubuntu servers:</p>
+        <pre>---<br>- name: Install Apache on Ubuntu servers<br>  hosts: servers<br>  become: yes<br>  tasks:<br>    - name: Update repositories cache<br>      ansible.builtin.apt:<br>        update_cache: yes<br><br>    - name: Install apache2 package<br>      ansible.builtin.apt:<br>        name: apache2<br>        state: latest<br><br>    - name: Start apache2 service, if not started<br>      ansible.builtin.service:<br>        name: apache2<br>        state: started<br><br>    - name: Enable apache2 service<br>      ansible.builtin.service:<br>        name: apache2<br>        enabled: yes</pre>
+        <p>Run the playbook:</p>
+        <pre>ansible-playbook -i hosts.ini install_apache.yml</pre>
+        <p>Open a web browser and enter the IP addresses of <code>server1</code> and <code>server2</code> in the address bar; you should see the default Apache2 Ubuntu page.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
