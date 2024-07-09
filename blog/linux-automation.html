@@ -58,7 +58,7 @@
         <p>To define system administration tasks using Ansible, you should create a playbook. For example:</p>
         <pre>nano install_apache.yml</pre>
         <p>Add the following lines to install Apache on Ubuntu servers:</p>
-        <pre>---<br>- name: Install Apache on Ubuntu servers<br>  hosts: servers<br>  become: yes<br>  tasks:<br>    - name: Update repositories cache<br>      ansible.builtin.apt:<br>        update_cache: yes<br><br>    - name: Install apache2 package<br>      ansible.builtin.apt:<br>        name: apache2<br>        state: latest<br><br>    - name: Start apache2 service, if not started<br>      ansible.builtin.service:<br>        name: apache2<br>        state: started<br><br>    - name: Enable apache2 service<br>      ansible.builtin.service:<br>        name: apache2<br>        enabled: yes</pre>
+        <pre>---<br>- name: Install Apache on Ubuntu servers<br>  hosts: servers<br>  become: yes<br>  tasks:<br>    - name: Update repositories cache and install apache2<br>      ansible.builtin.apt:<br>        name: apache2<br>        state: latest<br>        update_cache: yes<br><br>    - name: Start and enable apache2 service<br>      ansible.builtin.service:<br>        name: apache2<br>        state: started<br>        enabled: yes</pre>
         <p>Run the playbook:</p>
         <pre>ansible-playbook -i hosts.ini install_apache.yml</pre>
         <p>Open a web browser and enter the IP addresses of <code>server1</code> and <code>server2</code> in the address bar; you should see the default Apache2 Ubuntu page.</p>
