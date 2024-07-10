@@ -58,10 +58,22 @@
         <p>To define system administration tasks using Ansible, you should create a playbook. For example:</p>
         <pre>nano install_apache.yml</pre>
         <p>Add the following lines to install Apache on Ubuntu servers:</p>
-        <pre>---<br>- name: Install Apache on Ubuntu servers<br>  hosts: servers<br>  become: yes<br>  tasks:<br>    - name: Update repositories cache and install apache2<br>      ansible.builtin.apt:<br>        name: apache2<br>        state: latest<br>        update_cache: yes<br><br>    - name: Start and enable apache2 service<br>      ansible.builtin.service:<br>        name: apache2<br>        state: started<br>        enabled: yes</pre>
+        <pre>---<br>- name: Install Apache on Ubuntu servers<br>  hosts: servers<br>  gather_facts: false<br>  become: yes # Run tasks with root privileges<br>  tasks:<br>    - name: Update repositories cache and install apache2<br>      ansible.builtin.apt:<br>        name: apache2<br>        state: latest<br>        update_cache: yes<br><br>    - name: Start and enable apache2 service<br>      ansible.builtin.service:<br>        name: apache2<br>        state: started<br>        enabled: yes</pre>
         <p>Run the playbook:</p>
         <pre>ansible-playbook -i hosts.ini install_apache.yml</pre>
         <p>Open a web browser and enter the IP addresses of <code>server1</code> and <code>server2</code> in the address bar; you should see the default Apache2 Ubuntu page.</p>
+        <p>To configure a new virtual host or site on Apache, you should create a new playbook file:</p>
+        <pre>config_vhost.yml</pre>
+        <p>Add the following content:</p>
+        <pre>---<br>- name: Configure Apache virtual host<br>  hosts: server1<br>  gather_facts: false<br>  become: true<br><br>  vars:<br>    site_domain: example.com  # Define your site domain<br><br>  tasks:<br>    - name: Ensure Apache2 is installed<br>      ansible.builtin.apt:<br>        name: apache2<br>        state: present<br><br>    - name: Copy Apache virtual host configuration file<br>      ansible.builtin.template:<br>        src: vhost.conf.j2  # Path to your Jinja2 template file<br>        dest: /etc/apache2/sites-available/{{ site_domain }}.conf<br>        notify:<br>          - Reload Apache<br><br>    - name: Enable the new site<br>      ansible.builtin.command: a2ensite {{ site_domain }}<br>        notify:<br>          - Reload Apache<br><br>    - name: Create directory for site content<br>      ansible.builtin.file:<br>        path: "/var/www/{{ site_domain }}"<br>        state: directory<br>        owner: www-data<br>        group: www-data<br>        mode: '0755'<br><br>    - name: Create default page<br>      ansible.builtin.copy:<br>        content: '&lt;h1&gt;Welcome to {{ site_domain }}&lt;/h1&gt;'<br>        dest: /var/www/{{ site_domain }}/index.html<br><br>  handlers:<br>    - name: Reload Apache<br>      ansible.builtin.service:<br>        name: apache2<br>        state: reloaded</pre>
+        <p>Replace <code>site_domain</code> with your desired domain name for the new virtual host.</p>
+        <p>Create a Jinja2 template file:</p>
+        <pre>nano vhost.conf.j2</pre>
+        <p>Add the following content:</p>
+        <pre>&lt;VirtualHost *:80&gt;<br>    ServerAdmin webmaster@{{ site_domain }}<br>    ServerName {{ site_domain }}<br>    ServerAlias www.{{ site_domain }}<br>    DocumentRoot /var/www/{{ site_domain }}/<br><br>    ErrorLog ${APACHE_LOG_DIR}/error.log<br>    CustomLog ${APACHE_LOG_DIR}/access.log combined<br>&lt;/VirtualHost&gt;</pre>
+        <p>Run the playbook:</p>
+        <pre>ansible-playbook -i hosts.ini config_vhost.yml</pre>
+        <p>After running the playbook, you should be able to access <code>http://example.com</code> and see the default page you've configured.</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
