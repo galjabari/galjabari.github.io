@@ -44,7 +44,7 @@
         <h6>Create an Ansible inventory file</h6>
         <p>To manage and configure Linux systems with Ansible, you need to create an inventory file that lists Linux hosts along with their settings:</p>
         <pre>nano hosts.ini</pre>
-        <p>For example, add the following lines to define a group of servers:</p>
+        <p>For example, add the following lines to define a group of Linux servers:</p>
         <pre>[servers]<br>server1 ansible_host=192.168.1.101<br>server2 ansible_host=192.168.1.102<br><br>[servers:vars]<br>ansible_user=ubuntu<br>ansible_password=ubuntu<br>ansible_host_key_checking=false</pre>
         <p>Ensure that the SSH service is installed and properly configured on the target servers to enable remote management.</p>
         <h6>Write an Ansible playbook</h6>
