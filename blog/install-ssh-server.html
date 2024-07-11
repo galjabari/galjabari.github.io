@@ -43,9 +43,23 @@
         <p>Once the installation is complete, you can verify that the SSH server is running by checking its status. Run the command:</p>
         <pre>sudo systemctl status ssh.service</pre>
         <p>If the SSH server is active and running, you'll see a message indicating its status.</p>
-        <p>To connect to the SSH server, you'll need its IP address and your username. Assuming the IP address of your system is <code>192.168.1.5</code> and your username is <code>ubuntu</code>, you can connect using the following command:</p>
+        <p>To connect to the SSH server, you'll need its IP address and your username. Assuming the IP address of your server is <code>192.168.1.5</code> and your username is <code>ubuntu</code>, you can connect using the following command:</p>
         <pre>ssh ubuntu@192.168.1.5</pre>
-        <p>After entering the password, you should be logged in to your system via SSH.</p>
+        <p>After entering the password, you should be logged in to your server via SSH.</p>
+        <p>To log in to the SSH server without typing the password each time, you can use SSH keys.</p>
+        <p>To generate an SSH key pair, run the following command on your local machine:</p>
+        <pre>ssh-keygen</pre>
+        <p>Follow the prompts to save the key in the default location (<code>~/.ssh/id_rsa</code>) and set a passphrase (optional).</p>
+        <p>After generating the key pair, copy the public key to the remote server using the following command:</p>
+        <pre>ssh-copy-id ubuntu@192.168.1.5</pre>
+        <p>Alternatively, you can manually copy the key by displaying it using the command:</p>
+        <pre>cat ~/.ssh/id_rsa.pub</pre>
+        <p>On the server, open the following file using your preferred editor:</p>
+        <pre>nano ~/.ssh/authorized_keys</pre>
+        <p>Paste the copied key into this file.</p>
+        <p>Now, you can connect to the server using SSH key:</p>
+        <pre>ssh ubuntu@192.168.1.5</pre>
+        <p>If you set a passphrase for the SSH key, you'll be prompted to enter it.</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
