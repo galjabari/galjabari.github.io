@@ -60,7 +60,7 @@
         <pre>sudo nano /etc/dhcp/dhcpd.conf</pre>
         <p>Add a host declaration for the device within the subnet section. For example:</p>
         <pre>host printer1 {<br>    hardware etherenet 00:11:22:33:44:55;<br>    fixed-address 192.168.1.100;<br>}</pre>
-        <p>In this example, a printer with the MAC address <code>00:11:22:33:44:55</code> is assigned the static IP address <code>192.168.1.100</code></p>
+        <p>In this example, a printer with the MAC address <code>00:11:22:33:44:55</code> is assigned the static IP address <code>192.168.1.100</code>.</p>
         <p>Restart the DHCP server to apply the changes:</p>
         <pre>sudo systemctl restart isc-dhcp-server.service</pre>
         <p>Ensure the printer is configured to request an IP address form the DHCP server.</p>
