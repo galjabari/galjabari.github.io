@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../blog.html">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Infrastructure as Code with Terraform</h5>
+        <p>To automate and manage resources in Proxmox or on any cloud provider, you can use Terraform for infrastructure as code.</p>
+        <p>First, set up Proxmox VE and configure API access with appropriate user permissions for Terraform integration:</p>
+        <ul>
+            <li>Log in to the Proxmox web interface. Navigate to <code>Datacenter -> Permissions -> Users</code> and click on Add to create a new user (e.g. <code>terraform</code>).</li>
+            <li>Next, you need to generate an API token. Navigate to <code>Datacenter -> Permissions -> API Tokens</code> and click on Add to create a token for the user.</li>
+            <li>Provide a name for the token (e.g. <code>tftoken</code>) and ensure "Privilege Separation" is disabled, then click Add to generate it. Copy the generated API token for use with Terraform.</li>
+            <li>Navigate to <code>Datacenter -> Permissions</code>, then click Add to create a permission for the user with access to "/" path and <code>Administrator</code> role.</li>
+        </ul>
+        <h6>Install Terraform on Ubuntu</h6>
+        <p>To install Terraform on your Linux machine, run the following commands:</p>
+        <pre>wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg<br>echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list<br>sudo apt update && sudo apt install terraform</pre>
+        <p>Verify the installation by checking the Terraform version:</p>
+        <pre>terraform --version</pre>
+        <h6>Configure Proxmox provider</h6>
+        <p>To define the Proxmox provider and API access, you need to create a <code>main.tf</code> file:</p>
+        <pre>nano main.tf</pre>
+        <p>Add the following content:</p>
+        <pre>terraform {<br>  required_providers {<br>    proxmox = {<br>      source  = "telmate/proxmox"<br>    }<br>  }<br>}<br><br>provider "proxmox" {<br>  pm_api_url = "https://192.168.1.10:8006/api2/json"<br>  pm_api_token_id = "terraform@pve!tftoken"<br>  pm_api_token_secret = ""<br>  pm_tls_insecure = true<br>}</pre>
+        <p>Replace <code>192.168.1.10</code> with the IP address or hostname of your Proxmox server, and set <code>pm_api_token_secret</code> to the API token you have generated.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
