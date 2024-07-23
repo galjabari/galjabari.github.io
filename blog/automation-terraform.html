@@ -41,7 +41,7 @@
             <li>Log in to the Proxmox web interface. Navigate to <code>Datacenter -> Permissions -> Users</code> and click on Add to create a new user (e.g. <code>terraform</code>).</li>
             <li>Next, you need to generate an API token. Navigate to <code>Datacenter -> Permissions -> API Tokens</code> and click on Add to create a token for the user.</li>
             <li>Provide a name for the token (e.g. <code>tftoken</code>) and ensure "Privilege Separation" is disabled, then click Add to generate it. Copy the generated API token for use with Terraform.</li>
-            <li>Navigate to <code>Datacenter -> Permissions</code>, then click Add to create a permission for the user with access to "/" path and <code>Administrator</code> role.</li>
+            <li>Navigate to <code>Datacenter -> Permissions</code>, then click Add to create a permission for the user. Select "/" for the path and <code>Administrator</code> for the role.</li>
         </ul>
         <h6>Install Terraform on Ubuntu</h6>
         <p>To install Terraform on your Linux machine, run the following commands:</p>
@@ -49,11 +49,24 @@
         <p>Verify the installation by checking the Terraform version:</p>
         <pre>terraform --version</pre>
         <h6>Configure Proxmox provider</h6>
-        <p>To define the Proxmox provider and API access, you need to create a <code>main.tf</code> file:</p>
+        <p>To define the Proxmox provider and API access in Terraform, you need to create a <code>main.tf</code> configuration file:</p>
         <pre>nano main.tf</pre>
         <p>Add the following content:</p>
-        <pre>terraform {<br>  required_providers {<br>    proxmox = {<br>      source  = "telmate/proxmox"<br>    }<br>  }<br>}<br><br>provider "proxmox" {<br>  pm_api_url = "https://192.168.1.10:8006/api2/json"<br>  pm_api_token_id = "terraform@pve!tftoken"<br>  pm_api_token_secret = ""<br>  pm_tls_insecure = true<br>}</pre>
-        <p>Replace <code>192.168.1.10</code> with the IP address or hostname of your Proxmox server, and set <code>pm_api_token_secret</code> to the API token you have generated.</p>
+        <pre>terraform {<br>  required_providers {<br>    proxmox = {<br>      source  = "telmate/proxmox"<br>    }<br>  }<br>}<br><br>provider "proxmox" {<br>  pm_api_url = "https://192.168.1.10:8006/api2/json"<br>  pm_api_token_id = "terraform@pam!tftoken"<br>  pm_api_token_secret = "e653d906-575a-497d-8bfe-6bad7a9ddfac"<br>  pm_tls_insecure = true<br>}</pre>
+        <p>Replace <code>192.168.1.10</code> with the IP address or hostname of your Proxmox server, and replace the secret with the API token you have generated.</p>
+        <p>Run the following command to inialize the provider:</p>
+        <pre>terraform init</pre>
+        <h6>Configure Terraform</h6>
+        <p>Terraform can be used with Proxmox to automate the deployment of virtual machines (VMs) and Linux containers (LXC).</p>
+        <p>To define and manage LXC containers using Terraform, create a Terraform configuration file:</p>
+        <pre>nano lxc.tf</pre>
+        <p>Add the following content:</p>
+        <pre>resource "proxmox_lxc" "ubuntu" {<br>  target_node  = "pve"<br>  hostname     = "ubuntu"<br>  ostemplate   = "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"<br>  password     = "ubuntu"<br>  unprivileged = true<br>  cores        = 2<br>  memory       = 1024<br>  start        = true<br><br>  rootfs {<br>    storage = "local-lvm"<br>    size    = "8G"<br>  }<br><br>  network {<br>    name   = "eth0"<br>    bridge = "vmbr0"<br>    ip     = "dhcp"<br>  }<br>}</pre>
+        <p>Run the following command to see the planned changes:</p>
+        <pre>terraform plan</pre>
+        <p>Run the following command to apply the changes:</p>
+        <pre>terraform apply</pre>
+        <p>This will create the container based on your configuration. When you're done, use <code>terraform destroy</code> to cleanup.</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
