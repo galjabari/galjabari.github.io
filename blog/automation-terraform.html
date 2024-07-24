@@ -53,7 +53,7 @@
         <pre>nano main.tf</pre>
         <p>Add the following content:</p>
         <pre>terraform {<br>  required_providers {<br>    proxmox = {<br>      source  = "telmate/proxmox"<br>    }<br>  }<br>}<br><br>provider "proxmox" {<br>  pm_api_url = "https://192.168.1.10:8006/api2/json"<br>  pm_api_token_id = "terraform@pam!tftoken"<br>  pm_api_token_secret = "e653d906-575a-497d-8bfe-6bad7a9ddfac"<br>  pm_tls_insecure = true<br>}</pre>
-        <p>Replace <code>192.168.1.10</code> with the IP address or hostname of your Proxmox server, and replace the secret with the API token you have generated.</p>
+        <p>Replace <code>192.168.1.10</code> with the IP address or hostname of your Proxmox server. Paste the API token you have generated into <code>pm_api_token_secret</code>.</p>
         <p>Run the following command to inialize the provider:</p>
         <pre>terraform init</pre>
         <h6>Configure Terraform</h6>
