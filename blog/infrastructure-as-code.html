@@ -74,7 +74,7 @@
         <p>In Terraform, create a configuration file:</p>
         <pre>nano vm.tf</pre>
         <p>Add the following content:</p>
-        <pre>resource "proxmox_vm_qemu" "ubuntu-vm" {<br>  name        = "ubuntu"<br>  target_node = "pve"<br>  clone       = "ubuntu-22.04-template"<br>  sockets     = 1<br>  cores       = 2<br>  memory      = 2048<br>  disk {<br>    type    = "scsi"<br>    storage = "local-lvm"<br>    size    = "20G"<br>  }<br>  network {<br>    model     = "virtio"<br>    bridge    = "vmbr0"<br>  }<br>}</pre>
+        <pre>resource "proxmox_vm_qemu" "ubuntu-vm" {<br>  name        = "ubuntu"<br>  target_node = "pve"<br>  clone       = "ubuntu-22.04-template"<br>}</pre>
         <p>Run <code>terraform plan</code> to preview the changes. After reviewing the plan, run <code>terraform apply</code> to create the VM based on the cloud image template.</p>
 
     </div>
