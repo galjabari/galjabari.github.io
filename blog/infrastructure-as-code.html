@@ -61,7 +61,7 @@
         <p>To define and manage LXC containers using Terraform, create a Terraform configuration file:</p>
         <pre>nano lxc.tf</pre>
         <p>Add the following content:</p>
-        <pre>resource "proxmox_lxc" "ubuntu-ct" {<br>  target_node     = "pve"<br>  hostname        = "ubuntu-ct"<br>  ostemplate      = "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"<br>  password        = "ubuntu"<br>  unprivileged    = true<br>  cores           = 2<br>  memory          = 1024<br>  ssh_public_keys = file("~/.ssh/id_rsa.pub")<br>  rootfs {<br>    storage = "local-lvm"<br>    size    = "8G"<br>  }<br>  network {<br>    name   = "eth0"<br>    bridge = "vmbr0"<br>    ip     = "dhcp"<br>  }<br>}</pre>
+        <pre>resource "proxmox_lxc" "ubuntu-ct" {<br>  target_node     = "pve"<br>  hostname        = "ubuntu-ct"<br>  ostemplate      = "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"<br>  password        = "ubuntu"<br>  unprivileged    = true<br>  cores           = 2<br>  memory          = 1024<br>  start           = false<br>  ssh_public_keys = file("~/.ssh/id_rsa.pub")<br>  rootfs {<br>    storage = "local-lvm"<br>    size    = "8G"<br>  }<br>  network {<br>    name   = "eth0"<br>    bridge = "vmbr0"<br>    ip     = "dhcp"<br>  }<br>}</pre>
         <p>Make sure to download the specified container image or template on Proxmox before using it in Terraform.</p>
         <p>Run the following command to view the planned changes:</p>
         <pre>terraform plan</pre>
