@@ -5,7 +5,7 @@ wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.i
 # modify the cloud disk image to install QEMU guest agent
 virt-customize -a jammy-server-cloudimg-amd64.img --install qemu-guest-agent --run-command 'systemctl enable qemu-guest-agent'
 # create a new VM with VirtIO SCSI controller
-qm create 9000 --name ubuntu-22.04-template --memory 1024 --net0 virtio,bridge=vmbr0 --scsihw virtio-scsi-pci
+qm create 9000 --name ubuntu-22.04-template --cores 2 --memory 1024 --net0 virtio,bridge=vmbr0 --scsihw virtio-scsi-pci
 # import the disk image to local-lvm storage
 qm disk import 9000 jammy-server-cloudimg-amd64.img local-lvm
 # attach the imported disk as a SCSI drive
