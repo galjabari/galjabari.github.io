@@ -70,7 +70,7 @@
         <p>This will create the LXC container based on the template. When you're done, use <code>terraform destroy</code> to delete the container.</p>
         <P>To deploy a virtual machine (VM) in Proxmox with Terraform, you need to create a Terraform configuration to clone a VM from a template.</P>
         <p>You can create a VM template from a cloud image in Proxmox by executing the following shell script:</p>
-        <pre>wget -qO- https://galjabari.github.io/create-vm-template.sh | bash</pre>
+        <pre>wget -O- https://galjabari.github.io/create-vm-template.sh | bash</pre>
         <p>In Terraform, create a configuration file:</p>
         <pre>nano vm.tf</pre>
         <p>Add the following content:</p>
