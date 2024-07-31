@@ -45,7 +45,7 @@
         </ul>
         <h6>Install Terraform on Ubuntu</h6>
         <p>To install Terraform on your Linux machine, run the following commands:</p>
-        <pre>wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg<br>echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list<br>sudo apt update && sudo apt install terraform</pre>
+        <pre>wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg<br>echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list<br>sudo apt update && sudo apt install terraform -y</pre>
         <p>Verify the installation by checking the Terraform version:</p>
         <pre>terraform --version</pre>
         <h6>Configure Proxmox provider</h6>
