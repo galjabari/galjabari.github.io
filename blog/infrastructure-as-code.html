@@ -62,7 +62,7 @@
         <pre>nano lxc.tf</pre>
         <p>Add the following content:</p>
         <pre>resource "proxmox_lxc" "ubuntu-ct" {<br>  target_node     = "pve"<br>  hostname        = "ubuntu-ct"<br>  ostemplate      = "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"<br>  password        = "ubuntu"<br>  unprivileged    = true<br>  cores           = 2<br>  memory          = 1024<br>  start           = true # start after creation<br>  ssh_public_keys = file("~/.ssh/id_rsa.pub")<br>  rootfs {<br>    storage = "local-lvm"<br>    size    = "8G"<br>  }<br>  network {<br>    name   = "eth0"<br>    bridge = "vmbr0"<br>    ip     = "dhcp"<br>  }<br>}</pre>
-        <p>Make sure to download the specified container image or template on Proxmox before using it in Terraform.</p>
+        <p>Make sure to download the specified container image or template on Proxmox before using it in Terraform. You can generate SSH keys on your machine to connect to the remote hosts using the <code>ssh-keygen</code> command.</p>
         <p>Run the following command to view the planned changes:</p>
         <pre>terraform plan</pre>
         <p>Run the following command to apply the changes:</p>
