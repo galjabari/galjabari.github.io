@@ -66,7 +66,7 @@
         <p>Run the following command to view the planned changes:</p>
         <pre>terraform plan</pre>
         <p>Run the following command to apply the changes:</p>
-        <pre>terraform apply</pre>
+        <pre>terraform apply -auto-approve</pre>
         <p>This will create the LXC container based on the template. When you're done, use <code>terraform destroy</code> to delete the container.</p>
         <P>To deploy a virtual machine (VM) in Proxmox with Terraform, you need to create a Terraform configuration to clone a VM from a template.</P>
         <p>You can create a VM template from a cloud image in Proxmox by executing the following shell script:</p>
