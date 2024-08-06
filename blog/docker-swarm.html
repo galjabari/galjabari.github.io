@@ -41,7 +41,7 @@
         <pre>git clone https://github.com/galjabari/cloud-computing.git</pre>
         <p>Run Terraform to provision the infrastructure:</p>
         <pre>cd cloud-computing/swarm<br>terraform init<br>terraform apply -auto-approve</pre>
-        <p>This will create a Swarm cluster with one manager node and two worker nodes. Replace the IP addresses of the Swarm nodes in the Terraform configuration file with the IP addresses for your network.</p>
+        <p>This will create a Swarm cluster with one manager node and two worker nodes. Replace the IP addresses of the Swarm nodes with the IP addresses for your network.</p>
         <p>Run Ansible playbook to configure the Docker Swarm cluster:</p>
         <pre>ansible-playbook -i hosts.ini create_swarm.yml</pre>
         <p>The playbook includes tasks to install Docker on the nodes, initialize the Swarm on the manager node, and join the worker nodes to the Swarm.</p>
