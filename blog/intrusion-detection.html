@@ -51,6 +51,12 @@
         <pre>sudo suricata-update</pre>
         <p>After updating the rules, restart the Suricata service to ensure it loads the new rules:</p>
         <pre>sudo systemctl restart suricata</pre>
+        <p>To test the functionality of Suricata, open a new terminal to check the log:</p>
+        <pre>sudo tail -f /var/log/suricata/fast.log</pre>
+        <p>Use <code>curl</code> to trigger the rule from the ET Open ruleset, which is written specifically for test cases.</p>
+        <pre>curl http://testmynids.org/uid/index.html</pre>
+        <p>You should see an alert in the log, including the timestamp and the IP address of your system.</p>
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
