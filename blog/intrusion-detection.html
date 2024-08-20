@@ -50,7 +50,7 @@
         <p>To update Suricata signatures or rules, you can use the <code>suricata-update</code> tool:</p>
         <pre>sudo suricata-update</pre>
         <p>After updating the rules, restart the Suricata service to ensure it loads the new rules:</p>
-        <pre>sudo systemctl restart suricata</pre>
+        <pre>sudo systemctl restart suricata.service</pre>
         <p>To test the functionality of Suricata, open a new terminal to check the log:</p>
         <pre>sudo tail -f /var/log/suricata/fast.log</pre>
         <p>Use <code>curl</code> to trigger the rule from the ET Open ruleset, which is written specifically for test.</p>
