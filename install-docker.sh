@@ -1,3 +1,4 @@
+#! /bin/sh
 ## Setup
 sudo apt-get update
 sudo apt-get install software-properties-common ca-certificates curl -y
