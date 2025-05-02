@@ -51,7 +51,7 @@
         <p>To configure your system to use static IP address, edit the Netplan configuration file:</p>
         <pre>sudo nano /etc/netplan/50-cloud-init.yaml</pre>
         <p>For example, add the following configuration:</p> 
-        <pre>network:<br>  version: 2<br>  renderer: networkd<br>  ethernets:<br>    ens3:<br>      addresses:<br>        - 192.168.1.100/24<br>      routes:<br>        - to: default          via: 192.168.1.100/24<br>      nameservers:<br>        search: [example.com]<br>        addresses: [192.168.1.10, 192.168.1.11]</pre>
+        <pre>network:<br>  version: 2<br>  renderer: networkd<br>  ethernets:<br>    ens3:<br>      addresses:<br>        - 192.168.1.20/24<br>      routes:<br>        - to: default          via: 192.168.1.1/24<br>      nameservers:<br>        search: [example.com]<br>        addresses: [192.168.1.10, 192.168.1.11]</pre>
         <p>Change the settings to meet the requirements of your network such as IP address, default gateway, search domain, and DNS servers.</p>
         <p>Apply the configuration:</p>
         <pre>sudo netplan apply</pre>
