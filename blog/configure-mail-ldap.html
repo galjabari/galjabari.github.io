@@ -71,7 +71,7 @@
         <p>Edit the LDAP configuration for Dovecot:</p>
         <pre>sudo nano /etc/dovecot/dovecot-ldap.conf.ext</pre>
         <p>Add the following LDAP settings:</p>
-        <pre>hosts = localhost<br>dn = cn=admin,dc=example,dc=com<br>dnpass = secret<br>auth_bind = yes<br>ldap_version = 3<br>base = dc=example,dc=com<br>user_filter = (&(objectClass=inetOrgPerson)(uid=%n))<br>pass_attrs = mail=user,userPassword=password<br>pass_filter = (&(objectClass=inetOrgPerson)(uid=%n))</pre>
+        <pre>hosts = localhost<br>dn = cn=admin,dc=example,dc=com<br>dnpass = secret<br>auth_bind = yes<br>ldap_version = 3<br>base = dc=example,dc=com<br>user_filter = (&(objectClass=inetOrgPerson)(mail=%u))<br>pass_attrs = mail=user,userPassword=password<br>pass_filter = (&(objectClass=inetOrgPerson)(mail=%u))</pre>
         <p>Replace the LDAP server details such as base DN, admin credentials, and hostname with your actual LDAP server information.</p>
         <p>Edit the Dovecot mail configuration file:</p>
         <pre>sudo nano /etc/dovecot/conf.d/10-mail.conf</pre>
