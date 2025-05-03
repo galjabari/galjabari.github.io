@@ -64,8 +64,10 @@
         <pre>sudo apt install dovecot-ldap -y</pre>
         <p>Edit the Dovecot authentication configuration file:</p>
         <pre>sudo nano /etc/dovecot/conf.d/10-auth.conf</pre>
-        <p>Ensure the following lines are present and uncommented:</p>
+        <p>Ensure the following line are present and uncommented:</p>
         <pre>!include auth-ldap.conf.ext</pre>
+        <p>To use only LDAP authentication, you may need to comment out the following line:</p>
+        <pre>#!include auth-system.conf.ext</pre>        
         <p>Edit the LDAP configuration for Dovecot:</p>
         <pre>sudo nano /etc/dovecot/dovecot-ldap.conf.ext</pre>
         <p>Add the following LDAP settings:</p>
