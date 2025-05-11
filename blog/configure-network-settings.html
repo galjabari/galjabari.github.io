@@ -58,7 +58,7 @@
         <p>To configure multiple network interfaces on your system, edit the Netplan configuration file:</p>
         <pre>sudo nano /etc/netplan/50-cloud-init.yaml</pre>
         <p>For example, add the following configuration for two interfaces:</p>
-        <pre>network:<br>  version: 2<br>  renderer: networkd<br>  ethernets:<br>    ens3:<br>      dhcp4: true<br>    ens4:<br>      addresses:<br>        - 192.168.1.10/24</pre>
+        <pre>network:<br>  version: 2<br>  ethernets:<br>    ens3:<br>      dhcp4: true<br>    ens4:<br>      addresses:<br>        - 192.168.1.10/24</pre>
         <p>Apply the configuration:</p>
         <pre>sudo netplan apply</pre>        
     </div>
