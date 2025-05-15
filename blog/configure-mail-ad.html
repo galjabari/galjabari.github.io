@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A step-by-step guide on how to integrate a mail server on Ubuntu 20.04/22.04 with Active Directory for user authentication.">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../blog.html">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Configure Mail Server with Active Directory</h5>
+        <p>Before integrating the mail server with Active Directory for LDAP authentication, you need to have a working mail server and Active Directory Domain Controller.</p>
+        <p>You can follow this guide to set up the mail server: <a href="install-mail-server.html" target="_blank">Install and configure Mail Server on Ubuntu</a>.</p>
+        <p>To set up the domain controller on Windows Server:</p>
+        <ul>
+            <li>Rename the server to <code>dc.example.com</code>.</li>
+            <li>Install AD DS role on the server.</li>
+            <li>Promote the server to a domain controller for <code>example.com</code>.</li>
+            <li>Create AD Users for mail accounts (e.g. <code>admin@example.com</code>).</li>
+        </ul>
+        <p>Next, verify that the mail server can access the domain controller over LDAP.</p>
+        <pre>ldapsearch -H ldap://dc.example.com -x -D admin@example.com -W -b "DC=example,DC=com"</pre>
+        <p>Create a system user on the mail server to host virtual mail accounts.</p>
+        <pre>sudo useradd -u 5000 -s /usr/sbin/nologin -d /var/mail vmail</pre>
+        <p>Set permissions for virtual mail directories.</p>
+        <pre>sudo chown -R vmail:vmail /var/mail</pre>
+        <h6>Configure Postfix with Active Directory</h6>
+        <p>Install the LDAP module for Postfix.</p>
+        <pre>sudo apt install postfix-ldap -y</pre>
+        <p>Edit the Postfix main configuration file.</p>
+        <pre>sudo nano /etc/postfix/main.cf</pre>
+        <p>Add or update the following lines to configure Postfix with LDAP. Replace <code>example.com</code> with your actual Active Directory domain name.</p>
+        <pre>virtual_mailbox_base = /var/mail<br>virtual_uid_maps = static:5000<br>virtual_gid_maps = static:5000<br>virtual_mailbox_domains = example.com<br>virtual_mailbox_maps = ldap:/etc/postfix/ad-mailboxes.cf</pre>
+        <p>Make sure to remove the following line by commenting it out to deliver emails for virtual mail accounts:</p>
+        <pre>#mydestination = example.com, localhost</pre>
+        <p>Create the LDAP configuration file for mail account lookup.</p>
+        <pre>sudo nano /etc/postfix/ad-mailboxes.cf</pre>
+        <p>Add the following lines. Make sure to replace the server host, bind DN, password, and search base with your Active Directory details.</p>
+        <pre>server_host = dc.example.com<br>server_port = 389<br>version = 3<br>bind = yes<br>bind_dn = admin@example.com<br>bind_pw = secret<br>search_base = CN=Users,DC=example,DC=com<br>query_filter = (&(objectClass=user)(userPrincipalName=%s))<br>result_attribute = userPrincipalName<br>result_format = %d/%u/</pre>
+        <p>Restart the Postfix service to apply the changes.</p>
+        <pre>sudo systemctl restart postfix.service</pre>
+        <h6>Configure Dovecot with Active Directory</h6>
+        <p>Install the LDAP module for Dovecot.</p>
+        <pre>sudo apt install dovecot-ldap -y</pre>
+        <p>Edit the Dovecot authentication configuration file:</p>
+        <pre>sudo nano /etc/dovecot/conf.d/10-auth.conf</pre>
+        <p>Ensure the following line is present and uncommented:</p>
+        <pre>!include auth-ldap.conf.ext</pre>
+        <p>To use only LDAP authentication, you may need to comment out the following line:</p>
+        <pre>#!include auth-system.conf.ext</pre>        
+        <p>Edit the LDAP configuration for Dovecot.</p>
+        <pre>sudo nano /etc/dovecot/dovecot-ldap.conf.ext</pre>
+        <p>Update the configuration with your Active Directory settings:</p>
+        <pre>hosts = dc.example.com<br>dn = admin@example.com<br>dnpass = secret<br>auth_bind = yes<br>ldap_version = 3<br>base = CN=Users,DC=example,DC=com<br>scope = subtree<br>user_filter = (&(objectClass=user)(userPrincipalName=%u))<br>pass_filter = (&(objectClass=user)(userPrincipalName=%u))<br>pass_attrs = userPassword=password</pre>
+        <p>Edit the Dovecot mail configuration file:</p>
+        <pre>sudo nano /etc/dovecot/conf.d/10-mail.conf</pre>
+        <p>Add or modify the following lines:</p>
+        <pre>mail_location = maildir:/var/mail/%d/%n<br>mail_uid = 5000<br>mail_gid = 5000</pre>   
+        <p>Restart the Dovecot service to apply the changes.</p>
+        <pre>sudo systemctl restart dovecot.service</pre>
+        <p>After configuration, you should be able to authenticate using Active Directory user credentials. Test your mail server by sending a test email and checking if the email is delivered correctly to an AD user's mailbox.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
