@@ -36,7 +36,7 @@
         <p>This guide assumes that you have an existing mail server with the hostname <code>mail.example.com</code> and you need to deploy a webmail client for users to access the mail server using a web browser.</p>
         <p>First, install the required packages on your server to deploy Roundcube webmail using the following command:</p>
         <pre>sudo apt-get install apache2 mariadb-server roundcube -y</pre>
-        <p>Next, you need to configure Apache web server to access Roundcube:</p>
+        <p>Next, you need to configure Apache web server to enable access to Roundcube:</p>
         <pre>sudo nano /etc/apache2/conf-enabled/roundcube.conf</pre>
         <p>Add or uncomment the following line in the file:</p>
         <pre>Alias /roundcube /var/lib/roundcube/public_html</pre>
