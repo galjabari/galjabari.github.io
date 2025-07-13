@@ -45,15 +45,9 @@
     directory "/var/cache/bind";
     listen-on { any; };
     listen-on-v6 { any; };
-    allow-recursion {
-            none;
-    };
-    allow-transfer {
-            none;
-    };
-    allow-update {
-            none;
-    };
+    allow-recursion { none; };
+    allow-transfer { none; };
+    allow-update { none; };
 };
 
 zone "example.com." {
@@ -131,6 +125,7 @@ services:
         <pre>nslookup example.com</pre>
         <p>Test web server access.</p>
         <pre>wget -O- http://example.com</pre>
+        <p>This should return the Nginx welcome page.</p>
         <p>To clean up everything after you are done, use:</p>
         <pre>docker compose down</pre>
     </div>
