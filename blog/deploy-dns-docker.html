@@ -36,10 +36,10 @@
         <p>This guide will walk you through deploying an authoritative DNS server using Docker and BIND 9. We will create a network and set up a DNS server, a web server, and a client to test the configuration.</p>
         
         <p>First, create a directory for the configuration files.</p>
-        <pre>mkdir bind9</pre>
+        <pre>mkdir bind</pre>
         
-        <p>Create the main BIND 9 configuration file.</p>
-        <pre>nano bind9/named.conf</pre>
+        <p>Create the main BIND configuration file.</p>
+        <pre>nano bind/named.conf</pre>
         <p>Add the following content:</p>
         <pre>options {
     directory "/var/cache/bind";
@@ -63,7 +63,7 @@ zone "example.com." {
 };</pre>
 
         <p>Create the zone file for your domain</code>. Replace <code>example.com</code> with your real domain name.</p>
-        <pre>nano bind9/db.example.com</pre>
+        <pre>nano bind/db.example.com</pre>
         <p>Add the following content:</p>
         <pre>$TTL 86400
 @   IN  SOA     example.com. admin.example.com. (
@@ -78,7 +78,7 @@ ns1 IN  A       192.168.0.10
 www IN  CNAME   example.com.</pre>
 
         <p>Create the <code>docker-compose.yml</code> file to define Docker containers.</p>
-        <pre>nano bind9/docker-compose.yml</pre>
+        <pre>nano docker-compose.yml</pre>
         <p>Add the following content:</p>
         <pre>networks:
   lab_network:
@@ -102,7 +102,7 @@ services:
     dns:
       - 192.168.10.10
     volumes:
-      - ./:/etc/bind
+      - ./bind:/etc/bind
 
   web-server:
     image: nginx
@@ -124,7 +124,7 @@ services:
     stdin_open: true</pre>
 
         <p>Deploy the services using Docker Compose.</p>
-        <pre>cd bind9<br>docker compose up -d</pre>
+        <pre>docker compose up -d</pre>
         <p>Access the client container to test DNS resolution.</p>
         <pre>docker exec -it alpine sh</pre>
         <p>Test DNS resolution for <code>example.com</code>.</p>
