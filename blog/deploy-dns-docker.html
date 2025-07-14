@@ -97,9 +97,7 @@ services:
       - 192.168.10.10
     volumes:
       - ./bind:/etc/bind
-      - ./bind/cache:/var/cache/bind
-      - ./bind/zones:/var/lib/bind
-      - ./bind/logs:/var/log
+
   web-server:
     image: nginx
     container_name: nginx
