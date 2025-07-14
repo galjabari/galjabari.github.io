@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A step-by-step guide on how to deploy a mail server with Docker.">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Deploy a Mail Server with Docker</h5>
+        <p>This guide will walk you through deploying a mail server using Docker, featuring Roundcube webmail and a BIND DNS server.</p>
+
+        <p>First, create directories for the BIND, mail server, and Roundcube.</p>
+        <pre>mkdir bind mail roundcube</pre>
+        
+        <p>Create the main BIND configuration file.</p>
+        <pre>nano bind/named.conf</pre>
+        <p>Add the following content:</p>
+        <pre>options {
+    directory "/var/cache/bind";
+    listen-on { any; };
+    listen-on-v6 { any; };
+    allow-recursion { none; };
+    allow-transfer { none; };
+    allow-update { none; };
+};
+
+zone "example.com." {
+    type primary;
+    file "/etc/bind/db.example.com";
+    notify explicit;
+};</pre>
+
+        <p>Create the zone file for <code>example.com</code>. This includes the MX record for the mail server and the SPF TXT record.</p>
+        <pre>nano bind/db.example.com</pre>
+        <p>Add the following content:</p>
+        <pre>$TTL 86400
+@     IN  SOA     example.com. admin.example.com. (
+                  2025071101 ; Serial
+                  3600       ; Refresh
+                  1800       ; Retry
+                  604800     ; Expire
+                  86400 )    ; Negative Cache TTL
+@     IN  NS      ns1.example.com.
+ns1   IN  A       192.168.10.10
+@     IN  MX 10   mail.example.com.
+mail  IN  A       192.168.10.12
+@     IN  TXT     "v=spf1 mx -all"</pre>
+
+        <p>Create the <code>docker-compose.yml</code> file to define the Docker containers.</p>
+        <pre>nano docker-compose.yml</pre>
+        <p>Add the following content:</p>
+        <pre>networks:
+  lab_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.10.0/24
+          gateway: 192.168.10.1
+
+services:
+  dns-server:
+    image: internetsystemsconsortium/bind9:9.20
+    container_name: bind9
+    restart: always
+    ports:
+      - "5353:53/tcp"
+      - "5353:53/udp"
+    networks:
+      lab_network:
+        ipv4_address: 192.168.10.10
+    dns:
+      - 192.168.10.10
+    volumes:
+      - ./bind:/etc/bind
+
+  mail-server:
+    image: ghcr.io/docker-mailserver/docker-mailserver
+    container_name: mailserver
+    hostname: mail.example.com
+    ports:
+      - "25:25"
+      - "143:143"
+      - "465:465"
+      - "587:587"
+      - "993:993"
+    networks:
+      lab_network:
+        ipv4_address: 192.168.10.12
+    dns:
+      - 192.168.10.10
+    volumes:
+      - ./mail/data/:/var/mail/
+      - ./mail/logs/:/var/log/mail/
+      - ./mail/state/:/var/mail-state/
+      - ./mail/:/tmp/docker-mailserver/
+      - /etc/localtime:/etc/localtime:ro
+
+  webmail:
+    image: roundcube/roundcubemail
+    container_name: roundcube
+    ports:
+      - "8080:80"
+    networks:
+      lab_network:
+        ipv4_address: {}
+    dns:
+      - 192.168.10.10
+    volumes:
+      - ./roundcube:/var/www/html
+    environment:
+      - ROUNDCUBEMAIL_DEFAULT_HOST=mail.example.com
+      - ROUNDCUBEMAIL_DEFAULT_PORT=143
+      - ROUNDCUBEMAIL_SMTP_SERVER=mail.example.com
+      - ROUNDCUBEMAIL_SMTP_PORT=587
+      - ROUNDCUBEMAIL_USERNAME_DOMAIN=example.com</pre>
+
+        <p>Deploy the services using Docker Compose.</p>
+        <pre>docker compose up -d</pre>
+        
+        <p>Before using the mail server, you need to create a user account. Use the following command to create an email account for <code>user1@example.com</code> with the password <code>pass@123</code>.</p>
+        <pre>docker exec -it mailserver setup email add user1@example.com pass@123</pre>
+
+        <p>You can now access the Roundcube webmail client by navigating to <code>http://&lt;docker-host-ip&gt;:8080</code> in your web browser. Log in with the username <code>user1@example.com</code> and the password <code>pass@123</code>.</p>
+
+        <p>To clean up everything after you are done, use:</p>
+        <pre>docker compose down</pre>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
