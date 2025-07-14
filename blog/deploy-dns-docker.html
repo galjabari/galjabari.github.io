@@ -56,20 +56,20 @@ zone "example.com." {
     notify explicit;
 };</pre>
 
-        <p>Create the zone file for your domain</code>. Replace <code>example.com</code> with your real domain name.</p>
+        <p>Create the zone file for your domain</code>. Replace <code>example.com</code> with your actual domain.</p>
         <pre>nano bind/db.example.com</pre>
         <p>Add the following content:</p>
         <pre>$TTL 86400
-@   IN  SOA     example.com. admin.example.com. (
-    2025071101 ; Serial
-    3600       ; Refresh
-    1800       ; Retry
-    604800     ; Expire
-    86400 )    ; Negative Cache TTL
-@   IN  NS      ns1.example.com.
-ns1 IN  A       192.168.10.10
-@   IN  A       192.168.10.11
-www IN  CNAME   example.com.</pre>
+@     IN  SOA     example.com. admin.example.com. (
+                  2025071101 ; Serial
+                  3600       ; Refresh
+                  1800       ; Retry
+                  604800     ; Expire
+                  86400 )    ; Negative Cache TTL
+@     IN  NS      ns1.example.com.
+ns1   IN  A       192.168.10.10
+@     IN  A       192.168.10.11
+www   IN  CNAME   example.com.</pre>
 
         <p>Create the <code>docker-compose.yml</code> file to define Docker containers.</p>
         <pre>nano docker-compose.yml</pre>
@@ -97,7 +97,9 @@ services:
       - 192.168.10.10
     volumes:
       - ./bind:/etc/bind
-
+      - ./bind/cache:/var/cache/bind
+      - ./bind/zones:/var/lib/bind
+      - ./bind/logs:/var/log
   web-server:
     image: nginx
     container_name: nginx
@@ -123,6 +125,7 @@ services:
         <pre>docker exec -it alpine sh</pre>
         <p>Test DNS resolution for <code>example.com</code>.</p>
         <pre>nslookup example.com</pre>
+        <p>This should return the IP address of <code>example.com</code>.</p>
         <p>Test web server access.</p>
         <pre>wget -O- http://example.com</pre>
         <p>This should return the Nginx welcome page.</p>
