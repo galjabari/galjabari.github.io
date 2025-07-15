@@ -145,7 +145,7 @@ services:
         <p>Before using the mail server, you need to create a user account. Use the following command to create an email account for <code>user1@example.com</code> with the password <code>pass@123</code>.</p>
         <pre>docker exec -it mailserver setup email add user1@example.com pass@123</pre>
 
-        <p>You can now access the Roundcube webmail client by navigating to <code>http://&lt;docker-host-ip&gt;:8080</code> in your web browser. Log in with the username <code>user1@example.com</code> and the password <code>pass@123</code>.</p>
+        <p>You can now access the Roundcube webmail client by navigating to <code>http://localhost:8080</code> in your web browser. For remote access, use your docker host's IP. Log in with the username <code>user1@example.com</code> and the password <code>pass@123</code>.</p>
 
         <p>To clean up everything after you are done, use:</p>
         <pre>docker compose down</pre>
