@@ -56,7 +56,7 @@ zone "example.com." {
     notify explicit;
 };</pre>
 
-        <p>Create the zone file for <code>example.com</code>. This includes the MX record for the mail server and the SPF TXT record.</p>
+        <p>Create the zone file for <code>example.com</code>. This includes the MX record for the mail server.</p>
         <pre>nano bind/db.example.com</pre>
         <p>Add the following content:</p>
         <pre>$TTL 86400
@@ -69,8 +69,7 @@ zone "example.com." {
 @     IN  NS      ns1.example.com.
 ns1   IN  A       192.168.10.10
 @     IN  MX 10   mail.example.com.
-mail  IN  A       192.168.10.12
-@     IN  TXT     "v=spf1 mx -all"</pre>
+mail  IN  A       192.168.10.12</pre>
 
         <p>Create the <code>docker-compose.yml</code> file to define the Docker containers.</p>
         <pre>nano docker-compose.yml</pre>
