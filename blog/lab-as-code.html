@@ -32,13 +32,13 @@
     </nav>
     <div class="container">
         <h5>Lab as Code with Containerlab</h5>
-        <p>To deploy networking labs with Docker, use Containerlab. It allows you to define your lab topology in a YAML file and deploy it with a single command.</p>
+        <p>Containerlab is a tool for deploying networking labs with Docker. It allows you to define your lab's topology in a YAML file and deploy it with a single command.</p>
         <p>To install Containerlab on your Linux machine with Docker, run the following command:</p>
         <pre>curl -sL https://containerlab.dev/setup | sudo -E bash -s "all"</pre>
         <p>Ensure your user has root (or sudo) privileges to execute Docker commands:</p>
         <pre>sudo usermod -aG docker $USER</pre>
         <p>Log out of your session and log back in so the changes take effect.</p>
-        <p>To get started with Containerlab, create a network lab consisting of two Arista cEOS routers and two Linux clients. Each router in the lab connects to a separate client. The clients are manually configured with IP addresses and default gateways to enable network communication.</p>
+        <p>To get started with Containerlab, let's create a network lab consisting of two Arista cEOS routers and two Linux clients. Each router in the lab connects to a separate client. The clients are manually configured with IP addresses and default gateways to enable network communication.</p>
         <p>Create a file named <code>demo.clab.yml</code> and add the following content:</p>
         <pre>
 name: demo
@@ -81,7 +81,7 @@ topology:
     # Link between router2 and client2
     - endpoints: ["router2:eth2", "client2:eth1"]
         </pre>
-        <p>To automate router configuration during lab deployment, you can use startup configuration files for the routers.</p>
+        <p>To automate router configuration during lab deployment, you can provide startup configuration files for the routers.</p>
         <p>Create a file named <code>router1.cfg</code> with following content:</p>
         <pre>
 !
@@ -134,7 +134,7 @@ router bgp 65001
 !
 end
         </pre>
-        <p>This lab uses BGP as the dynamic routing protocol. Alternatively, you can use OSPF.</p>
+        <p>This lab uses BGP as the dynamic routing protocol, but you can also use OSPF as an alternative.</p>
         <p>To deploy the lab, run the following command in the same directory where you created the files:</p>
         <pre>containerlab deploy -t demo.clab.yml</pre>
         <p>After the lab is deployed, you can test the connectivity between the clients. Open a new terminal and connect to client1:</p>
@@ -147,7 +147,7 @@ end
         <pre>show ip route</pre>
         <p>To generate a graph of the network topology, use the following command:</p>
         <pre>containerlab graph -t demo.clab.yml</pre>
-        <p>This command creates an interactive HTML-based graph that is accessible via a web browser.</p>    
+        <p>This command creates an interactive HTML-based graph that you can access in a web browser.</p>    
         <p>To destroy the lab, run the following command:</p>
         <pre>containerlab destroy -t ceos.clab.yml</pre>
     </div>
