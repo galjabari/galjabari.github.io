@@ -32,13 +32,13 @@
     </nav>
     <div class="container">
         <h5>Lab as Code with Containerlab</h5>
-        <p>To deploy networking labs with Docker, you can use Containerlab. It enables you to define your lab topology in a YAML file and deploy it with a single command.</p>
+        <p>To deploy networking labs with Docker, use Containerlab. It allows you to define your lab topology in a YAML file and deploy it with a single command.</p>
         <p>To install Containerlab on your Linux machine with Docker, run the following command:</p>
         <pre>curl -sL https://containerlab.dev/setup | sudo -E bash -s "all"</pre>
         <p>Ensure your user has root (or sudo) privileges to execute Docker commands:</p>
         <pre>sudo usermod -aG docker $USER</pre>
         <p>Log out of your session and log back in so the changes take effect.</p>
-        <p>To get started with Containerlab, you can create a network lab in which clients communicate through routers. The lab will consist of two Arista cEOS routers and two Linux clients.</p>
+        <p>To get started with Containerlab, create a network lab consisting of two Arista cEOS routers and two Linux clients. Each router in the lab connects to a separate client. The clients are manually configured with IP addresses and default gateways to enable network communication.</p>
         <p>Create a file named <code>demo.clab.yml</code> and add the following content:</p>
         <pre>
 name: demo
@@ -81,7 +81,6 @@ topology:
     # Link between router2 and client2
     - endpoints: ["router2:eth2", "client2:eth1"]
         </pre>
-        <p>In this lab, the routers are connected to each other and each router is connected to a client. The clients are configured with IP addresses and default gateways.</p>
         <p>To automate router configuration during lab deployment, you can use startup configuration files for the routers.</p>
         <p>Create a file named <code>router1.cfg</code> with following content:</p>
         <pre>
@@ -144,8 +143,11 @@ end
         <pre>ping 192.168.20.2</pre>
         <p>Connect to router1 CLI:</p>
         <pre>docker exec -it clab-demo-router1 Cli</pre>
-        <p>Verify routing table on router1:</p>
-        <pre>show ip route</pre>        
+        <p>Verify the routing table on Router1:</p>
+        <pre>show ip route</pre>
+        <p>To generate a graph of the network topology, use the following command:</p>
+        <pre>containerlab graph -t demo.clab.yml</pre>
+        <p>This command creates an interactive HTML-based graph that is accessible via a web browser.</p>    
         <p>To destroy the lab, run the following command:</p>
         <pre>containerlab destroy -t ceos.clab.yml</pre>
     </div>
