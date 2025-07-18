@@ -33,13 +33,13 @@
     <div class="container">
         <h5>Lab as Code with Containerlab</h5>
         <p>Containerlab is a tool for deploying networking labs with Docker. It allows you to define your lab's topology in a YAML file and deploy it with a single command.</p>
-        <h6>Install Containerlab on Linux</h6>
+        <h6>1. Install Containerlab on Linux</h6>
         <p>To install Containerlab on your Linux machine with Docker, run the following command:</p>
         <pre>curl -sL https://containerlab.dev/setup | sudo -E bash -s "all"</pre>
         <p>Ensure your user has root (or sudo) privileges to execute Docker commands:</p>
         <pre>sudo usermod -aG docker $USER</pre>
         <p>Log out of your session and log back in so the changes take effect.</p>
-        <h6>Create a network topology using Containerlab</h6>
+        <h6>2. Create a network topology using Containerlab</h6>
         <p>To get started with Containerlab, let's create a network lab consisting of two Arista cEOS routers and two Linux clients. Each router in the lab connects to a separate client. The clients are manually configured with IP addresses and default gateways to enable network communication.</p>
         <p>Create a file named <code>demo.clab.yml</code> and add the following content:</p>
         <pre>
@@ -134,7 +134,7 @@ router bgp 65001
 !
 end</pre>
         <p>This lab uses BGP as the dynamic routing protocol, but you can also use OSPF as an alternative.</p>
-        <h6>Deploy a network topology using Containerlab</h6>
+        <h6>3. Deploy the network topology using Containerlab</h6>
         <p>To deploy the lab, run the following command in the same directory where you created the files:</p>
         <pre>containerlab deploy -t demo.clab.yml</pre>
         <p>After the lab is deployed, you can test the connectivity between the clients. Open a new terminal and connect to client1:</p>

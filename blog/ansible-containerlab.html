@@ -32,13 +32,13 @@
     </nav>
     <div class="container">
         <h5>Network Automation with Ansible and Containerlab</h5>
-        <p>This guide walks through automating network device configuration using Ansible and Containerlab. We will use the same lab topology as in the <a href="lab-as-code.html" target="_blank">Lab as Code with Containerlab</a>, but this time, well use Ansible to configure Arista cEOS routers.</p>
-        <p>Ensure you have Containerlab and Ansible installed on your Linux system:</p>
+        <p>This guide walks through automating network device configuration using Ansible and Containerlab. We will use the same lab topology as in the <a href="lab-as-code.html" target="_blank">Lab as Code with Containerlab</a> guide, but this time, we'll use Ansible to configure the Arista cEOS routers.</p>
+        <p>First, ensure you have Containerlab and Ansible installed on your Linux system. You can verify the installations by running:</p>
         <pre>
 containerlab version
 ansible --version</pre>
-        <h6>Create the lab topology using Containerlab</h6>
-        <p>The lab consists of two Arista cEOS routers and two Linux clients. Create a file named <code>demo.clab.yml</code> and add the following content:</p>
+        <h6>1. Create the Lab Topology with Containerlab</h6>
+        <p>The lab consists of two Arista cEOS routers and two Linux clients. Create a file named <code>demo.clab.yml</code> and add the following configuration:</p>
         <pre>
 name: demo
 
@@ -77,8 +77,8 @@ topology:
     - endpoints: ["router1:eth2", "client1:eth1"]
     # Link between router2 and client2
     - endpoints: ["router2:eth2", "client2:eth1"]</pre>
-        <h6>Create Ansible playbooks for setting up routers</h6>
-        <p>Create a palybook file (<code>router1.yml</code>) to configure <code>router1</code>:</p>
+        <h6>2. Create Ansible Playbooks for Router Configuration</h6>
+        <p>Next, create a playbook file named <code>router1.yml</code> to configure <code>router1</code>:</p>
         <pre>
 ---
 - name: Configure Arista cEOS Router 1
@@ -128,7 +128,7 @@ topology:
             - neighbor_address: "192.168.1.2"
               remote_as: "65001"
         state: merged</pre>
-        <p>And create a palybook file (<code>router2.yml</code>) to configure <code>router2</code>:</p>
+        <p>Then, create a second playbook file, <code>router2.yml</code>, to configure <code>router2</code>:</p>
         <pre>
 ---
 - name: Configure Arista cEOS Router 2
@@ -178,16 +178,16 @@ topology:
             - neighbor_address: "192.168.1.1"
               remote_as: "65001"
         state: merged</pre>
-        <h6>Deploy and configure the lab</h6>
+        <h6>3. Deploy and Configure the Lab</h6>
         <p>Deploy the lab using Containerlab:</p>
         <pre>containerlab deploy -t demo.clab.yml</pre>
-        <p>Containerlab automatically generates an Ansible inventory file in the lab directory (<code>clab-demo/ansible-inventory.yml</code>). You can use this file to run the Ansible playbooks:</p>
+        <p>Containerlab automatically generates an Ansible inventory file in the lab directory (e.g., <code>clab-demo/ansible-inventory.yml</code>). Use this inventory to run the Ansible playbooks:</p>
         <pre>
 ansible-playbook -i clab-demo/ansible-inventory.yml router1.yml
 ansible-playbook -i clab-demo/ansible-inventory.yml router2.yml</pre>
-        <p>Connect to the clients and routers to test connectivity and check the routing tables.</p>
-        <p>To destroy the lab, run the following command:</p>
-        <pre>containerlab destroy -t clab/demo.clab.yml --cleanup</pre>
+        <p>After the playbooks have run, you can connect to the clients and routers to test connectivity and inspect the routing tables.</p>
+        <p>To destroy the lab and remove all related files, run the following command:</p>
+        <pre>containerlab destroy -t demo.clab.yml --cleanup</pre>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
