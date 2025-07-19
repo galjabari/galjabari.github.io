@@ -149,10 +149,10 @@ end</pre>
         <pre>containerlab graph -t demo.clab.yml</pre>
         <p>This command creates an interactive HTML-based graph that you can access in a web browser.</p>
         <h6>4. Clean Up the Lab</h6>
-        <p>After testing, you can clean up the lab environment. First, stop the lab:</p>
-        <pre>containerlab stop -t demo.clab.yml</pre>
-        <p>This command stops all containers in the lab without removing them.</p>
-        <p>To remove the lab and all associated containers, run:</p>
+        <p>After testing, you can clean up the lab environment. To destroy the lab, run:</p>
+        <pre>containerlab destroy -t demo.clab.yml</pre>
+        <p>This command removes all containers in the lab without deleting any related files.</p>
+        <p>To remove the lab and all related files, run:</p>
         <pre>containerlab destroy -t ceos.clab.yml --cleanup</pre>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
