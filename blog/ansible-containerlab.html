@@ -186,6 +186,30 @@ topology:
 ansible-playbook -i clab-demo/ansible-inventory.yml router1.yml
 ansible-playbook -i clab-demo/ansible-inventory.yml router2.yml</pre>
         <p>After the playbooks have run, you can connect to the clients and routers to test connectivity and inspect the routing tables.</p>
+        <p>To verify the BGP routing table using Ansible, create a playbook named <code>verify.yml</code>:</p>
+        <pre>
+---
+- name: Show BGP routing table on Arista cEOS routers
+  hosts: arista_ceos
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: arista.eos.eos
+    ansible_host_key_checking: false
+    ansible_become: yes
+  gather_facts: false
+  tasks:
+    - name: Show BGP routes
+      arista.eos.eos_command:
+        commands:
+          - show ip bgp
+      register: bgp_output
+
+    - name: Display BGP routes
+      ansible.builtin.debug:
+        var: bgp_output.stdout_lines</pre>
+        <p>Run the verification playbook:</p>
+        <pre>ansible-playbook -i clab-demo/ansible-inventory.yml verify.yml</pre>
+        <p>This will display the BGP routing table for both routers.</p>
         <p>To destroy the lab and remove all related files, run the following command:</p>
         <pre>containerlab destroy -t demo.clab.yml --cleanup</pre>
     </div>
