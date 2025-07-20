@@ -37,7 +37,7 @@
         <p>To identify all available network interfaces, run the following command:</p>
         <pre>ip a</pre>
         <p>The system identifies Ethernet interfaces with logical names such as <code>ens3</code> or <code>enp2s0</code>.</p>
-        <h6>Configure DHCP</h6>
+        <h6>Configure a Dynamic IP Address</h6>
         <p>Netplan configuration files are located in the <code>/etc/netplan/</code> directory and use the <code>.yaml</code> format. To configure an interface to use DHCP, edit the relevant configuration file. For example:</p>
         <pre>sudo nano /etc/netplan/50-cloud-init.yaml</pre>
         <p>Add the following configuration:</p>
