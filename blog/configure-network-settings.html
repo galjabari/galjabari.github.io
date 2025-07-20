@@ -32,27 +32,29 @@
         </div>
     </nav>
     <div class="container">
-        <h5>Configure network settings on Ubuntu</h5>
-        <p>You can configure network interfaces on Ubuntu using graphical utilities.</p>
-        <p>To manage the network using a CLI, you can use popular tools like <code>ip addr</code> or <code>ifconfig</code>.</p>
-        <p>To quickly identify all available network interfaces, run the following command:</p>
+        <h5>Configure Network Settings on Ubuntu</h5>
+        <p>Ubuntu provides graphical utilities for configuring network interfaces. To manage network settings from the command-line interface (CLI), you can use tools like <code>ip addr</code> or <code>ifconfig</code>.</p>
+        <p>To identify all available network interfaces, run the following command:</p>
         <pre>ip a</pre>
-        <p>Ethernet interfaces are identified by the system using logical names such as <code>ens3</code> or <code>enp2s0</code>.</p>
-        <p>To configure your system to use DHCP, edit a Netplan configuration file located in <code>/etc/netplan/</code> with <code>.yaml</code> format. For example:</p>
+        <p>The system identifies Ethernet interfaces with logical names such as <code>ens3</code> or <code>enp2s0</code>.</p>
+        <h6>Configure DHCP</h6>
+        <p>Netplan configuration files are located in the <code>/etc/netplan/</code> directory and use the <code>.yaml</code> format. To configure an interface to use DHCP, edit the relevant configuration file. For example:</p>
         <pre>sudo nano /etc/netplan/50-cloud-init.yaml</pre>
         <p>Add the following configuration:</p>
         <pre>network:<br>  version: 2<br>  ethernets:<br>    ens3:<br>      dhcp4: true</pre>
-        <p>This configuration use dynamic IP address assignment for Ethernet interface identified as <code>ens3</code>.</p>
+        <p>This configuration enables dynamic IP address assignment (DHCP) for the Ethernet interface identified as <code>ens3</code>.</p>
         <p>To apply the configuration, run the following command:</p>
         <pre>sudo netplan apply</pre>
-        <p>To configure your system to use static IP address, edit the Netplan configuration file:</p>
+        <h6>Configure a Static IP Address</h6>
+        <p>To assign a static IP address, edit the Netplan configuration file:</p>
         <pre>sudo nano /etc/netplan/50-cloud-init.yaml</pre>
         <p>For example, add the following configuration:</p> 
         <pre>network:<br>  version: 2<br>  ethernets:<br>    ens3:<br>      addresses:<br>        - 192.168.1.20/24<br>      routes:<br>        - to: default<br>          via: 192.168.1.1<br>      nameservers:<br>        search: [example.com]<br>        addresses: [192.168.1.10, 192.168.1.11]</pre>
-        <p>Change the settings to meet the requirements of your network such as IP address, default gateway, search domain, and DNS servers.</p>
+        <p>Adjust the settings, such as the IP address, default gateway, search domain, and DNS servers, to match your network requirements.</p>
         <p>Apply the configuration:</p>
         <pre>sudo netplan apply</pre>
-        <p>To configure multiple network interfaces on your system, edit the Netplan configuration file:</p>
+        <h6>Configure Multiple Interfaces</h6>
+        <p>To configure multiple network interfaces, edit the Netplan configuration file:</p>
         <pre>sudo nano /etc/netplan/50-cloud-init.yaml</pre>
         <p>For example, add the following configuration for two interfaces:</p>
         <pre>network:<br>  version: 2<br>  ethernets:<br>    ens3:<br>      dhcp4: true<br>    ens4:<br>      addresses:<br>        - 192.168.1.10/24</pre>
