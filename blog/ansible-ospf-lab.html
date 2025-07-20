@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ghannam Aljabari</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Blog</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+
+    <h5>OSPF Lab with Containerlab and Ansible</h5>
+    <p>This guide demonstrates how to deploy and configure a leaf-spine OSPF lab using Containerlab and Ansible.</p>
+    <p>We use a simple topology with one spine and two leaf routers, all running Arista cEOS. The topology is
+      defined in `ospf.clab.yml`:</p>
+
+    <pre>
+name: ospf
+
+topology:
+  nodes:
+    spine:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+    leaf1:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+    leaf2:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+  links:
+    - endpoints: ["spine:eth1", "leaf1:eth1"]
+    - endpoints: ["spine:eth2", "leaf2:eth1"]
+</pre>
+
+
+    <p>Deploy the Topology with Containerlab</p>
+
+    <pre>
+containerlab deploy -t ospf/ospf.clab.yml</pre>
+
+    <h6>Ansible Playbooks for OSPF Configuration</h6>
+
+    <p>Below are the Ansible playbooks for each node. These configure interfaces, enable IP routing, and set up
+      OSPF.</p>
+    <p>Spine Playbook (`spine.yml`)
+    </p>
+    <pre>
+---
+- name: Configure Arista cEOS Spine
+  hosts: clab-ospf-spine
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: arista.eos.eos
+    ansible_host_key_checking: false
+    ansible_become: yes
+  gather_facts: false
+  tasks:
+    - name: Configure Ethernet interfaces
+      arista.eos.eos_l3_interfaces:
+        config:
+          - name: Ethernet1
+            ipv4:
+              - address: 192.168.1.1/30
+          - name: Ethernet2
+            ipv4:
+              - address: 192.168.1.5/30
+          - name: Loopback0
+            ipv4:
+              - address: 10.10.10.1/32
+        state: merged
+    - name: Enable Ethernet interfaces
+      arista.eos.eos_interfaces:
+        config:
+          - name: Ethernet1
+            enabled: true
+            mode: layer3
+          - name: Ethernet2
+            enabled: true
+            mode: layer3
+        state: merged
+    - name: Enable IP routing
+      arista.eos.eos_config:
+        lines:
+          - ip routing
+    - name: Configure OSPF settings
+      arista.eos.eos_ospfv2:
+        config:
+          processes:
+            - process_id: 1
+              router_id: "10.10.10.1"
+              networks:
+                - prefix: "10.10.10.1/32"
+                  area: "0.0.0.0"
+                - prefix: "192.168.1.0/30"
+                  area: "0.0.0.0"
+                - prefix: "192.168.1.4/30"
+                  area: "0.0.0.0"
+        state: merged
+</pre>
+
+    <p>Leaf 1 Playbook (`leaf1.yml`)</p>
+    <pre>
+---
+- name: Configure Arista cEOS Leaf 1
+  hosts: clab-ospf-leaf1
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: arista.eos.eos
+    ansible_host_key_checking: false
+    ansible_become: yes
+  gather_facts: false
+  tasks:
+    - name: Configure Ethernet interfaces
+      arista.eos.eos_l3_interfaces:
+        config:
+          - name: Ethernet1
+            ipv4:
+              - address: 192.168.1.2/30
+          - name: Ethernet2
+            ipv4:
+              - address: 192.168.10.1/24
+          - name: Loopback0
+            ipv4:
+              - address: 10.10.10.2/32
+        state: merged
+    - name: Enable Ethernet interfaces
+      arista.eos.eos_interfaces:
+        config:
+          - name: Ethernet1
+            enabled: true
+            mode: layer3
+          - name: Ethernet2
+            enabled: true
+            mode: layer3
+        state: merged
+    - name: Enable IP routing
+      arista.eos.eos_config:
+        lines:
+          - ip routing
+    - name: Configure OSPF settings
+      arista.eos.eos_ospfv2:
+        config:
+          processes:
+            - process_id: 1
+              router_id: "10.10.10.2"
+              networks:
+                - prefix: "10.10.10.2/32"
+                  area: "0.0.0.0"
+                - prefix: "192.168.1.0/30"
+                  area: "0.0.0.0"
+        state: merged
+</pre>
+
+    <p>Leaf 2 Playbook (`leaf2.yml`)</p>
+    <pre>
+---
+- name: Configure Arista cEOS Leaf 2
+  hosts: clab-ospf-leaf2
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: arista.eos.eos
+    ansible_host_key_checking: false
+    ansible_become: yes
+  gather_facts: false
+  tasks:
+    - name: Configure Ethernet interfaces
+      arista.eos.eos_l3_interfaces:
+        config:
+          - name: Ethernet1
+            ipv4:
+              - address: 192.168.1.6/30
+          - name: Ethernet2
+            ipv4:
+              - address: 192.168.20.1/24
+          - name: Loopback0
+            ipv4:
+              - address: 10.10.10.3/32
+        state: merged
+    - name: Enable Ethernet interfaces
+      arista.eos.eos_interfaces:
+        config:
+          - name: Ethernet1
+            enabled: true
+            mode: layer3
+          - name: Ethernet2
+            enabled: true
+            mode: layer3
+        state: merged
+    - name: Enable IP routing
+      arista.eos.eos_config:
+        lines:
+          - ip routing
+    - name: Configure OSPF settings
+      arista.eos.eos_ospfv2:
+        config:
+          processes:
+            - process_id: 1
+              router_id: "10.10.10.3"
+              networks:
+                - prefix: "10.10.10.3/32"
+                  area: "0.0.0.0"
+                - prefix: "192.168.1.4/30"
+                  area: "0.0.0.0"
+        state: merged
+</pre>
+
+    <h6>Run the Playbooks</h6>
+
+    <p>Make sure you have an inventory file generated by Containerlab:</p>
+    <pre>containerlab inventory -t ospf/ospf.clab.yml --format ansible > inventory.yaml</pre>
+
+    <p>Then run the playbooks:</p>
+    <pre>
+ansible-playbook -i inventory.yaml ospf/leaf1.yml
+ansible-playbook -i inventory.yaml ospf/leaf2.yml
+ansible-playbook -i inventory.yaml ospf/spine.yml
+</pre>
+
+    <p>You can verify OSPF neighbor relationships and routing tables using Ansible (`verify.yml`).</p>
+    <pre>
+---
+- name: Show OSPF routing table on Arista cEOS routers
+  hosts: arista_ceos
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: arista.eos.eos
+    ansible_host_key_checking: false
+  gather_facts: false
+  tasks:
+    - name: Show OSPF routes
+      arista.eos.eos_command:
+        commands: 
+          - show ip ospf neighbor
+          - show ip route ospf
+      register: ospf_output
+
+    - name: Display OSPF routes
+      ansible.builtin.debug:
+        var: ospf_output.stdout_lines
+</pre>
+    <p>Then run the playbooks:</p>
+    <pre>
+ansible-playbook -i inventory.yaml ospf/verify.yml
+</pre>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
