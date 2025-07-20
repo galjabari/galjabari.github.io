@@ -207,7 +207,7 @@ ansible-playbook -i clab-demo/ansible-inventory.yml router2.yml</pre>
     - name: Display BGP routes
       ansible.builtin.debug:
         var: bgp_output.stdout_lines</pre>
-        <p>Run the verification playbook:</p>
+        <p>Run the playbook:</p>
         <pre>ansible-playbook -i clab-demo/ansible-inventory.yml verify.yml</pre>
         <p>This will display the BGP routing table for both routers.</p>
         <p>To destroy the lab and remove all related files, run the following command:</p>
