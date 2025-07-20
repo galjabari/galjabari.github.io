@@ -32,31 +32,34 @@
         </div>
     </nav>
     <div class="container">
-        <h5>Install SSH Server on Ubuntu</h5>
-        <p>Run the following command in your terminal to make sure your package lists are up to date:</p>
+        <h5>Install and Configure an SSH Server on Ubuntu</h5>
+        <h6>Install OpenSSH Server</h6>
+        <p>First, update your package lists to ensure you have the latest versions available:</p>
         <pre>sudo apt update</pre>
-        <p>Next, install the OpenSSH server package by executing the following command:</p>
+        <p>Next, install the OpenSSH server package:</p>
         <pre>sudo apt install openssh-server -y</pre>
-        <p>Once the installation is complete, you can verify that the SSH server is running by checking its status. Run the command:</p>
+        <p>Once the installation is complete, the SSH server should start automatically. You can verify its status by running:</p>
         <pre>sudo systemctl status ssh.service</pre>
-        <p>If the SSH server is active and running, you'll see a message indicating its status.</p>
-        <p>To connect to the SSH server, you'll need its IP address and your username. Assuming the IP address of your server is <code>192.168.1.5</code> and your username is <code>ubuntu</code>, you can connect using the following command:</p>
+        <p>If the service is active, you are ready to connect.</p>
+        <h6>Connect to the SSH Server</h6>
+        <p>To connect to the SSH server from another machine, you will need the server's IP address and a valid username. For example, if the server's IP is <code>192.168.1.5</code> and your username is <code>ubuntu</code>, use the following command:</p>
         <pre>ssh ubuntu@192.168.1.5</pre>
-        <p>After entering the password, you should be logged in to your server via SSH.</p>
-        <p>To log in to the SSH server without typing the password each time, you can use SSH keys.</p>
-        <p>To generate an SSH key pair, run the following command on your local machine:</p>
+        <p>The first time you connect, you may be asked to confirm the host's authenticity. After confirming and entering your password, you will be logged in.</p>
+        <h6>Configure SSH Key-Based Authentication</h6>
+        <p>For a more secure and convenient way to log in, you can set up SSH key-based authentication. This allows you to connect without entering a password each time.</p>
+        <p>On your local (client) machine, generate an SSH key pair by running:</p>
         <pre>ssh-keygen</pre>
-        <p>Follow the prompts to save the key in the default location (<code>~/.ssh/id_rsa</code>) and set a passphrase (optional).</p>
-        <p>After generating the key pair, copy the public key to the remote server using the following command:</p>
+        <p>You can accept the default location (<code>~/.ssh/id_rsa</code>) and optionally set a passphrase for added security.</p>
+        <p>Next, copy the public key to the remote server. The easiest way is to use the <code>ssh-copy-id</code> utility:</p>
         <pre>ssh-copy-id ubuntu@192.168.1.5</pre>
-        <p>Alternatively, you can manually copy the key by displaying it using the command:</p>
+        <p>Alternatively, you can copy the key manually. First, display the public key on your local machine:</p>
         <pre>cat ~/.ssh/id_rsa.pub</pre>
-        <p>On the server, open the following file using your preferred editor:</p>
+        <p>Then, on the server, open the <code>authorized_keys</code> file in a text editor:</p>
         <pre>nano ~/.ssh/authorized_keys</pre>
-        <p>Paste the copied key into this file.</p>
-        <p>Now, you can connect to the server using SSH key:</p>
+        <p>Paste your public key into this file and save it.</p>
+        <p>You should now be able to connect to the server using your SSH key:</p>
         <pre>ssh ubuntu@192.168.1.5</pre>
-        <p>If you set a passphrase for the SSH key, you'll be prompted to enter it.</p>
+        <p>If you set a passphrase when creating the key, you will be prompted to enter it.</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
