@@ -200,6 +200,7 @@ ansible-playbook -i clab-demo/ansible-inventory.yml router2.yml</pre>
     - name: Show BGP routes
       arista.eos.eos_command:
         commands:
+          - show ip bgp summary
           - show ip bgp
       register: bgp_output
 
