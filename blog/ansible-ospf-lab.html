@@ -223,7 +223,7 @@ containerlab deploy -t ospf.clab.yml</pre>
                   area: "0.0.0.0"
         state: merged
 </pre>
-    <p>Next, execute the playbooks for each device:</p>
+    <p>Next, execute the playbook for each device:</p>
     <pre>
 ansible-playbook -i clab-ospf/ansible-inventory.yml leaf1.yml
 ansible-playbook -i clab-ospf/ansible-inventory.yml leaf2.yml
