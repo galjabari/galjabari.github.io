@@ -34,7 +34,7 @@
 
     <h5>OSPF Lab with Ansible and Containerlab</h5>
     <p>This guide demonstrates how to deploy and configure a leaf-spine OSPF lab using Ansible and Containerlab.</p>
-    <p>The lab uses 3-router topology with one spine and two leaf routers, all running Arista cEOS. The topology is
+    <p>The lab uses a 3-router topology with one spine and two leaf routers, all running Arista cEOS. The topology is
       defined in the <code>ospf.clab.yml</code> file:</p>
 
     <pre>
@@ -63,7 +63,7 @@ topology:
 containerlab deploy -t ospf.clab.yml</pre>
 
     <p>Then, create Ansible playbooks to configure the network interfaces and set up OSPF on each node.</p>
-    <p>Create a playbook (<code>spine.yml</code>) to config spine:</p>
+    <p>Create a playbook (<code>spine.yml</code>) to configure the spine router:</p>
     <pre>
 ---
 - name: Configure Arista cEOS Spine
@@ -118,7 +118,7 @@ containerlab deploy -t ospf.clab.yml</pre>
         state: merged
 </pre>
 
-    <p>Create a playbook (<code>leaf1.yml</code>) to configure leaf 1:</p>
+    <p>Create a playbook (<code>leaf1.yml</code>) to configure the first leaf router:</p>
     <pre>
 ---
 - name: Configure Arista cEOS Leaf 1
@@ -171,7 +171,7 @@ containerlab deploy -t ospf.clab.yml</pre>
         state: merged
 </pre>
 
-    <p>Create a playbook (<code>leaf2.yml</code>) to configure leaf 2:</p>
+    <p>Create a playbook (<code>leaf2.yml</code>) to configure the second leaf router:</p>
     <pre>
 ---
 - name: Configure Arista cEOS Leaf 2
@@ -223,7 +223,7 @@ containerlab deploy -t ospf.clab.yml</pre>
                   area: "0.0.0.0"
         state: merged
 </pre>
-    <p>Next, execute the playbook for each device:</p>
+    <p>Next, execute the playbooks for each device:</p>
     <pre>
 ansible-playbook -i clab-ospf/ansible-inventory.yml leaf1.yml
 ansible-playbook -i clab-ospf/ansible-inventory.yml leaf2.yml
