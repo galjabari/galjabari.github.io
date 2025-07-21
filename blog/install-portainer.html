@@ -32,13 +32,22 @@
     </nav>
     <div class="container">
         <h5>Install Portainer CE with Docker</h5>
-        <p>To get started quickly, you can install Portainer CE using the following command:</p>
-        <pre>wget -O- https://galjabari.github.io/install-portainer.sh | bash</pre>
-        <p>To download the bash script before installation, you can run the following commands:</p>
-        <pre>wget https://galjabari.github.io/install-portainer.sh<br>sudo bash install-portainer.sh</pre>
-        <p>When the installation is complete, you can log into Portainer by opening a web browser and going to:</p>
+        <p>This guide walks you through installing Portainer CE on a Docker host.</p>
+        <p>First, create a persistent volume for Portainer data:</p>
+        <pre>sudo docker volume create portainer_data</pre>
+        <p>Next, run the Portainer container with the following command:</p>
+        <pre>
+sudo docker run -d \
+  -p 8000:8000 -p 9443:9443 \
+  --name portainer \
+  --restart=always \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v portainer_data:/data portainer/portainer-ce:latest</pre>
+
+        <p>Once the installation is complete, you can access the Portainer UI in your web browser at:</p>
         <pre>https://localhost:9443</pre>
-        <p>Replace <code>localhost</code> with the IP address of your machine if needed.</p>
+        <p>If you are accessing Portainer from a different machine, replace <code>localhost</code> with the Docker
+            host's IP address.</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
