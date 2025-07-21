@@ -32,11 +32,11 @@
         </div>
     </nav>
     <div class="container">
-        <h5>Install and configure a DHCP Server on Ubuntu</h5>
-        <p>Before setting up the DHCP server, ensure that your system's has a static IP address (for example, 192.168.1.5/24).</p>
-        <p>First, ensure your system's package lists are up to date by running:</p>
+        <h5>Install and Configure a DHCP Server on Ubuntu</h5>
+        <p>Before setting up the DHCP server, ensure that your system has a static IP address (for example, 192.168.1.5/24).</p>
+        <p>First, update your system's package lists by running:</p>
         <pre>sudo apt update</pre>
-        <p>Install the DHCP server package by executing:</p>
+        <p>Install the DHCP server package:</p>
         <pre>sudo apt install isc-dhcp-server -y</pre>
         <p>Open the DHCP server configuration file in the <code>nano</code> text editor:</p>
         <pre>sudo nano /etc/dhcp/dhcpd.conf</pre>
