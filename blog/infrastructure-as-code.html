@@ -62,7 +62,7 @@
             you have generated into <code>pm_api_token_secret</code>.</p>
         <p>Run the following command to install the Proxmox provider:</p>
         <pre>terraform init</pre>
-        <h6>Configure Terraform</h6>
+        <h6>Deploy an LXC in Proxmox</h6>
         <p>Terraform can be used with Proxmox to automate the deployment of virtual machines (VMs) and Linux containers
             (LXC).</p>
         <p>To define and manage LXC containers using Terraform, create a Terraform configuration file:</p>
@@ -78,6 +78,7 @@
         <pre>terraform apply -auto-approve</pre>
         <p>This will create the LXC container based on the template. When you're done, use
             <code>terraform destroy</code> to delete the container.</p>
+        <h6>Deploy a VM in Proxmox</h6>
         <P>To deploy a virtual machine (VM) in Proxmox with Terraform, you need to create a Terraform configuration to
             clone a VM from a template.</P>
         <p>You can create a VM template from a cloud image in Proxmox by executing the following commands:</p>
