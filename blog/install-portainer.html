@@ -44,9 +44,12 @@ sudo docker run -d \
   --name portainer \
   --restart=always \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -v portainer_data:/data portainer/portainer-ce:latest</pre>
+  -v portainer_data:/data \
+  portainer/portainer-ce:latest
+</pre>
 
-        <p>Once the installation is complete, you can access the Portainer UI in your web browser at: <code>https://localhost:9443</code></p>
+        <p>Once the installation is complete, you can access the Portainer UI in your web browser at:
+            <code>https://localhost:9443</code></p>
         <p>If you are accessing Portainer from a different machine, replace <code>localhost</code> with the Docker
             host's IP address.</p>
     </div>
