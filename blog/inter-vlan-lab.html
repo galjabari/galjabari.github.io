@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Configure Inter-VLAN Routing using Containerlab</h5>
+        <p>This guide demonstrates how to configure inter-VLAN routing using Containerlab with Arista cEOS. The lab consists of two VLANs, each with its own subnet, and a router that routes traffic between them.</p>
+        <h6>1. Create a network topology</h6>
+        <p>To create a network topology with two VLANs, you can use the following YAML configuration (<code>vlan.clab.yml</code>):</p>
+        <pre>
+name: vlan
+
+topology:
+  nodes:
+    router:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+      startup-config: router.cfg
+
+    switch:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+      startup-config: switch.cfg
+
+    client1:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 192.168.10.2/24 dev eth1
+        - ip route replace default via 192.168.10.1
+
+    client2:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 192.168.20.2/24 dev eth1
+        - ip route replace default via 192.168.20.1
+
+  links:
+    - endpoints: ["switch:eth1", "client1:eth1"]
+    - endpoints: ["switch:eth2", "client2:eth1"]
+    - endpoints: ["switch:eth3", "router:eth1"]    
+</pre>
+        <p>This configuration defines a router, a switch, and two clients, each connected to the switch. The router will handle inter-VLAN routing.</p>
+        <p>Next, create the configuration files for the switch and router.</p>
+        <p>In the same directory, create a file named <code>switch.cfg</code> with the following content:</p>
+        <pre>
+!
+enable
+configure
+!
+hostname cEOS-Switch
+!
+vlan 10
+   name VLAN10
+vlan 20
+   name VLAN20
+!
+interface Ethernet1
+   switchport mode access
+   switchport access vlan 10
+!
+interface Ethernet2
+   switchport mode access
+   switchport access vlan 20
+!
+interface Ethernet3
+   switchport mode trunk
+   switchport trunk allowed vlan 10,20
+!
+end          
+</pre>
+        <p>This configuration sets up two access ports for VLAN 10 and VLAN 20, and a trunk port to connect to the router.</p>        
+        <p>In the same directory, create a file named <code>router.cfg</code> with the following content:</p>
+        <pre>
+!
+enable
+configure
+!          
+hostname cEOS-Router
+!
+ip routing
+!
+interface Ethernet1
+   no switchport
+!
+interface Ethernet1.10
+   encapsulation dot1q vlan 10
+   ip address 192.168.10.1/24
+!
+interface Ethernet1.20
+   encapsulation dot1q vlan 20
+   ip address 192.168.20.1/24
+!
+end          
+</pre>
+        <p>This configuration enables inter-VLAN routing on the router by creating sub-interfaces for each VLAN, each with its own IP address.</p>
+        <h6>2. Deploy the network topology</h6>
+        <p>To deploy the network topology, run the following command:</p>
+        <pre>containerlab deploy -t vlan.clab.yml</pre>
+        <p>After the lab is deployed, you can test connectivity between the clients. Open a new terminal and connect to <strong>client1</strong>:</p>
+        <pre>docker exec -it clab-vlan-client1 sh</pre>
+        <p>Ping client2 from client1:</p>
+        <pre>ping 192.168.20.2</pre>
+        <p>To access the router CLI:</p>
+        <pre>docker exec -it clab-vlan-router Cli</pre>
+        <p>Verify the routing table on the router:</p>
+        <pre>show ip route</pre>
+        <h6>3. Clean up the lab</h6>
+        <p>After testing, you can clean up the lab environment. To remove the lab and all related files, run:</p>
+        <pre>containerlab destroy -t ceos.clab.yml --cleanup</pre>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
