@@ -37,7 +37,7 @@
         <pre>
 containerlab version
 ansible --version</pre>
-        <h6>1. Create the Lab Topology with Containerlab</h6>
+        <h6>1. Create the lab topology with Containerlab</h6>
         <p>The lab consists of two Arista cEOS routers and two Linux clients. Create a file named <code>demo.clab.yml</code> and add the following configuration:</p>
         <pre>
 name: demo
@@ -77,7 +77,7 @@ topology:
     - endpoints: ["router1:eth2", "client1:eth1"]
     # Link between router2 and client2
     - endpoints: ["router2:eth2", "client2:eth1"]</pre>
-        <h6>2. Create Ansible Playbooks for Router Configuration</h6>
+        <h6>2. Create Ansible playbooks for router configuration</h6>
         <p>Next, create a playbook file named <code>router1.yml</code> to configure <code>router1</code>:</p>
         <pre>
 ---
@@ -178,7 +178,7 @@ topology:
             - neighbor_address: "192.168.1.1"
               remote_as: "65001"
         state: merged</pre>
-        <h6>3. Deploy and Configure the Lab</h6>
+        <h6>3. Deploy and configure the lab</h6>
         <p>Deploy the lab using Containerlab:</p>
         <pre>containerlab deploy -t demo.clab.yml</pre>
         <p>Containerlab automatically generates an Ansible inventory file in the lab directory (e.g., <code>clab-demo/ansible-inventory.yml</code>). Use this inventory to run the Ansible playbooks:</p>
