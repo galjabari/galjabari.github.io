@@ -37,10 +37,12 @@
             steps to install VS Code on Ubuntu.</p>
         <p>First, add the Microsoft repository to get the latest version:</p>
         <pre>
-sudo apt update -y
-sudo apt install software-properties-common apt-transport-https curl -y
-curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-sudo apt-add-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+sudo apt update
+sudo apt install wget gpg apt-transport-https software-properties-common -y
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo install -D -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/microsoft.gpg
+rm -f microsoft.gpg
+echo -e "Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg" | sudo tee /etc/apt/sources.list.d/vscode.sources > /dev/null
 </pre>
         <p>Next, update the package list and install VS Code:</p>
         <pre>
