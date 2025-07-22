@@ -32,12 +32,12 @@
         </div>
     </nav>
     <div class="container">
-        <h5>Configure Network Settings on Ubuntu</h5>
+        <h5>Configure network settings on Ubuntu</h5>
         <p>Ubuntu provides graphical utilities for configuring network interfaces. To manage network settings from the command-line interface (CLI), you can use tools like <code>ip addr</code> or <code>ifconfig</code>.</p>
         <p>To identify all available network interfaces, run the following command:</p>
         <pre>ip a</pre>
         <p>The system identifies Ethernet interfaces with logical names such as <code>ens3</code> or <code>enp2s0</code>.</p>
-        <h6>Configure a Dynamic IP Address</h6>
+        <h6>Configure a dynamic IP address</h6>
         <p>Netplan configuration files are located in the <code>/etc/netplan/</code> directory and use the <code>.yaml</code> format. To configure an interface to use DHCP, edit the relevant configuration file. For example:</p>
         <pre>sudo nano /etc/netplan/50-cloud-init.yaml</pre>
         <p>Add the following configuration:</p>
@@ -45,7 +45,7 @@
         <p>This configuration enables dynamic IP address assignment (DHCP) for the Ethernet interface identified as <code>ens3</code>.</p>
         <p>To apply the configuration, run the following command:</p>
         <pre>sudo netplan apply</pre>
-        <h6>Configure a Static IP Address</h6>
+        <h6>Configure a static IP address</h6>
         <p>To assign a static IP address, edit the Netplan configuration file:</p>
         <pre>sudo nano /etc/netplan/50-cloud-init.yaml</pre>
         <p>For example, add the following configuration:</p> 
@@ -53,7 +53,7 @@
         <p>Adjust the settings, such as the IP address, default gateway, search domain, and DNS servers, to match your network requirements.</p>
         <p>Apply the configuration:</p>
         <pre>sudo netplan apply</pre>
-        <h6>Configure Multiple Interfaces</h6>
+        <h6>Configure multiple interfaces</h6>
         <p>To configure multiple network interfaces, edit the Netplan configuration file:</p>
         <pre>sudo nano /etc/netplan/50-cloud-init.yaml</pre>
         <p>For example, add the following configuration for two interfaces:</p>
