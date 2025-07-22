@@ -103,7 +103,7 @@ end
         <h6>4. Run the Ansible playbook</h6>
         <p>To run the playbook and display the STP status for each switch, use:</p>
         <pre>ansible-playbook -i clab-stp/ansible-inventory.yml show_stp.yml</pre>
-        <p>This command will connect to the switches and execute the <code>show spanning-tree</code> command, displaying the STP status.</p>
+        <p>This command will connect to the switches and execute the <code>show spanning-tree</code> command. The output will display the STP status for each switch, including information such as the root bridge, port roles, and blocked ports.</p>
         <h6>5. Clean Up the Lab</h6>
         <p>After testing, you can clean up the lab environment. To remove the lab and all related files, run:</p>
         <pre>containerlab destroy -t stp.clab.yml --cleanup</pre>
