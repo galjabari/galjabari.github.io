@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Build Custom Ubuntu Node for Containerlab</h5>
+        <p>This guide explains how to build a custom Ubuntu image for Containerlab. The image allows you to run Ubuntu containers as host nodes in your lab deployments.</p>
+        <p>First, create a <code>Dockerfile</code> to define a custom Ubuntu image. This file pre-installs the necessary networking tools into the image.</p>
+        <pre>
+# Use official Ubuntu base image
+FROM ubuntu:latest
+
+# Avoid interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        iproute2 \
+        iputils-ping \
+        net-tools \
+        dnsutils \
+        wget \
+        curl \
+        traceroute \
+        nano \
+        vim \
+        sudo \
+        gnupg \
+        lsb-release \
+        python3 \
+        python3-pip \
+        tcpdump \
+        iptables \
+        bridge-utils \
+        ca-certificates \
+        openssh-server \
+        isc-dhcp-client \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create a 'clab' user with sudo privileges and 'clab' password
+RUN useradd -ms /bin/bash clab && echo "clab:clab" | chpasswd && adduser clab sudo
+
+# Set up SSH server
+RUN mkdir -p /var/run/sshd && \
+    touch /etc/ssh/sshd_config && \
+    echo 'PermitRootLogin no' >> /etc/ssh/sshd_config && \
+    echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
+
+# Expose SSH port
+EXPOSE 22
+
+# Set working directory
+WORKDIR /home/clab
+
+# Set default command to start SSH server
+CMD ["/usr/sbin/sshd", "-D"]
+</pre>
+        <p>Once the <code>Dockerfile</code> is created, build the Docker image with the following command:</p>
+        <pre>docker build -t clab-ubuntu:latest .</pre>
+        <p>This command creates a local Docker image named <code>clab-ubuntu</code> with the <code>latest</code> tag.</p>
+        <p>Next, define the lab topology in a YAML file. In this example, the lab includes a client and a server configured using the local Ubuntu image.</p>
+        <p>Create a file named <code>ubuntu.clab.yml</code> and add the following content:</p> 
+        <pre>
+name: ubuntu
+
+topology:
+  nodes:
+    router:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+      startup-config: router.cfg
+
+    switch:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+      startup-config: switch.cfg
+      
+    client:
+      kind: linux
+      image: clab-ubuntu:latest
+      exec:
+        - dhclient eth1
+    
+    server:
+      kind: linux
+      image: clab-ubuntu:latest
+      exec:
+        - ip addr add 192.168.10.10/24 dev eth1
+
+  links:
+    - endpoints: ["switch:eth1", "client:eth1"]
+    - endpoints: ["switch:eth2", "server:eth1"]    
+    - endpoints: ["switch:eth3", "router:eth1"]
+</pre>
+        <p>Create the router configuration file named <code>router.cfg</code>:</p>
+        <pre>
+!
+enable
+configure terminal
+!
+username admin privilege 15 secret admin
+!
+ip routing
+!
+interface Ethernet1
+   no switchport
+   ip address 192.168.10.1/24
+   dhcp server ipv4
+!
+dhcp server
+   subnet 192.168.10.0/24
+      range 192.168.10.20 192.168.10.100
+      default-gateway 192.168.10.1
+   !
+   lease time ipv4 1 days 0 hours 0 minutes
+!
+end
+</pre>
+        <p>Create the switch configuration file named <code>switch.cfg</code>:</p>
+        <pre>
+!
+enable
+configure terminal
+!
+username admin privilege 15 secret admin
+!
+interface Ethernet1
+   switchport
+!
+interface Ethernet2
+   switchport
+!
+interface Ethernet3
+   switchport
+!
+end
+</pre>
+        <p>Deploy the lab using Containerlab:</p>
+        <pre>containerlab deploy -t ubuntu.clab.yml</pre>
+        <p>After deployment, test the connectivity between the client and the server. Connect to the client:</p>
+        <pre>ssh clab@clab-ubuntu-client</pre>
+        <p>Ping the server from the client:</p>
+        <pre>ping 192.168.10.10</pre>
+        <p>To destroy the lab and remove all containers, run:</p>
+        <pre>containerlab destroy -t ubuntu.clab.yml --cleanup</pre>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
