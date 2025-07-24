@@ -31,7 +31,7 @@
         </div>
     </nav>
     <div class="container">
-        <h5>Build Custom Ubuntu Node for Containerlab</h5>
+        <h5>Build custom Ubuntu node for Containerlab</h5>
         <p>This guide explains how to build a custom Ubuntu image for Containerlab. The image allows you to run Ubuntu containers as host nodes in your lab deployments.</p>
         <p>First, create a <code>Dockerfile</code> to define a custom Ubuntu image. This file pre-installs the necessary networking tools into the image.</p>
         <pre>
@@ -86,18 +86,13 @@ CMD ["/usr/sbin/sshd", "-D"]
         <p>Once the <code>Dockerfile</code> is created, build the Docker image with the following command:</p>
         <pre>docker build -t clab-ubuntu:latest .</pre>
         <p>This command creates a local Docker image named <code>clab-ubuntu</code> with the <code>latest</code> tag.</p>
-        <p>Next, define the lab topology in a YAML file. In this example, the lab includes a client and a server configured using the local Ubuntu image.</p>
+        <p>Next, define the lab topology in a YAML file. In this example, the lab consists of a client and a server that will use the custom-built Ubuntu image.</p>
         <p>Create a file named <code>ubuntu.clab.yml</code> and add the following content:</p> 
         <pre>
 name: ubuntu
 
 topology:
   nodes:
-    router:
-      kind: arista_ceos
-      image: takfa19/ceos:4.32.2F
-      startup-config: router.cfg
-
     switch:
       kind: arista_ceos
       image: takfa19/ceos:4.32.2F
@@ -107,42 +102,17 @@ topology:
       kind: linux
       image: clab-ubuntu:latest
       exec:
-        - dhclient eth1
+        - ip addr add 192.168.10.2/24 dev eth1
     
     server:
       kind: linux
       image: clab-ubuntu:latest
       exec:
-        - ip addr add 192.168.10.10/24 dev eth1
+        - ip addr add 192.168.10.3/24 dev eth1
 
   links:
     - endpoints: ["switch:eth1", "client:eth1"]
     - endpoints: ["switch:eth2", "server:eth1"]    
-    - endpoints: ["switch:eth3", "router:eth1"]
-</pre>
-        <p>Create the router configuration file named <code>router.cfg</code>:</p>
-        <pre>
-!
-enable
-configure terminal
-!
-username admin privilege 15 secret admin
-!
-ip routing
-!
-interface Ethernet1
-   no switchport
-   ip address 192.168.10.1/24
-   dhcp server ipv4
-!
-dhcp server
-   subnet 192.168.10.0/24
-      range 192.168.10.20 192.168.10.100
-      default-gateway 192.168.10.1
-   !
-   lease time ipv4 1 days 0 hours 0 minutes
-!
-end
 </pre>
         <p>Create the switch configuration file named <code>switch.cfg</code>:</p>
         <pre>
@@ -158,9 +128,6 @@ interface Ethernet1
 interface Ethernet2
    switchport
 !
-interface Ethernet3
-   switchport
-!
 end
 </pre>
         <p>Deploy the lab using Containerlab:</p>
@@ -168,7 +135,7 @@ end
         <p>After deployment, test the connectivity between the client and the server. Connect to the client:</p>
         <pre>ssh clab@clab-ubuntu-client</pre>
         <p>Ping the server from the client:</p>
-        <pre>ping 192.168.10.10</pre>
+        <pre>ping 192.168.10.3</pre>
         <p>To destroy the lab and remove all containers, run:</p>
         <pre>containerlab destroy -t ubuntu.clab.yml --cleanup</pre>
     </div>
