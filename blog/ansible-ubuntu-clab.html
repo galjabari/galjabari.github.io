@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Linux Automation with Ansible and Containerlab</h5>
+        <p>This guide demonstrates how to automate the configuration of Linux servers using Ansible in a Containerlab environment. We will use the same lab topology as in the <a href="build-ubuntu-clab.html" target="_blank">Build custom Ubuntu node for Containerlab</a> guide to install and configure a web server on Ubuntu.</p>
+        <p>First, create the lab topology file named <code>ubuntu.clab.yml</code>:</p>
+        <pre>
+name: ubuntu
+
+topology:
+  nodes:
+    switch:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+      startup-config: switch.cfg
+
+    client:
+      kind: linux
+      image: clab-ubuntu:latest
+      exec:
+        - ip addr add 192.168.10.2/24 dev eth1
+
+    server:
+      kind: linux
+      image: clab-ubuntu:latest
+      exec:
+        - ip addr add 192.168.10.3/24 dev eth1
+
+  links:
+    - endpoints: ["switch:eth1", "client:eth1"]
+    - endpoints: ["switch:eth2", "server:eth1"]
+</pre>
+        <p>Make sure to build the Ubuntu node image before deploying the lab.</p>
+        <p>Create the switch configuration file named <code>switch.cfg</code>:</p>
+        <pre>
+!
+enable
+configure terminal
+!
+username admin privilege 15 secret admin
+!
+interface Ethernet1
+   switchport
+!
+interface Ethernet2
+   switchport
+!
+end
+</pre>
+        <p>Create an Ansible playbook named <code>nginx.yml</code> to install and configure Nginx on the server:</p>
+        <pre>
+---
+- name: Install Nginx on Ubuntu server
+  hosts: clab-ubuntu-server
+  vars:
+    ansible_user: clab
+    ansible_password: clab
+    ansible_become_password: clab
+    ansible_host_key_checking: false
+  gather_facts: false
+  become: yes 
+  tasks:
+    - name: Update repositories cache and install Nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: latest
+        update_cache: yes
+
+    - name: Start and enable Nginx service
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes
+</pre>
+        <p>Deploy the lab:</p>
+        <pre>clab deploy -t ubuntu.clab.yml</pre>
+        <p>Run the Ansible playbook:</p>
+        <pre>ansible-playbook -i clab-ubuntu/ansible-inventory.yml nginx.yml</pre>
+        <p>After the playbook execution, verify the Nginx installation by connecting to the client and accessing the server's web page:</p>
+        <pre>ssh clab@clab-ubuntu-client</pre>
+        <p>From the client, use <code>curl</code> to check the Nginx default page:</p>
+        <pre>curl http://192.168.10.3</pre>
+        <p>To destroy the lab, run:</p>
+        <pre>clab destroy -t ubuntu.clab.yml --cleanup</pre>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
