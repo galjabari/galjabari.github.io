@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Deploy a Web application with Containerlab</h5>
+        <p>This guide demonstrates how to deploy a web application using Containerlab in a data center topology. The lab consists of a three routers, a desktop client, and a web server.</p>
+        <h6>1. Create a lab topology</h6>
+        <p>The lab topology is defined in the <code>web.clab.yml</code> file:</p>
+        <pre>
+name: web
+
+topology:
+  nodes:
+    # Spine (Arista cEOS)
+    spine:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+      startup-config: spine.cfg
+
+    # Leaf 1 (Arista cEOS)
+    leaf1:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+      startup-config: leaf1.cfg
+
+    # Leaf 2 (Arista cEOS)
+    leaf2:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+      startup-config: leaf2.cfg
+
+    # Desktop (Linux container)
+    desktop:
+      kind: linux
+      image: lscr.io/linuxserver/webtop:latest
+      ports:
+        - 3000:3000
+        - 3001:3001
+      exec:
+        - ip addr add 192.168.10.2/24 dev eth1
+        - ip route replace default via 192.168.10.1
+
+    # Server (Linux container)
+    server:
+      kind: linux
+      image: ubuntu/nginx:latest
+      exec:
+        - ip addr add 192.168.20.2/24 dev eth1
+        - ip route replace default via 192.168.20.1
+
+  links:
+    # Link between spine and leaf 1
+    - endpoints: ["spine:eth1", "leaf1:eth1"]
+    # Link between spine and leaf 2
+    - endpoints: ["spine:eth2", "leaf2:eth1"]
+    # Link between leaf 1 and desktop
+    - endpoints: ["leaf1:eth2", "desktop:eth1"]
+    # Link between leaf 2 and server
+    - endpoints: ["leaf2:eth2", "server:eth1"]
+        </pre>
+        <h6>2. Create startup configurations</h6>
+        <p>The startup configurations for the routers are provided below.</p>
+        <p><strong>spine.cfg</strong></p>
+        <pre>
+!
+enable
+configure
+!
+username admin privilege 15 secret admin
+!
+ip routing
+!
+interface Ethernet1
+  no switchport
+  ip address 192.168.1.2/30
+!
+interface Ethernet2
+  no switchport
+  ip address 192.168.1.6/30
+!
+interface Loopback0
+  ip address 10.10.10.3/32
+!
+router ospf 1
+  router-id 10.10.10.3
+  network 192.168.1.0/30 area 0
+  network 192.168.1.4/30 area 0
+!
+end
+        </pre>
+        <p><strong>leaf1.cfg</strong></p>
+        <pre>
+!
+enable
+configure
+!
+username admin privilege 15 secret admin
+!
+ip routing
+!
+interface Ethernet1
+  no switchport
+  ip address 192.168.1.1/30
+!
+interface Ethernet2
+  no switchport
+  ip address 192.168.10.1/24
+!
+interface Loopback0
+  ip address 10.10.10.1/32
+!
+router ospf 1
+  router-id 10.10.10.1
+  network 192.168.1.0/30 area 0
+  network 192.168.10.0/24 area 0
+!
+end
+        </pre>
+        <p><strong>leaf2.cfg</strong></p>
+        <pre>
+!
+enable
+configure
+!
+username admin privilege 15 secret admin
+!
+ip routing
+!
+interface Ethernet1
+  no switchport
+  ip address 192.168.1.5/30
+!
+interface Ethernet2
+  no switchport
+  ip address 192.168.20.1/24
+!
+interface Loopback0
+  ip address 10.10.10.2/32
+!
+router ospf 1
+  router-id 10.10.10.2
+  network 192.168.1.4/30 area 0
+  network 192.168.20.0/24 area 0
+!
+end
+        </pre>
+        <h6>3. Deploy the lab</h6>
+        <p>To deploy the lab, navigate to the directory containing the files and run:</p>
+        <pre>
+containerlab deploy -t web.clab.yml
+        </pre>
+        <p>This command will create the lab topology and configure the devices with the specified startup configurations.</p>
+        <p>To access the desktop client, open a web browser and navigate to <code>http://localhost:3000</code> or <code>https://localhost:3001</code>.</p>
+        <p>You can now access the web server from the desktop client by navigating to <code>http://192.168.20.2</code>.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
