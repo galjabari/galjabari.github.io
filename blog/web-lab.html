@@ -35,7 +35,7 @@
         <p>This guide demonstrates how to deploy a web application using Containerlab in a data center topology. The lab consists of a three routers, a desktop client, and a web server.</p>
         <h6>1. Create a lab topology</h6>
         <p>The lab topology is defined in the <code>web.clab.yml</code> file:</p>
-        <pre>
+<pre>
 name: web
 
 topology:
@@ -90,7 +90,7 @@ topology:
         <h6>2. Create startup configurations</h6>
         <p>The startup configurations for the routers are provided below.</p>
         <p><strong>spine.cfg</strong></p>
-        <pre>
+<pre>
 !
 enable
 configure
@@ -118,7 +118,7 @@ router ospf 1
 end
         </pre>
         <p><strong>leaf1.cfg</strong></p>
-        <pre>
+<pre>
 !
 enable
 configure
@@ -146,7 +146,7 @@ router ospf 1
 end
         </pre>
         <p><strong>leaf2.cfg</strong></p>
-        <pre>
+<pre>
 !
 enable
 configure
@@ -172,12 +172,12 @@ router ospf 1
   network 192.168.20.0/24 area 0
 !
 end
-        </pre>
+</pre>
         <h6>3. Deploy the lab</h6>
         <p>To deploy the lab, navigate to the directory containing the files and run:</p>
         <pre>
 containerlab deploy -t web.clab.yml
-        </pre>
+</pre>
         <p>This command will create the lab topology and configure the devices with the specified startup configurations.</p>
         <p>To access the desktop client, open a web browser and navigate to <code>http://localhost:3000</code> or <code>https://localhost:3001</code>.</p>
         <p>You can now access the web server from the desktop client by navigating to <code>http://192.168.20.2</code>.</p>
