@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Configure a Static VXLAN using Containerlab</h5>
+        <p>Static VXLAN is a method of encapsulating Layer 2 Ethernet frames within Layer 3 UDP packets, allowing for the extension of Layer 2 networks over a Layer 3 infrastructure.</p>
+        <p>This guide demonstrates how to configure a static VXLAN in a data center topology using Containerlab with Arista cEOS. The lab consists of one spine switch, two leaf switches, and two clients in the same VLAN connected to different leaf switches.</p>
+        <h6>1. Create a network topology</h6>
+        <p>To create the spine-leaf topology, you can use the following YAML configuration (<code>vxlan.clab.yml</code>):</p>
+        <pre>
+name: vxlan
+topology:
+  nodes:
+    # Spine (Arista cEOS)
+    spine:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+      startup-config: spine.cfg
+
+    # Leaf 1 (Arista cEOS)
+    leaf1:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+      startup-config: leaf1.cfg
+
+    # Leaf 2 (Arista cEOS)
+    leaf2:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+      startup-config: leaf2.cfg
+
+    # Client 1 (Linux container)
+    client1:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 192.168.10.1/24 dev eth1
+
+    # Client 2 (Linux container)
+    client2:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 192.168.10.2/24 dev eth1
+
+  links:
+    - endpoints: ["spine:eth1", "leaf1:eth1"]
+    - endpoints: ["spine:eth2", "leaf2:eth1"]
+    - endpoints: ["leaf1:eth2", "client1:eth1"]
+    - endpoints: ["leaf2:eth2", "client2:eth1"]
+</pre>
+        <p>This configuration defines the spine and leaf switches, and two clients with static IP addresses.</p>
+        <p>Next, create the configuration files for the switches.</p>
+        <p>In the same directory, create a file named <code>spine.cfg</code> with the following content:</p>
+        <pre>
+!
+enable
+configure terminal
+!
+hostname spine
+!
+username admin privilege 15 secret admin
+!
+interface Ethernet1
+   no switchport
+   ip address 10.0.1.1/30
+   ip ospf area 0
+!
+interface Ethernet2
+   no switchport
+   ip address 10.0.1.5/30
+   ip ospf area 0
+!
+interface Loopback0
+   ip address 3.3.3.3/32
+   ip ospf area 0
+!
+ip routing
+!
+router ospf 1
+   router-id 3.3.3.3
+</pre>
+        <p>Create a file named <code>leaf1.cfg</code>:</p>
+        <pre>
+!
+enable
+configure terminal
+!
+hostname leaf1
+!
+username admin privilege 15 secret admin
+!
+interface Ethernet1
+   no switchport
+   ip address 10.0.1.2/30
+   ip ospf area 0
+!
+interface Loopback0
+   ip address 1.1.1.1/32
+   ip ospf area 0
+!
+ip routing
+!
+vlan 10
+   name VLAN10
+!
+interface vxlan 1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+   vxlan flood vtep 2.2.2.2
+!
+router ospf 1
+   router-id 1.1.1.1
+!
+interface Ethernet2
+   switchport mode access
+   switchport access vlan 10
+</pre>
+        <p>In this configuration, leaf1 is set up to use VXLAN with a VNI of 10010, allowing it to encapsulate traffic for VLAN 10. The VXLAN tunnel is established with the leaf2 switch, which acts as the VTEP (VXLAN Tunnel Endpoint).</p>
+        <p>Finally, create the configuration file for leaf2:</p>
+<p>Create a file named <code>leaf2.cfg</code>:</p>
+        <pre>
+!
+enable
+configure terminal
+!
+hostname leaf2
+!
+username admin privilege 15 secret admin
+!
+interface Ethernet1
+   no switchport
+   ip address 10.0.1.6/30
+   ip ospf area 0
+!
+interface Loopback0
+   ip address 2.2.2.2/32
+   ip ospf area 0
+!
+ip routing
+!
+vlan 10
+   name VLAN10
+!
+interface vxlan 1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+   vxlan flood vtep 1.1.1.1
+!
+router ospf 1
+   router-id 2.2.2.2
+!
+interface Ethernet2
+   switchport mode access
+   switchport access vlan 10
+</pre>
+        <p>In this configuration, leaf1 is also set up to use VXLAN with a VNI of 10010, allowing it to encapsulate traffic for VLAN 10. The VXLAN tunnel is established with the leaf1 switch, which acts as the VTEP.</p>
+        <h6>2. Deploy the network topology</h6>
+        <p>To deploy the network topology, run the following command:</p>
+        <pre>clab deploy -t vxlan.clab.yml</pre>
+        <p>After the lab is deployed, you can test connectivity between the clients. Open a new terminal and connect to client1:</p>
+        <pre>docker exec -it clab-vxlan-client1 sh</pre>
+        <p>Ping client2 to test the VXLAN tunnel:</p>
+        <pre>ping 192.168.10.2</pre>
+        <p>To access the switches:</p>
+        <pre>ssh clab-vxlan-leaf1</pre>
+        <pre>ssh clab-vxlan-leaf2</pre>
+        <pre>ssh clab-vxlan-spine</pre>
+        <p>Verify the VXLAN tunnel status on the leaf switches:</p>
+        <pre>show vxlan vni</pre>
+        <pre>show vxlan address-table</pre>
+        <h6>3. Clean up the lab</h6>
+        <p>After testing, you can clean up the lab environment. To remove the lab and all related files, run:</p>
+        <pre>clab destroy -t vxlan.clab.yml --cleanup</pre>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
