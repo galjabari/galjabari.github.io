@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://galjabari.github.io/sitemap.xml
