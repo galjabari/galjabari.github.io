@@ -179,7 +179,7 @@ end
         <h6>2. Deploy and verify the lab</h6>
         <p>Deploy the topology with the following command:</p>
         <pre>clab deploy -t trunk.clab.yml</pre>
-        <p>After the lab is deployed, you can test connectivity between clients. For example, to test communication between clients in the same VLAN but on different switches, access <code>client1</code> and ping <code>client3</code>. You can access the client with the follwoing command:</p>
+        <p>After the lab is deployed, you can test connectivity between clients. For example, to test communication between clients in the same VLAN but on different switches, access <code>client1</code> and ping <code>client3</code>. You can access the client with the following command:</p>
          <pre>docker exec -it clab-trunk-client1 sh</pre>
         <p>To access the CLI for each switch, use the following commands:</p>
         <pre>docker exec -it clab-trunk-spine Cli</pre>
