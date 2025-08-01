@@ -61,7 +61,7 @@ topology:
     # Client 1 (Linux container)
     client1:
       kind: linux
-      image: alpine:latest  # Lightweight Linux image
+      image: alpine:latest
       # Use udhcpc for DHCP client functionality
       exec:
         - ip route del default
@@ -79,7 +79,7 @@ topology:
     # Client 3 (Linux container)
     client3:
       kind: linux
-      image: alpine:latest  # Lightweight Linux image
+      image: alpine:latest 
       # Use udhcpc for DHCP client functionality
       exec:
         - ip route del default
@@ -95,17 +95,11 @@ topology:
         - udhcpc -i eth1
 
   links:
-    # Link between spine and leaf1
     - endpoints: ["spine:eth1", "leaf1:eth3"]
-    # Link between spine and leaf2
     - endpoints: ["spine:eth2", "leaf2:eth3"]
-    # Link between leaf1 and client 1
     - endpoints: ["leaf1:eth1", "client1:eth1"]
-    # Link between leaf1 and client 2
     - endpoints: ["leaf1:eth2", "client2:eth1"]
-    # Link between leaf2 and client 3
     - endpoints: ["leaf2:eth1", "client3:eth1"]
-    # Link between leaf2 and client 4
     - endpoints: ["leaf2:eth2", "client4:eth1"]
 </pre>
         <p>This configuration defines a spine switch, two leaf switches, and four clients. The clients will obtain their IP addresses from the DHCP server running on the spine switch.</p>
