@@ -31,10 +31,10 @@
         </div>
     </nav>
     <div class="container">
-        <h5>Configure VLAN Trunks on Arista cEOS</h5>
-        <p>This guide demonstrates how to configure VLAN trunks between Arista cEOS switches using Containerlab. The lab consists of a spine switch that handles routing and DHCP, and two leaf switches that extend VLANs to clients.</p>
+        <h5>Configure VLAN Trunking on Arista cEOS</h5>
+        <p>This guide demonstrates how to configure VLANs and VLAN trunking on Arista cEOS switches using Containerlab. The lab includes a Layer 3 switch providing routing and DHCP services, along with two Layer 2 switches that extend VLANs to connected client devices.</p>
         <h6>1. Create a network topology</h6>
-        <p>To create a network topology with a spine, two leafs, and four clients, you can use the following YAML configuration (<code>trunk.clab.yml</code>):</p>
+        <p>To create a network topology, use the following Containerlab configuration file named <code>trunk.clab.yml</code>:</p>
         <pre>
 name: layer3
 
@@ -102,9 +102,9 @@ topology:
     - endpoints: ["leaf2:eth1", "client3:eth1"]
     - endpoints: ["leaf2:eth2", "client4:eth1"]
 </pre>
-        <p>This configuration defines a spine switch, two leaf switches, and four clients. The clients will obtain their IP addresses from the DHCP server running on the spine switch.</p>
-        <p>Next, create the configuration files for the switches.</p>
-        <p>In the same directory, create a file named <code>spine.cfg</code> with the following content:</p>
+        <p>This configuration defines the spine switch, two leaf switches, and four clients. Each client is set up to automatically obtain an IP address from the DHCP server running on the spine switch.</p>
+        <p>Next, create the startup configuration files for the switches.</p>
+        <p>In the same directory as your YAML file, create a file named <code>spine.cfg</code> with the following content:</p>
         <pre>
 !
 enable
@@ -149,7 +149,7 @@ dhcp server
 !
 end
 </pre>
-        <p>Create a file named <code>leaf.cfg</code> for both leaf switches:</p>
+        <p>Create a file named <code>leaf.cfg</code>, which will be used for both leaf switches:</p>
         <pre>
 !
 enable
@@ -176,21 +176,23 @@ interface Ethernet3
 !
 end
 </pre>
-        <h6>2. Deploy the network topology</h6>
-        <p>To deploy the network topology, run the following command:</p>
+        <h6>2. Deploy and verify the lab</h6>
+        <p>Deploy the topology with the following command:</p>
         <pre>clab deploy -t trunk.clab.yml</pre>
-        <p>After the lab is deployed, you can test connectivity between the clients. For example, connect to client1 and ping client3.</p>
-        <p>To access the switch CLIs:</p>
-        <pre>docker exec -it clab-layer3-spine Cli</pre>
-        <pre>docker exec -it clab-layer3-leaf1 Cli</pre>
-        <p>On the spine, verify the routing table and DHCP leases:</p>
+        <p>After the lab is deployed, you can test connectivity between clients. For example, to test communication between clients in the same VLAN but on different switches, access <code>client1</code> and ping <code>client3</code>. You can access the client with the follwoing command:</p>
+         <pre>docker exec -it clab-trunk-client1 sh</pre>
+        <p>To access the CLI for each switch, use the following commands:</p>
+        <pre>docker exec -it clab-trunk-spine Cli</pre>
+        <pre>docker exec -it clab-trunk-leaf1 Cli</pre>
+        <pre>docker exec -it clab-trunk-leaf2 Cli</pre>
+        <p>On the spine, verify the IP routing table and DHCP leases:</p>
         <pre>show ip route</pre>
         <pre>show dhcp server leases</pre>
-        <p>On the leaf switches, verify the VLANs and trunk interfaces:</p>
+        <p>On the leaf switches, verify the VLAN and trunk interface configurations:</p>
         <pre>show vlan</pre>
         <pre>show interfaces trunk</pre>
         <h6>3. Clean up the lab</h6>
-        <p>After testing, you can clean up the lab environment. To remove the lab and all related files, run:</p>
+        <p>When you are finished, you can destroy the lab environment and remove all related files with the following command:</p>
         <pre>clab destroy -t trunk.clab.yml --cleanup</pre>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
