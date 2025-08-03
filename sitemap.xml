@@ -21,6 +21,16 @@
   <priority>0.80</priority>
 </url>
 <url>
+  <loc>https://galjabari.github.io/blog/dns-lab.html</loc>
+  <lastmod>2025-07-25T09:28:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://galjabari.github.io/blog/radius-lab.html</loc>
+  <lastmod>2025-07-25T09:28:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
   <loc>https://galjabari.github.io/blog/static-vxlan-lab.html</loc>
   <lastmod>2025-07-25T09:28:14+00:00</lastmod>
   <priority>0.80</priority>
