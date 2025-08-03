@@ -34,16 +34,11 @@
     <div class="container">
         <h5>Deploy RADIUS Server with Containerlab</h5>
         <p>This guide walks you through setting up a RADIUS server with Containerlab and configuring AAA on an Arista cEOS switch to authenticate users using RADIUS.</p>
-        <p>First, create a <code>Dockerfile</code> to define a custom RADIUS server image. This file is based on the official FreeRADIUS image.
-        <pre>
-FROM freeradius/freeradius-server:latest-alpine
-COPY raddb/ /etc/raddb/
-</pre>
-        <p>Next, create the directory structure for the RADIUS server configuration files.</p>
+        <p>First, create the directory structure for the RADIUS server configuration files.</p>
         <pre>
 mkdir -p raddb/mods-config/files
 </pre>
-        <p>Create the <code>raddb/clients.conf</code> file and add the following content to define the RADIUS client (Arista switch).</p>
+        <p>Create the <code>raddb/clients.conf</code> file and add the following content to define the RADIUS client (the Arista switch).</p>
         <pre>
 client switch {
     ipaddr     = 192.168.10.1
@@ -51,12 +46,12 @@ client switch {
 }
 </pre>
 <p>This configuration allows the switch to communicate with the RADIUS server using the shared secret <code>clab</code>.</p>
-        <p>Create the <code>raddb/mods-config/files/authorize</code> file and add the following content to define the user credentials.</p>
+        <p>Create the <code>raddb/mods-config/files/authorize</code> file and add the following content to define user credentials.</p>
         <pre>
 clab  Cleartext-Password := "clab"
     Arista-AVPair := "shell:roles=network-admin"
 </pre>
-<p>This configuration allows the user <code>clab</code> to log in with the password <code>clab</code> and grants them the role of <code>network-admin</code> on the Arista switch.</p>
+<p>This configuration allows the user <code>clab</code> to log in with the password <code>clab</code> and grants them the <code>network-admin</code> role on the Arista switch.</p>
         <p>Next, define the lab topology in a YAML file. The lab consists of an Arista cEOS switch and a RADIUS server.</p>
         <p>Create a file named <code>radius.clab.yml</code> and add the following content:</p>
         <pre>
@@ -71,7 +66,11 @@ topology:
       
     server:
       kind: linux
-      image: clab-radius:latest
+      image: freeradius/freeradius-server:latest-alpine
+      cmd: -X
+      binds:
+        - ./raddb/clients.conf:/etc/raddb/clients.conf
+        - ./raddb/mods-config/files/authorize:/etc/raddb/mods-config/files/authorize
       exec:
         - ip addr add 192.168.10.10/24 dev eth1
 
@@ -99,13 +98,14 @@ aaa authorization exec default group radius local
 end
 </pre>
         <p>This configuration sets up the switch to use the RADIUS server at <code>192.168.10.10</code> with the shared secret <code>clab</code>. It also configures AAA to authenticate users via RADIUS and fall back to local authentication if RADIUS is unavailable.</p>
-        <p>Build the RADIUS Docker image:</p>
-        <pre>docker build -t clab-radius:latest .</pre>
         <p>Deploy the lab using Containerlab:</p>
         <pre>clab deploy -t radius.clab.yml</pre>
         <p>To verify the RADIUS authentication, connect to the Arista switch using SSH:</p>
         <pre>ssh clab@clab-radius-switch</pre>
         <p>Enter the password <code>clab</code> when prompted. You should be able to log in and see the switch prompt.</p>
+        <p>To view the RADIUS server logs, check the output of the RADIUS server container:</p>
+        <pre>docker logs clab-radius-server</pre>
+        <p>This will show you the authentication requests and responses.</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
