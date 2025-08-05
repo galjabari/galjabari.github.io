@@ -76,7 +76,7 @@ topology:
     - endpoints: ["switch2:eth2", "client2:eth1"]
     - endpoints: ["switch1:eth3", "attacker:eth1"]
 </pre>
-        <p>This configuration defines two switches and three clients, one of which is an attacker attempting to connect to the network.</p>
+        <p>This topology defines two switches and three clients, one of which is an attacker attempting to connect to the network.</p>
         <p>Next, create the startup configuration files for the switches.</p>
         <p>In the same directory as your YAML file, create a file named <code>switch1.cfg</code> with the following content:</p>
         <pre>
@@ -118,7 +118,7 @@ interface Ethernet2
 !
 end
 </pre>
-<p>This configuration sets up port security on <code>switch2</code>, allowing only one MAC address on <code>Ethernet1</code>. If a second MAC address is detected, the port will be shut down.</p>
+<p>This configuration enables port security on <code>switch2</code>, allowing only one MAC address on <code>Ethernet1</code>. If a second MAC address is detected, the port will be shut down.</p>
         <h6>2. Deploy and verify the lab</h6>
         <p>Deploy the topology with the following command:</p>
         <pre>clab deploy -t portsec.clab.yml</pre>
