@@ -103,7 +103,7 @@ interface Ethernet2
 !
 end
 </pre>
-<p>This configuration sets up two VLANs (10 and 20) and configures Rapid PVST. The port priorities are adjusted so that for VLAN 10, one link is forwarding and the other is blocking, and for VLAN 20, the roles are reversed. This allows for load balancing.</p>
+<p>This configuration sets up two VLANs (10 and 20) and enables Rapid PVST. The port priorities are adjusted to 64 so that, for VLAN 10, one link is forwarding while the other is blocking; for VLAN 20, the roles are reversed. The default port priority for PVST is 128, and the lower the number, the higher the priority.</p>
         <h6>2. Deploy and verify the lab</h6>
         <p>Deploy the topology with the following command:</p>
         <pre>clab deploy -t pvst.clab.yml</pre>
