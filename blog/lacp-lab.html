@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Learn how to configure a Port Channel using LACP on Arista cEOS switches using Containerlab to aggregate multiple links into a single logical link.">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Configure Port Channel on Arista cEOS</h5>
+        <p>Link Aggregation Control Protocol (LACP) is a standardized protocol that enables the bundling of several physical ports together to form a single logical channel. This guide demonstrates how to configure a Port Channel using LACP on Arista cEOS switches using Containerlab.</p>
+        <h6>1. Create a network topology</h6>
+        <p>To create a network topology, use the following Containerlab configuration file named <code>lacp.clab.yml</code>:</p>
+        <pre>
+name: lacp
+topology:
+  nodes:
+    switch1:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+      startup-config: switch.cfg
+    switch2:
+      kind: arista_ceos
+      image: takfa19/ceos:4.32.2F
+      startup-config: switch.cfg
+
+  links:
+    - endpoints: ["switch1:eth1", "switch2:eth1"]
+    - endpoints: ["switch1:eth2", "switch2:eth2"]
+</pre>
+        <p>This topology defines two switches with two redundant links that will be bundled into a Port Channel.</p>
+        <p>Next, create the startup configuration files for the switches.</p>
+        <p>In the same directory as your YAML file, create a file named <code>switch.cfg</code>, which will be used for both switches:</p>
+        <pre>
+!
+enable
+configure terminal
+!
+username admin privilege 15 secret admin
+!
+vlan 10
+   name VLAN10
+vlan 20
+   name VLAN20
+!
+interface Ethernet1
+   channel-group 1 mode active
+!
+interface Ethernet2
+   channel-group 1 mode active
+!
+interface Port-Channel1
+   switchport mode trunk
+   switchport trunk allowed vlan 10,20
+!
+end
+</pre>
+<p>This configuration file sets up two VLANs (10 and 20) and configures Ethernet1 and Ethernet2 to be part of Port Channel 1 in active LACP mode. The Port Channel interface is set to trunk mode, allowing VLANs 10 and 20.</p>
+        <h6>2. Deploy and verify the lab</h6>
+        <p>Deploy the topology with the following command:</p>
+        <pre>clab deploy -t lacp.clab.yml</pre>
+        <p>After the lab is deployed, you can verify the LACP configuration. Access <code>switch1</code> and check the Port Channel status.</p>
+        <p>To access <code>switch1</code>, use the following command:</p>
+        <pre>docker exec -it clab-lacp-switch1 Cli</pre>
+        <p>On <code>switch1</code>, you can check the Port Channel status with the following command:</p>
+        <pre>show port-channel</pre>
+        <p>You should see output indicating that Port Channel 1 is up and includes both Ethernet1 and Ethernet2 as members.</p>
+        <p>To verify Port Channel 1 details, you can use:</p>
+        <pre>show interfaces Port-Channel1</pre>
+        <h6>3. Clean up the lab</h6>
+        <p>When you are finished, you can destroy the lab environment and remove all related files with the following command:</p>
+        <pre>clab destroy -t lacp.clab.yml --cleanup</pre>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
