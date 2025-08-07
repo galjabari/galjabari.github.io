@@ -33,7 +33,8 @@
     </nav>
     <div class="container">
         <h5>Configure Port Channel on Arista cEOS</h5>
-        <p>Link Aggregation Control Protocol (LACP) is a standardized protocol that enables the bundling of several physical ports together to form a single logical channel. This guide demonstrates how to configure a Port Channel using LACP on Arista cEOS switches using Containerlab.</p>
+        <p>Link Aggregation Control Protocol (LACP) is a standardized protocol that allows multiple physical Ethernet links to be combined into a single logical link—called a Port Channel or EtherChannel—to increase bandwidth and provide redundancy.</p>
+        <p>This guide demonstrates how to configure a Port Channel on Arista cEOS switches using Containerlab.</p>
         <h6>1. Create a network topology</h6>
         <p>To create a network topology, use the following Containerlab configuration file named <code>lacp.clab.yml</code>:</p>
         <pre>
@@ -90,7 +91,7 @@ end
         <p>On <code>switch1</code>, you can check the Port Channel status with the following command:</p>
         <pre>show port-channel</pre>
         <p>You should see output indicating that Port Channel 1 is up and includes both Ethernet1 and Ethernet2 as members.</p>
-        <p>To verify Port Channel 1 details, you can use:</p>
+        <p>To verify Port Channel interface details, you can use:</p>
         <pre>show interfaces Port-Channel1</pre>
         <h6>3. Clean up the lab</h6>
         <p>When you are finished, you can destroy the lab environment and remove all related files with the following command:</p>
