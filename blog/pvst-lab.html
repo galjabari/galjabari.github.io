@@ -58,6 +58,9 @@ topology:
         <p>In the same directory as your YAML file, create a file named <code>switch1.cfg</code> with the following content:</p>
         <pre>
 !
+enable
+configure terminal
+!
 username admin privilege 15 secret admin
 !
 spanning-tree mode rapid-pvst
@@ -81,6 +84,9 @@ end
 </pre>
         <p>Create a file named <code>switch2.cfg</code> with the following content:</p>
         <pre>
+!
+enable
+configure terminal
 !
 username admin privilege 15 secret admin
 !
