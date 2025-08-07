@@ -43,11 +43,11 @@ topology:
     switch1:
       kind: arista_ceos
       image: takfa19/ceos:4.32.2F
-      startup-config: switch1.cfg
+      startup-config: switch.cfg
     switch2:
       kind: arista_ceos
       image: takfa19/ceos:4.32.2F
-      startup-config: switch2.cfg
+      startup-config: switch.cfg
 
   links:
     - endpoints: ["switch1:eth1", "switch2:eth1"]
@@ -55,34 +55,7 @@ topology:
 </pre>
         <p>This topology defines two switches with two redundant links.</p>
         <p>Next, create the startup configuration files for the switches.</p>
-        <p>In the same directory as your YAML file, create a file named <code>switch1.cfg</code> with the following content:</p>
-        <pre>
-!
-enable
-configure terminal
-!
-username admin privilege 15 secret admin
-!
-spanning-tree mode rapid-pvst
-!
-vlan 10
-   name VLAN10
-vlan 20
-   name VLAN20
-!
-interface Ethernet1
-   switchport mode trunk
-   switchport trunk allowed vlan 10,20
-   spanning-tree vlan 10 port-priority 64
-!
-interface Ethernet2
-   switchport mode trunk
-   switchport trunk allowed vlan 10,20
-   spanning-tree vlan 20 port-priority 64
-!
-end
-</pre>
-        <p>Create a file named <code>switch2.cfg</code> with the following content:</p>
+        <p>In the same directory as your YAML file, create a file named <code>switch.cfg</code>, which will be used for both switches:</p>
         <pre>
 !
 enable
