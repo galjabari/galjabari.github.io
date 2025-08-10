@@ -47,7 +47,7 @@
         <p>If you have multiple network interfaces, you need to specify which interface the DHCP server should listen on. Edit the following file:</p>
         <pre>sudo nano /etc/default/isc-dhcp-server</pre>
         <p>For example, set the interface:</p>
-        <pre>INTERFACESv4="ens34"</pre>
+        <pre>INTERFACESv4="ens37"</pre>
         <p>Replace <code>ens34</code> with your actual network interface name (use <code>ip a</code> to check).</p>
         <p>Restart the DHCP service to apply the new configuration:</p>
         <pre>sudo systemctl restart isc-dhcp-server.service</pre>
