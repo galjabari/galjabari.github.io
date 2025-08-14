@@ -34,36 +34,37 @@
     <div class="container">
         <h5>Enable DNSSEC with BIND on Ubuntu</h5>
         <p>DNSSEC is a security extension for DNS that adds a layer of authentication to prevent DNS spoofing and cache poisoning attacks.</p>
-        <p>This guide assumes you have a primary DNS server configured as in the <a href="install-dns-server.html">Install and configure an authoritative DNS Server on Ubuntu</a> guide and you need to enable DNSSEC for your domain.</p>
-        <p>First, create a directory to store the DNSSEC keys.</p>
+        <p>This guide assumes you have a primary DNS server configured as in the <a href="install-dns-server.html">Install and Configure an Authoritative DNS Server on Ubuntu</a> guide, and you need to enable DNSSEC for your domain.</p>
+        <p>First, create a directory to store the DNSSEC keys:</p>
         <pre>sudo mkdir -p /etc/bind/keys<br>cd /etc/bind/keys</pre>
-        <p>Generate the Zone Signing Key (ZSK) for your domain.</p>
+        <p>Generate the Zone Signing Key (ZSK) for your domain. Replace <code>example.com</code> with your actual domain name:</p>
         <pre>sudo dnssec-keygen -a RSASHA256 -b 2048 -n ZONE example.com</pre>
-        <p>Generate the Key Signing Key (KSK) for the zone.</p>
+        <p>Generate the Key Signing Key (KSK) for your domain:</p>
         <pre>sudo dnssec-keygen -a RSASHA256 -b 2048 -n ZONE -f KSK example.com</pre>
-        <p>Edit the zone file for your domain.</p>
+        <p>Edit the zone file for your domain:</p>
         <pre>sudo nano /etc/bind/db.example.com</pre>
-        <p>Include the generated keys in the zone file. Replace the placeholders with the actual key IDs from the generated files in the keys directory.</p>
+        <p>Include the generated keys at the bottom of the zone file. Replace the placeholders with the actual key IDs from the generated files in the keys directory:</p>
         <pre>$INCLUDE "/etc/bind/keys/Kexample.com.+008+&lt;ZSK_ID&gt;.key"<br>$INCLUDE "/etc/bind/keys/Kexample.com.+008+&lt;KSK_ID&gt;.key"</pre>
-        <p>Sign the zone file with the generated keys.</p>
+        <p>Sign the zone file with the generated keys:</p>
         <pre>sudo dnssec-signzone -o example.com /etc/bind/db.example.com \
 Kexample.com.+008+&lt;ZSK_ID&gt; Kexample.com.+008+&lt;KSK_ID&gt;</pre>
-        <p>This will create a signed zone file named <code>db.example.com.signed</code> in the same directory. You need to run this command every time you make changes to the zone file.</p>
-        <p>Edit the BIND configuration file to point to the signed zone file.</p>
+        <p>This command generates a signed zone file named <code>db.example.com.signed</code> in the same directory. Be sure to run it again whenever you make changes to the original zone file.</p>
+        <p>Edit the BIND configuration file to point to the signed zone file:</p>
         <pre>sudo nano /etc/bind/named.conf.local</pre>
         <p>Update the zone configuration:</p>
         <pre>zone "example.com" {
     type master;
     file "/etc/bind/db.example.com.signed";
 };</pre>
-        <p>Restart the BIND service to apply the changes.</p>
+        <p>Restart the BIND service to apply the changes:</p>
         <pre>sudo systemctl restart bind9.service</pre>
-        <p>Check the status of the BIND service.</p>
+        <p>Check the status of the BIND service:</p>
         <pre>sudo systemctl status bind9.service</pre>
         <p>To verify DNSSEC is enabled, use the following command:</p>
         <pre>dig +dnssec +multi example.com @localhost</pre>
-        <p>To add the DNSSEC keys to your domain registrar, use the following command to display the delegation signer (DS) record:</p>
+        <p>To submit your DNSSEC keys to your domain registrar, run the following command to display the Delegation Signer (DS) record:</p>
         <pre>cat /etc/bind/keys/dsset-example.com.</pre>
+        <p>Whenever you generate a new KSK, you must submit a corresponding DS record to your domain registrar.</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
