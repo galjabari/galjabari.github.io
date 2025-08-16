@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Install and configure SNMP on Ubuntu</h5>
+        <p>Simple Network Management Protocol (SNMP) is used for monitoring network devices and servers.</p>
+        <p>This guide explains how to install and configure the SNMP on Ubuntu.</p>
+        <p>First, update your package list and install the SNMP daemon and SNMP tools.</p>
+        <pre>sudo apt update<br>sudo apt install snmp snmpd -y</pre>
+        <p>Next, you need to configure the SNMP daemon.</p>
+        <pre>sudo nano /etc/snmp/snmpd.conf</pre>
+        <p>Make the following changes to the file.</p>
+        <pre>sysLocation  Server Room
+sysContact   admin@example.com
+agentAddress udp:161,udp6:161
+rocommunity  public default # It is highly recommended to change 'public' to a more secure string</pre>
+<p>These settings define the system's location and contact information, the agent's listening address, and a read-only community string for security.</p>
+        <p>Restart the SNMP daemon for the changes to take effect.</p>
+        <pre>sudo systemctl restart snmpd</pre>
+        <p>Then, check its status and enable it to start on boot.</p>
+        <pre>sudo systemctl status snmpd
+sudo systemctl enable snmpd</pre>
+        <p>You can test the SNMP configuration using the <code>snmpwalk</code> command.</p>
+        <pre>snmpwalk -v2c -c public localhost &lt;OID&gt;</pre>
+        <p>Here are some examples using common Object Identifiers (OIDs):</p>
+        <pre># Get system uptime
+snmpwalk -v2c -c public localhost 1.3.6.1.2.1.1.3
+# Get system contact
+snmpwalk -v2c -c public localhost 1.3.6.1.2.1.1.4
+# Get system location
+snmpwalk -v2c -c public localhost 1.3.6.1.2.1.1.6</pre>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
