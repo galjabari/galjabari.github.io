@@ -33,7 +33,7 @@
     <div class="container">
         <h5>Install and configure SNMP on Ubuntu</h5>
         <p>Simple Network Management Protocol (SNMP) is used for monitoring network devices and servers.</p>
-        <p>This guide explains how to install and configure the SNMP on Ubuntu.</p>
+        <p>This guide explains how to install and configure SNMP on Ubuntu.</p>
         <p>First, update your package list and install the SNMP daemon and SNMP tools.</p>
         <pre>sudo apt update<br>sudo apt install snmp snmpd -y</pre>
         <p>Next, you need to configure the SNMP daemon.</p>
@@ -42,8 +42,8 @@
         <pre>sysLocation  Server Room
 sysContact   admin@example.com
 agentAddress udp:161,udp6:161
-rocommunity  public default # It is highly recommended to change 'public' to a more secure string</pre>
-<p>These settings define the system's location and contact information, the agent's listening address, and a read-only community string for security.</p>
+rocommunity  public default</pre>
+<p>This configuration sets the system location, contact information, the agent's listening address, and a read-only community string. It is highly recommended to change 'public' to a more secure string to enhance security.</p>
         <p>Restart the SNMP daemon for the changes to take effect.</p>
         <pre>sudo systemctl restart snmpd</pre>
         <p>Then, check its status and enable it to start on boot.</p>
