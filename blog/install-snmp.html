@@ -41,7 +41,7 @@
         <p>Make the following changes to the file.</p>
         <pre>sysLocation  Server Room
 sysContact   admin@example.com
-agentAddress udp:161,udp6:161
+agentAddress 0.0.0.0,[::]
 rocommunity  public default</pre>
 <p>This configuration sets the system location, contact information, the agent's listening address, and a read-only community string. It is highly recommended to change 'public' to a more secure string to enhance security.</p>
         <p>Restart the SNMP daemon for the changes to take effect.</p>
