@@ -50,7 +50,7 @@ rocommunity  public default # It is highly recommended to change 'public' to a m
         <pre>sudo systemctl status snmpd
 sudo systemctl enable snmpd</pre>
         <p>You can test the SNMP configuration using the <code>snmpwalk</code> command.</p>
-        <pre>snmpwalk -v2c -c public localhost &lt;OID&gt;</pre>
+        <pre>snmpwalk -v2c -c public localhost</pre>
         <p>Here are some examples using common Object Identifiers (OIDs):</p>
         <pre># Get system uptime
 snmpwalk -v2c -c public localhost 1.3.6.1.2.1.1.3
