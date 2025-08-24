@@ -64,7 +64,7 @@ push "dhcp-option DNS 192.168.1.10"
 
 client-config-dir /etc/openvpn/ccd
 username-as-common-name</pre>
-    <p>This configuration pushes the route to the internal LAN, sets the DNS server for VPN clients, and enables client-specific configurations. Make sure to comment out the "redirect-gateway" line, if present, to prevent internet access through the VPN.</p>
+        <p>This configuration pushes the route to the internal LAN, sets the DNS server for VPN clients, and enables client-specific configurations. Make sure to comment out the "redirect-gateway" line, if present, to prevent internet access through the VPN.</p>
 
         <p>Edit the OpenVPN RADIUS plugin configuration file:</p>
         <pre>sudo nano /etc/openvpn/radiusplugin.cnf</pre>
