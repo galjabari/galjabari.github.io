@@ -76,6 +76,10 @@ username-as-common-name</pre>
         <pre>sudo systemctl restart openvpn-server@server.service</pre>
         <p>Check the status to ensure it is running correctly:</p>
         <pre>sudo systemctl status openvpn-server@server.service</pre>
+        <p>To verify the setup, connect to the VPN using the configured user credentials. Once connected, check the assigned IP address and routing table:</p>
+        <pre>ip addr show tun0
+ip route</pre>
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
