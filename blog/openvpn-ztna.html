@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A step-by-step guide on how to implement OpenVPN with FreeRADIUS for Zero Trust Network Access.">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>OpenVPN with FreeRADIUS for ZTNA</h5>
+        <p>This guide explains how to implement Zero Trust Network Access (ZTNA) using OpenVPN and FreeRADIUS, with the goal of enforcing the zero trust principle: never trust, always verify.</p>
+        <p>Before you begin, make sure to complete the following guide:</p>
+        <p><a href="openvpn-radius.html">Configure OpenVPN with RADIUS authentication</a></p>
+
+        <p>First, edit the users configuration file of FreeRADIUS:</p>
+        <pre>sudo nano /etc/freeradius/3.0/users</pre>
+        <p>Add the following lines to assign a static IP address to a user:</p>
+        <pre>vpnuser Cleartext-Password := "secret"
+        Service-Type = Framed-User,
+        Framed-IP-Address = 10.8.0.10</pre>
+
+        <p>Restart the FreeRADIUS service to apply the changes:</p>
+        <pre>sudo systemctl restart freeradius.service</pre>
+        <p>Check the status to ensure it is running correctly:</p>
+        <pre>sudo systemctl status freeradius.service</pre>
+
+        <p>Test the RADIUS user authentication:</p>
+        <pre>radtest vpnuser secret localhost 0 testing123</pre>
+
+        <p>Next, create a directory for client-specific configurations in OpenVPN:</p>
+        <pre>sudo mkdir -p /etc/openvpn/ccd</pre>
+
+        <p>Edit the OpenVPN server configuration file:</p>
+        <pre>sudo nano /etc/openvpn/server/server.conf</pre>
+        <p>Add or modify the following lines:</p>
+        <pre>#push "redirect-gateway def1 bypass-dhcp"
+#push "dhcp-option DNS 8.8.8.8"
+push "route 192.168.1.0 255.255.255.0"
+push "dhcp-option DNS 192.168.1.1"
+
+client-config-dir /etc/openvpn/ccd
+username-as-common-name</pre>
+        <p>This configuration pushes the route to the internal network, sets the DNS server for the VPN clients, and enables client-specific configurations.</p>
+
+        <p>Edit the OpenVPN RADIUS plugin configuration file:</p>
+        <pre>sudo nano /etc/openvpn/radiusplugin.cnf</pre>
+        <p>Ensure the following line is present to enable client-specific configurations:</p>
+        <pre>client-config-dir /etc/openvpn/ccd</pre>
+
+        <p>Restart the OpenVPN server to apply the changes:</p>
+        <pre>sudo systemctl restart openvpn-server@server.service</pre>
+        <p>Check the status to ensure it is running correctly:</p>
+        <pre>sudo systemctl status openvpn-server@server.service</pre>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
