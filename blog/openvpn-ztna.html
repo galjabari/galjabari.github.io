@@ -64,7 +64,7 @@ push "dhcp-option DNS 192.168.1.10"
 
 client-config-dir /etc/openvpn/ccd
 username-as-common-name</pre>
-        <p>This configuration pushes the route to the internal LAN, sets the DNS server for VPN clients, and enables client-specific configurations. Make sure to comment out the "redirect-gateway" line, if present, to prevent internet access through the VPN.</p>
+        <p>This configuration pushes the route to the internal LAN, sets the DNS server for VPN clients, and enables client-specific configurations. Ensure you comment out the "redirect-gateway" line, if present, to prevent internet access through the VPN.</p>
 
         <p>Edit the OpenVPN RADIUS plugin configuration file:</p>
         <pre>sudo nano /etc/openvpn/radiusplugin.cnf</pre>
@@ -76,7 +76,38 @@ username-as-common-name</pre>
         <p>Check the status to ensure it is running correctly:</p>
         <pre>sudo systemctl status openvpn-server@server.service</pre>
         <p>To verify the setup, connect to the VPN using the configured user credentials. Once connected, check the assigned IP address and routing table.</p>
+        <p>To log connection events, you can use scripts in the OpenVPN configuration. For example, edit the server configuration file again:</p>
+        <pre>sudo nano /etc/openvpn/server/server.conf</pre>
+        <p>Add the following lines:</p>
+        <pre>script-security 2
+client-connect /etc/openvpn/client-events.sh
+client-disconnect /etc/openvpn/client-events.sh</pre>
+        <p>Create the script file:</p>
+        <pre>sudo nano /etc/openvpn/client-events.sh</pre>
+        <p>Add the following content:</p>
+        <pre>#!/bin/bash
 
+LOGFILE="/var/log/openvpn/clients.log"
+DATE_TIME=$(date +"%Y-%m-%d %H:%M:%S")
+
+if [ "$script_type" = "client-connect" ]; then
+    echo "$DATE_TIME [CONNECT] CN=$common_name REAL_IP=$untrusted_ip \
+VIRTUAL_IP=$ifconfig_pool_remote_ip" >> "$LOGFILE"
+
+else
+    echo "$DATE_TIME [DISCONNECT] CN=$common_name REAL_IP=$untrusted_ip \
+VIRTUAL_IP=$ifconfig_pool_remote_ip RX=${bytes_received}B TX=${bytes_sent}B" \
+    >> "$LOGFILE"
+fi
+
+exit 0</pre>
+        <p>Make sure the script is executable:</p>
+        <pre>sudo chmod +x /etc/openvpn/client-events.sh</pre>
+        <p>Create the log file and set ownership:</p>
+        <pre>sudo touch /var/log/openvpn/clients.log
+sudo chown nobody:nogroup /var/log/openvpn/clients.log</pre>
+        <p>Restart the OpenVPN server to apply the changes:</p>
+        <pre>sudo systemctl restart openvpn-server@server.service</pre> 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
