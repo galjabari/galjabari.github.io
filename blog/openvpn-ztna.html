@@ -103,11 +103,12 @@ fi
 exit 0</pre>
         <p>Make sure the script is executable:</p>
         <pre>sudo chmod +x /etc/openvpn/client-events.sh</pre>
-        <p>Create the log file and set ownership:</p>
+        <p>Create the log file and set permissions:</p>
         <pre>sudo touch /var/log/openvpn/clients.log
 sudo chown nobody:nogroup /var/log/openvpn/clients.log</pre>
         <p>Restart the OpenVPN server to apply the changes:</p>
         <pre>sudo systemctl restart openvpn-server@server.service</pre> 
+        <p>Now, connection and disconnection events will be logged in /var/log/openvpn/clients.log.</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
