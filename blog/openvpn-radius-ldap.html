@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A step-by-step guide on how to configure OpenVPN with RADIUS and LDAP authentication on Ubuntu, defining an access policy for users in a specific VPN group.">
+    <title>Ghannam Aljabari</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Configure OpenVPN with RADIUS and LDAP authentication</h5>
+        <p>This guide walks you through setting up OpenVPN with RADIUS and LDAP as a backend for user authentication. We will also define an access policy to allow only users in a specific LDAP group to connect to the VPN.</p>
+        <p>Before proceeding, ensure you have completed the following guides:</p>
+        <p><a href="openvpn-radius.html" target="_blank">Configure OpenVPN with RADIUS authentication</a></p>
+        <p><a href="configure-freeradius-ldap.html" target="_blank">Configure FreeRADIUS with LDAP authentication</a></p>        
+
+        <p>Edit the FreeRADIUS configuration file:</p>
+        <pre>sudo nano /etc/freeradius/3.0/sites-available/default</pre>
+        <p>Inside the configuration file, uncomment the following lines in the <code>authorize</code> section:</p>
+        <pre>authorize {
+    ...
+    ldap
+    ...
+}</pre>
+        <p>Edit the LDAP module configuration file:</p>
+        <pre>sudo nano /etc/freeradius/3.0/mods-available/ldap</pre>
+        <p>Then, modify the following parameters:</p>
+        <pre>filter = '(objectClass=groupOfNames)'
+name_attribute = cn
+membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-User-Name}:-%{User-Name}}))"</pre>
+        
+        <p>To grant VPN access only to users belonging to a specific LDAP group (e.g., "group1"), we need to modify the FreeRADIUS configuration file:</p>
+        <pre>sudo nano /etc/freeradius/3.0/sites-available/default</pre>
+        <p>Locate the <code>authorize</code> section and add the following policy.</p>
+        <pre>if (LDAP-Group == "group1") {
+    update reply {
+        Reply-Message = "Access Granted"
+    }
+} else {
+    reject
+    update reply {
+        Reply-Message = "Access Denied: Not a member of the VPN group."
+    }
+}
+</pre>
+        <p>To apply the changes, restart the FreeRADIUS service:</p>
+        <pre>sudo systemctl restart freeradius.service</pre>
+        <p>You can test LDAP authentication with group membership using <code>radtest</code> command.</p>
+        <pre>radtest user1 secret localhost 0 testing123</pre>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
