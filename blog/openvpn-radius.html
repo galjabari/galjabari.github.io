@@ -37,8 +37,9 @@
         <p>Before proceeding, ensure you have completed the following guides:</p>
         <p><a href="install-openvpn.html">Install OpenVPN Server on Ubuntu</a></p>
         <p><a href="install-radius-server.html">Install and configure RADIUS Server on Ubuntu</a></p>
-
-        <p>First, edit the FreeRADIUS client configuration file:</p>
+        
+        <h6>1. Configure RADIUS server</h6>
+        <p>Edit the FreeRADIUS client configuration file:</p>
         <pre>sudo nano /etc/freeradius/3.0/clients.conf</pre>
         <p>Add a client entry for your OpenVPN server, replacing <code>OPENVPN_IP</code> with its IP address and <code>SHARED_SECRET</code> with the shared secret.</p>
         <pre>client openvpn {
@@ -48,7 +49,8 @@
         <p>Restart the FreeRADIUS service to apply the changes:</p>
         <pre>sudo systemctl restart freeradius.service</pre>
 
-        <p>Next, install the OpenVPN RADIUS authentication plugin:</p>
+        <h6>2. Configure OpenVPN server</h6>
+        <p>Install the OpenVPN RADIUS authentication plugin:</p>
         <pre>sudo apt-get install openvpn-auth-radius -y</pre>
 
         <p>Copy the example configuration file for the RADIUS plugin:</p>
@@ -83,6 +85,7 @@ server
         <p>Check the status of the OpenVPN server service:</p>
         <pre>sudo systemctl status openvpn-server@server.service</pre>
 
+        <h6>3. Configure OpenVPN client</h6>
         <p>To connect an OpenVPN client to the server, modify the client configuration file (e.g., <code>client.ovpn</code>):</p>
         <pre>sudo nano client.ovpn</pre>
         <p>Add the following line to your client configuration:</p>

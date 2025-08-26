@@ -37,7 +37,8 @@
         <p>Before you begin, make sure to complete the following guide:</p>
         <p><a href="openvpn-radius.html">Configure OpenVPN with RADIUS authentication</a></p>
 
-        <p>First, edit the users configuration file of FreeRADIUS:</p>
+        <h6>1. Configure RADIUS server</h6>
+        <p>Edit the users configuration file of FreeRADIUS:</p>
         <pre>sudo nano /etc/freeradius/3.0/users</pre>
         <p>Add the following lines to assign a static IP address to a user:</p>
         <pre>vpnuser Cleartext-Password := "secret"
@@ -52,7 +53,8 @@
         <p>Test the RADIUS user authentication:</p>
         <pre>radtest vpnuser secret localhost 0 testing123</pre>
 
-        <p>Next, create a directory for client-specific configurations in OpenVPN:</p>
+        <h6>2. Configure OpenVPN server</h6>
+        <p>Create a directory for client-specific configurations in OpenVPN:</p>
         <pre>sudo mkdir -p /etc/openvpn/ccd</pre>
 
         <p>Edit the OpenVPN server configuration file:</p>
@@ -76,7 +78,9 @@ username-as-common-name</pre>
         <p>Check the status to ensure it is running correctly:</p>
         <pre>sudo systemctl status openvpn-server@server.service</pre>
         <p>To verify the setup, connect to the VPN using the configured user credentials. Once connected, check the assigned IP address and routing table.</p>
-        <p>To log connection events, you can use scripts in the OpenVPN configuration. For example, edit the server configuration file again:</p>
+        
+        <h6>3. Create a script for OpenVPN</h6>
+        <p>To enhance logging and monitoring, you can create a script that logs connection and disconnection events. For example, edit the server configuration file:</p>
         <pre>sudo nano /etc/openvpn/server/server.conf</pre>
         <p>Add the following lines:</p>
         <pre>script-security 2
