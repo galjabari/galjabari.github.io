@@ -61,10 +61,10 @@ membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-U
         Reply-Message = "Access Granted"
     }
 } else {
-    reject
     update reply {
         Reply-Message = "Access Denied: Not a member of the VPN group."
     }
+    reject
 }
 </pre>
         <p>To apply the changes, restart the FreeRADIUS service:</p>
