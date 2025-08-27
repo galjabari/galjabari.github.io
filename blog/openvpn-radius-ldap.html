@@ -33,12 +33,12 @@
     </nav>
     <div class="container">
         <h5>OpenVPN with RADIUS and LDAP authentication</h5>
-        <p>This guide walks you through setting up OpenVPN with RADIUS and LDAP as a backend for user authentication. We will also define an access policy to allow only users in a specific LDAP group to connect to the VPN.</p>
+        <p>This guide outlines the configuration of OpenVPN with RADIUS and LDAP for user authentication. It enables the enforcement of VPN access policies based on LDAP group membership or specific LDAP attributes.</p>
         <p>Before proceeding, ensure you have completed the following guides:</p>
         <p><a href="configure-freeradius-ldap.html" target="_blank">Configure FreeRADIUS with LDAP authentication</a></p>        
         <p><a href="openvpn-radius.html" target="_blank">Configure OpenVPN with RADIUS authentication</a></p>
 
-        <p>Edit the FreeRADIUS configuration file:</p>
+        <p>To create access policies based on LDAP group membership, we need to modify the FreeRADIUS configuration.</p>
         <pre>sudo nano /etc/freeradius/3.0/sites-available/default</pre>
         <p>Inside the configuration file, uncomment the following lines in the <code>authorize</code> section:</p>
         <pre>authorize {
@@ -53,7 +53,7 @@
 name_attribute = cn
 membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-User-Name}:-%{User-Name}}))"</pre>
         
-        <p>To grant VPN access only to users belonging to a specific LDAP group (e.g., "group1"), we need to modify the FreeRADIUS configuration file:</p>
+        <p>For example, to restrict VPN access to members of a specific LDAP group (e.g., "group1"), modify the FreeRADIUS configuration file:</p>
         <pre>sudo nano /etc/freeradius/3.0/sites-available/default</pre>
         <p>Locate the <code>authorize</code> section and add the following policy.</p>
         <pre>if (LDAP-Group == "group1") {
@@ -69,9 +69,39 @@ membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-U
 </pre>
         <p>To apply the changes, restart the FreeRADIUS service:</p>
         <pre>sudo systemctl restart freeradius.service</pre>
-        <p>You can test LDAP authentication with group membership using <code>radtest</code> command.</p>
+        <p>Test LDAP authentication with group membership using the <code>radtest</code> command.</p>
         <pre>radtest user1 secret localhost 0 testing123</pre>
 
+        <p>We can also create access policies based on specific LDAP attributes. For example, to assign static IP addresses to VPN users, extend the OpenLDAP schema with FreeRADIUS attributes:</p>
+        <pre>gunzip -c /usr/share/doc/freeradius/schemas/ldap/openldap/freeradius.ldif.gz > freeradius.ldif<br>sudo ldapadd -Y EXTERNAL -H ldapi:/// -f freeradius.ldif</pre>
+        <p>Verify that the schema has been loaded correctly:</p>
+        <pre>sudo ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=schema,cn=config</pre>
+        <p>Restart the OpenLDAP service to apply the changes:</p>
+        <pre>sudo systemctl restart slapd</pre>
+
+        <p>Next, edit the FreeRADIUS LDAP module configuration file:</p>
+        <pre>sudo nano /etc/freeradius/3.0/mods-enabled/ldap</pre>
+        <p>Add the following line within the <code>update</code> section to map the <code>Framed-IP-Address</code> attribute:</p>
+        <pre>update {
+  reply:Framed-IP-Address := 'radiusFramedIPAddress'
+}</pre>
+        <p>Restart the FreeRADIUS service to apply the changes:</p>
+        <pre>sudo systemctl restart freeradius.service</pre>
+        <p>Now, modify LDAP users to include the <code>radiusFramedIPAddress</code> attribute, which specifies the static IP address assigned to the user upon VPN connection.</p>
+        <p>Create a file named <code>user.ldif</code>:</p>
+        <pre>nano user.ldif</pre>
+        <p>Add the following content to the <code>user1</code> LDAP entry:</p>
+        <pre>dn: uid=user1,ou=People,dc=example,dc=com
+changetype: modify
+add: objectClass
+objectClass: radiusprofile
+-
+add: radiusFramedIPAddress
+radiusFramedIPAddress: 10.8.0.100</pre>
+        <p>Apply the changes to the LDAP directory:</p>
+        <pre>ldapmodify -x -D "cn=admin,dc=example,dc=com" -W -f user.ldif</pre>
+        <p>Test LDAP authentication again using the <code>radtest</code> command.</p>
+        <pre>radtest user1 secret localhost 0 testing123</pre>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
