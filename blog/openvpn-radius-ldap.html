@@ -32,12 +32,13 @@
         </div>
     </nav>
     <div class="container">
-        <h5>OpenVPN with RADIUS and LDAP authentication</h5>
-        <p>This guide outlines the configuration of OpenVPN with RADIUS and LDAP for user authentication. It enables the enforcement of VPN access policies based on LDAP group membership or specific LDAP attributes.</p>
+        <h5>OpenVPN with RADIUS and LDAP for ZTNA</h5>
+        <p>This guide outlines the configuration of OpenVPN with RADIUS and LDAP for ZTNA. It enables the enforcement of VPN access policies based on LDAP group membership or specific LDAP attributes.</p>
         <p>Before proceeding, ensure you have completed the following guides:</p>
         <p><a href="configure-freeradius-ldap.html" target="_blank">Configure FreeRADIUS with LDAP authentication</a></p>        
-        <p><a href="openvpn-radius.html" target="_blank">Configure OpenVPN with RADIUS authentication</a></p>
-
+        <p><a href="openvpn-ztna.html" target="_blank">OpenVPN with RADIUS for ZTNA</a></p>
+        
+        <h6>Configure FreeRADIUS for LDAP group membership</h6>
         <p>To create access policies based on LDAP group membership, we need to modify the FreeRADIUS configuration.</p>
         <pre>sudo nano /etc/freeradius/3.0/sites-available/default</pre>
         <p>Inside the configuration file, uncomment the following lines in the <code>authorize</code> section:</p>
@@ -53,7 +54,7 @@
 name_attribute = cn
 membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-User-Name}:-%{User-Name}}))"</pre>
         
-        <p>For example, to restrict VPN access to members of a specific LDAP group (e.g., "group1"), modify the FreeRADIUS configuration file:</p>
+        <p>For example, to restrict VPN access to members of a specific LDAP group (e.g., <code>group1</code>), modify the FreeRADIUS configuration file:</p>
         <pre>sudo nano /etc/freeradius/3.0/sites-available/default</pre>
         <p>Locate the <code>authorize</code> section and add the following policy.</p>
         <pre>if (LDAP-Group == "group1") {
@@ -72,6 +73,7 @@ membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-U
         <p>Test LDAP authentication with group membership using the <code>radtest</code> command.</p>
         <pre>radtest user1 secret localhost 0 testing123</pre>
 
+        <h6>Configure FreeRADIUS for LDAP attributes</h6>
         <p>We can also create access policies based on specific LDAP attributes. For example, to assign static IP addresses to VPN users, extend the OpenLDAP schema with FreeRADIUS attributes:</p>
         <pre>gunzip -c /usr/share/doc/freeradius/schemas/ldap/openldap/freeradius.ldif.gz > freeradius.ldif<br>sudo ldapadd -Y EXTERNAL -H ldapi:/// -f freeradius.ldif</pre>
         <p>Verify that the schema has been loaded correctly:</p>
