@@ -72,6 +72,7 @@ membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-U
         <pre>sudo systemctl restart freeradius.service</pre>
         <p>Test LDAP authentication with group membership using the <code>radtest</code> command.</p>
         <pre>radtest user1 secret localhost 0 testing123</pre>
+        <p>You should see a message indicating whether access is granted or denied based on group membership.</p>
 
         <h6>Configure FreeRADIUS for LDAP attributes</h6>
         <p>We can also create access policies based on specific LDAP attributes. For example, to assign static IP addresses to VPN users, extend the OpenLDAP schema with FreeRADIUS attributes:</p>
@@ -104,6 +105,7 @@ radiusFramedIPAddress: 10.8.0.100</pre>
         <pre>ldapmodify -x -D "cn=admin,dc=example,dc=com" -W -f user.ldif</pre>
         <p>Test LDAP authentication again using the <code>radtest</code> command.</p>
         <pre>radtest user1 secret localhost 0 testing123</pre>
+        <p>Now, when <code>user1</code> connects to the VPN, they should be assigned the static IP address.</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
