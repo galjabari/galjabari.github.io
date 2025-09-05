@@ -57,7 +57,7 @@ membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-U
         <p>For example, to restrict VPN access to members of a specific LDAP group (e.g., <code>group1</code>), modify the FreeRADIUS configuration file:</p>
         <pre>sudo nano /etc/freeradius/3.0/sites-available/default</pre>
         <p>Locate the <code>authorize</code> section and add the following policy.</p>
-        <pre>if (LDAP-Group == "group1") {
+        <pre>if ((NAS-Port-Type == Virtual) && (LDAP-Group == "group1")) {
     update reply {
         Reply-Message = "Access Granted"
     }
