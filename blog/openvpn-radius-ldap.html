@@ -97,7 +97,7 @@ membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-U
         <pre>dn: uid=user1,ou=People,dc=example,dc=com
 changetype: modify
 add: objectClass
-objectClass: radiusprofile
+objectClass: radiusProfile
 -
 add: radiusFramedIPAddress
 radiusFramedIPAddress: 10.8.0.100</pre>
