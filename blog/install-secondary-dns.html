@@ -32,7 +32,7 @@
         </div>
     </nav>
     <div class="container">
-        <h5>Install and configure a secondary DNS Server on Ubuntu</h5>
+        <h5>Install and configure a secondary DNS server on Ubuntu</h5>
         <p>This guide assumes you have already configured <a href="install-dns-server.html" target="_blank">DNS Server</a> as a primary server, and you need to set up a secondary server to maintain the availability of the domain if the primary becomes unavailable.</p>
         <h6>Configure primary DNS server</h6>
         <p>First, on the primary server, edit the BIND configuration file.</p>
@@ -52,8 +52,8 @@
         <pre>dig NS example.com</pre>
         <p>You should see the DNS records returned by your primary DNS server.</p>
         <h6>Configure secondary DNS server</h6>
-        <p>Before setting up the secondary DNS server, ensure that your system's has a static IP address (e.g. 192.168.1.11/24)</p>
-        <p>Next, update the package lists the same way as on the primary server.</p>
+        <p>Before setting up the secondary DNS server, ensure that your system has a static IP address (e.g., <code>192.168.1.11/24</code>)</p>
+        <p>Next, update the package lists, similar to the primary server.</p>
         <pre>sudo apt update</pre>
         <p>Install the BIND DNS server package.</p>
         <pre>sudo apt install bind9 -y</pre>
@@ -64,7 +64,7 @@
         <p>Replace <code>192.168.1.10</code> with the IP address of your primary server.</p>
         <p>To apply the changes, restart the BIND service.</p>
         <pre>sudo systemctl restart bind9.service</pre>
-        <p>To query your secondary DNS server directly, use <code>dig</code> command with the @ symbol followed by the hostname or IP address of the server:</p>
+        <p>To query your secondary DNS server directly, use the <code>dig</code> command with the @ symbol followed by the hostname or IP address of the server:</p>
         <pre>dig www.example.com @192.168.1.11</pre>
         <p>Note: A zone is only transferred if the <code>Serial</code> number on the primary server is larger than the one on the secondary server. You must increment the <code>Serial</code> number every time you make changes to the zone file on the primary server.</p>
     </div>
