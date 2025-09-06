@@ -48,11 +48,11 @@
         <p>For a more secure and convenient way to log in, you can set up SSH key-based authentication. This allows you to connect without entering a password each time.</p>
         <p>On your local (client) machine, generate an SSH key pair by running:</p>
         <pre>ssh-keygen</pre>
-        <p>You can accept the default location (<code>~/.ssh/id_rsa</code>) and optionally set a passphrase for added security.</p>
+        <p>You can accept the default location (<code>~/.ssh/id_ed25519</code>) and optionally set a passphrase for added security.</p>
         <p>Next, copy the public key to the remote server. The easiest way is to use the <code>ssh-copy-id</code> utility:</p>
         <pre>ssh-copy-id ubuntu@192.168.1.10</pre>
         <p>Alternatively, you can copy the key manually. First, display the public key on your local machine:</p>
-        <pre>cat ~/.ssh/id_rsa.pub</pre>
+        <pre>cat ~/.ssh/id_ed25519.pub</pre>
         <p>Then, on the server, open the <code>authorized_keys</code> file in a text editor:</p>
         <pre>nano ~/.ssh/authorized_keys</pre>
         <p>Paste your public key into this file and save it.</p>
