@@ -33,23 +33,15 @@
     </nav>
     <div class="container">
         <h5>Manage OpenLDAP directory on Ubuntu</h5>
-        <p>You can manage OpenLDAP directory on Ubuntu using various utilities like <code>ldapadd</code>, <code>ldapmodify</code>, and <code>ldapdelete</code>.</p>
-        <p>To manage the OpenLDAP directory using a GUI, you can use tools like phpLDAPadmin or Apache Directory Studio.</p>
+        <p>You can manage the OpenLDAP directory on Linux using command-line utilities such as <code>ldapadd</code>, <code>ldapmodify</code>, and <code>ldapdelete</code>. For graphical management, tools like phpLDAPadmin and Apache Directory Studio provide user-friendly interfaces.</p>
         <h6>Install phpLDAPadmin on Ubuntu</h6>
-        <p>Here's how to set up and use phpLDAPadmin on Ubuntu:</p>
         <p>Update package lists and install phpLDAPadmin.</p>
         <pre>sudo apt update<br>sudo apt install phpldapadmin -y</pre></p>
-        <p>During the installation process, the Apache web server may be installed and configured.</p>
-        <p>To access phpLDAPadmin, navigate to <code>http://localhost/phpldapadmin</code> using a web browser on OpenLDAP server. Replace <code>localhost</code> with your OpenLDAP server's hostname or IP address to access phpLDAPadmin on your machine.</p>
-        <p>Log in with the LDAP administrator credentials. You should now be able to browse, search, add, modify, and delete entries in the OpenLDAP directory.</p>
+        <p>During installation, the Apache web server may be automatically installed and configured. To access phpLDAPadmin, open a web browser on the OpenLDAP server and navigate to <code>http://localhost/phpldapadmin</code>. If you're accessing it from a different machine, replace <code>localhost</code> with the server's hostname or IP address. Log in using your LDAP administrator credentials. Once authenticated, you can browse, search, add, modify, and delete entries within the OpenLDAP directory through the phpLDAPadmin interface</p>
         <h6>Install Apache Directory Studio on Ubuntu</h6>
-        <p>Here's how to set up and use Apache Directory Studio on Ubuntu:</p>
         <p>Update package lists and install Java.</p>
         <pre>sudo apt update<br>sudo apt install default-jre -y</pre></p>        
-        <p>Go to the <a href="https://directory.apache.org/studio/" target="_blank"> Apache Directory Studio</a> website and download the appropriate package for your Ubuntu Linux.</p>
-        <p>Extract the downloaded archive to a location of your choice. Navigate to the extracted directory and run the <code>ApacheDirectoryStudio</code> java application.</p>
-        <p>Create a new LDAP connection. Fill in the connection details, including the hostname or IP, port, and LDAP administrator credentials.</p>
-        <p>Once connected, you can use Apache Directory Studio to browse, search, add, modify, and delete entries in your OpenLDAP directory.</p>
+        <p>Visit the <a href="https://directory.apache.org/studio/" target="_blank"> Apache Directory Studio</a> website and download the package suitable for your Ubuntu Linux system. After downloading, extract the archive to a preferred location. Navigate to the extracted directory and launch the <code>ApacheDirectoryStudio</code> Java application. To begin, create a new LDAP connection by entering the required details—such as the server's hostname or IP address, port number, and LDAP administrator credentials. Once connected, you can use Apache Directory Studio’s graphical interface to browse, search, add, modify, and delete entries in your OpenLDAP directory.</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
