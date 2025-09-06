@@ -58,7 +58,7 @@
         <p>To list the DHCP leases on the DHCP server, you can run the following command:</p>
         <pre>dhcp-lease-list</pre>
         <p>This command is used to monitor IP address assignments within your network.</p>
-        <p>To assign static IP address to a adevice in the DHCP server, you need to edit the DHCP configuration file:</p>
+        <p>To assign a static IP address to a device in the DHCP server, you need to edit the DHCP configuration file:</p>
         <pre>sudo nano /etc/dhcp/dhcpd.conf</pre>
         <p>Add a host declaration for the device within the subnet section. For example:</p>
         <pre>host printer1 {<br>    hardware etherenet 00:11:22:33:44:55;<br>    fixed-address 192.168.1.100;<br>}</pre>
