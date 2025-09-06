@@ -40,7 +40,7 @@
         <pre>sudo apt install bind9 -y</pre>
         <p>Edit the BIND configuration file to define the zone.</p> 
         <pre>sudo nano /etc/bind/named.conf.local</pre>
-        <p>Add the following configuration for your domain, replacing "example.com" with your actual domain name:</p>
+        <p>Add the following configuration for your domain, replacing <code>example.com</code> with your actual domain name:</p>
         <pre>zone "example.com" {<br>    type master;<br>    file "/etc/bind/db.example.com";<br>};</pre>
         <p>Copy the default zone file and create a new one for your domain.</p>
         <pre>sudo cp /etc/bind/db.local /etc/bind/db.example.com</pre>
@@ -55,7 +55,7 @@
         <p>Finally, test DNS resolution for your domain.</p>
         <pre>dig example.com</pre>
         <p>You should see the DNS records returned by your authoritative DNS server.</p>
-        <p>To add a new DNS record for "www.example.com" pointing to "example.com", edit the zone file.</p>
+        <p>To add a new DNS record for <code>www.example.com</code> pointing to <code>example.com</code>, edit the zone file.</p>
         <pre>sudo nano /etc/bind/db.example.com</pre>
         <p>Add the following line under the existing records:</p>
         <pre>www     IN      CNAME   example.com.</pre>
