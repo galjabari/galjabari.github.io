@@ -46,7 +46,7 @@
         <p>After making changes, reload the Squid service to apply the configuration:</p>
         <pre>sudo systemctl reload squid.service</pre>
         <p>You can now connect to proxy server from your client devices using LDAP username and password.</p>
-        <p>To configure Squid for group-based access control using LDAP, you need to define an external ACL type for LDAP group. Edit the Squid configuration file using the following command:</p>
+        <p>To configure Squid for group-based access control using LDAP, you need to define an external ACL type for LDAP group. Edit the Squid configuration file again:</p>
         <pre>sudo nano /etc/squid/squid.conf</pre>
         <p>Add the following lines to define an external ACL type named <code>ldap_group</code>:</p>
         <pre>external_acl_type ldap_group %LOGIN /usr/lib/squid/ext_ldap_group_acl -v 3 \<br>-b "ou=Groups,dc=example,dc=com" \<br>-D "cn=admin,dc=example,dc=com" -w secret \<br>-f "(&(cn=%g)(member=uid=%u,ou=People,dc=example,dc=com))" localhost<br>acl ldap-group1 external ldap_group group1<br>http_access allow ldap-group1</pre>
