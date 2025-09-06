@@ -32,17 +32,17 @@
         </div>
     </nav>
     <div class="container">
-        <h5>Install and configure LDAP Server on Ubuntu</h5>
-        <p>First, set hostname within your domain. Replace "example.com" with your actual domain.</p>
+        <h5>Install and Configure LDAP Server on Ubuntu</h5>
+        <p>First, set the hostname within your domain. Replace <code>example.com</code> with your actual domain.</p>
         <pre>sudo hostname ldap.example.com</pre>
         <p>Next, update package lists and install OpenLDAP and related utilities.</p>
         <pre>sudo apt update<br>sudo apt install slapd ldap-utils -y</pre>
-        <p>After installation, you will be prompted to configure OpenLDAP server. When prompted to set up your LDAP administrator password, enter a new password and then confirm the password.</p>
-        <p>You can also reconfigure OpenLDAP server anytime using:</p>
+        <p>After installation, you will be prompted to configure the OpenLDAP server. When prompted to set up your LDAP administrator password, enter a new password and then confirm it.</p>
+        <p>You can also reconfigure the OpenLDAP server anytime using:</p>
         <pre>sudo dpkg-reconfigure slapd</pre>
         <p>Step 1: Select No if you want to omit the OpenLDAP server configuration.</p>
-        <p>Step 2: Enter your domain name that will become your base Distinguished Name (DN). If you enter "example.com", it is converted to "dc=example,dc=com"</p>
-        <p>Step 3: Enter your organization name such as "Example".</p>
+        <p>Step 2: Enter your domain name, which will become your base Distinguished Name (DN). If you enter <code>example.com</code>, it is converted to <code>dc=example,dc=com</code>.</p>
+        <p>Step 3: Enter your organization name, such as "Example".</p>
         <p>Step 4: Enter your LDAP administrator password and confirm it.</p>
         <p>Step 5: Select Yes if you want to remove the database files.</p>
         <p>Step 6: Select Yes if you want to move existing LDAP files.</p>
@@ -50,22 +50,22 @@
         <pre>nano base.ldif</pre>
         <p>Add the following content to the file:</p>
         <pre>dn: ou=People,dc=example,dc=com<br>objectClass: organizationalUnit<br>ou: People<br><br>dn: ou=Groups,dc=example,dc=com<br>objectClass: organizationalUnit<br>ou: Groups</pre>
-        <p>Use <code>ldapadd</code> command to add entries to the LDAP directory.</p>
+        <p>Use the <code>ldapadd</code> command to add entries to the LDAP directory.</p>
         <pre>ldapadd -x -D cn=admin,dc=example,dc=com -W -f base.ldif</pre>
-        <p>You will be prompted to enter the password of LDAP administrator.</p>
+        <p>You will be prompted to enter the LDAP administrator's password.</p>
         <p>Create a file named <code>account.ldif</code> to define user entries.</p>
         <pre>nano account.ldif</pre>
         <p>Add the following content to the file:</p>
         <pre>dn: uid=user1,ou=People,dc=example,dc=com<br>objectClass: inetOrgPerson<br>uid: user1<br>cn: User 1<br>sn: 1<br>mail: user1@example.com<br>userPassword: secret<br><br>dn: uid=user2,ou=People,dc=example,dc=com<br>objectClass: inetOrgPerson<br>uid: user2<br>cn: User 2<br>sn: 2<br>mail: user2@example.com<br>userPassword: secret</pre>
-        <p>Use <code>ldapadd</code> command to add entries to the LDAP directory.</p>
+        <p>Use the <code>ldapadd</code> command to add entries to the LDAP directory.</p>
         <pre>ldapadd -x -D cn=admin,dc=example,dc=com -W -f account.ldif</pre>
         <p>Create a file named <code>group.ldif</code> to define group entries.</p>
         <pre>nano group.ldif</pre>
         <p>Add the following content to the file:</p>
         <pre>dn: cn=group1,ou=Groups,dc=example,dc=com<br>objectClass: groupOfNames<br>member: uid=user1,ou=People,dc=example,dc=com<br><br>dn: cn=group2,ou=Groups,dc=example,dc=com<br>objectClass: groupOfNames<br>member: uid=user2,ou=People,dc=example,dc=com</pre>
-        <p>Use <code>ldapadd</code> command to add entries to the LDAP directory.</p>
+        <p>Use the <code>ldapadd</code> command to add entries to the LDAP directory.</p>
         <pre>ldapadd -x -D cn=admin,dc=example,dc=com -W -f group.ldif</pre>
-        <p>You can use <code>ldapsearch</code> command to test the LDAP connection and perform queries.</p>
+        <p>You can use the <code>ldapsearch</code> command to test the LDAP connection and perform queries.</p>
         <p>Here's how you can test:</p>
         <pre>ldapsearch -x -LLL -H ldap://localhost -b dc=example,dc=com</pre>
         <p>This command queries the LDAP server for all entries under the base DN. Replace <code>localhost</code> with your LDAP server's hostname or IP address.</p>
