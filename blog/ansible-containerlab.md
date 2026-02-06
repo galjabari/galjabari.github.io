@@ -154,6 +154,9 @@ Deploy the lab using Containerlab:
 ```
 containerlab deploy -t demo.clab.yml
 ```
+
+![](../assets/clab.png)
+
 Containerlab automatically generates an Ansible inventory file in the lab directory (e.g., `clab-demo/ansible-inventory.yml`). Use this inventory to run the Ansible playbooks:
 ```
 ansible-playbook -i clab-demo/ansible-inventory.yml router1.yml
