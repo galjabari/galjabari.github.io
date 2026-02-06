@@ -13,14 +13,14 @@ First, connect to SQL database using your preferred SQL client (like `mysql` or 
 
 To add users to RADIUS database, insert user credentials into the `radcheck` table.
 
-```
+```sql
 INSERT INTO radcheck (username, attribute, op, value) VALUES ('user1', 'Cleartext-Password', ':=', 'secret');
 INSERT INTO radcheck (username, attribute, op, value) VALUES ('user2', 'Cleartext-Password', ':=', 'secret');
 ```
 
 To assign users to groups, insert group members into the `radusergroup` table.
 
-```
+```sql
 INSERT INTO radusergroup (username, groupname, priority) VALUES ('user1', 'group1', 1);
 INSERT INTO radusergroup (username, groupname, priority) VALUES ('user2', 'group2', 1);
 ```
@@ -29,7 +29,7 @@ You need to define each RADIUS client that will communicate with the RADIUS serv
 
 To add a RADIUS client, insert the client's details into the `nas` table.
 
-```
+```sql
 INSERT INTO nas (nasname, shortname, type, secret) VALUES ('192.168.1.2', 'cisco-switch', 'other', 'pass@123');
 ```
 
@@ -37,7 +37,7 @@ Each RADIUS client (NAS) has its own extended attributes known as vendor-specifi
 
 To define an ACL for each group, insert `cisco-avpair` RADIUS attributes into the `radgroupreply` table.
 
-```
+```sql
 INSERT INTO radgroupreply (groupname, attribute, op, value) VALUES ('group1', 'cisco-avpair', '=', 'ip:inacl#1=permit ip any any');
 INSERT INTO radgroupreply (groupname, attribute, op, value) VALUES ('group2', 'cisco-avpair', '=', 'ip:inacl#1=permit udp any any eq 53');
 INSERT INTO radgroupreply (groupname, attribute, op, value) VALUES ('group2', 'cisco-avpair', '=', 'ip:inacl#2=permit tcp any any eq 53');

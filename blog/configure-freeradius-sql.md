@@ -119,7 +119,7 @@ mysql -u radius -p
 
 When prompted enter the password and add a new user into the database:
 
-```
+```sql
 USE radius;
 INSERT INTO radcheck (username, attribute, op, value) VALUES ('user1', 'Cleartext-Password', ':=', 'secret');
 exit
