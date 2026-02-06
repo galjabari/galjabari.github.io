@@ -71,6 +71,8 @@ Deploy the topology with the following command:
 clab deploy -t pvst.clab.yml
 ```
 
+![](../assets/stp.png)
+
 After the lab is deployed, you can verify the PVST configuration. Access `switch1` and check the spanning tree status for VLAN 10 and VLAN 20.
 
 To access `switch1`, use the following command:
