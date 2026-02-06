@@ -68,3 +68,5 @@ python3 diagram.py
 ```
 
 The diagram will be saved as `web_service.png` on your working directory.
+
+![Web Service](../assets/web_service.png)
