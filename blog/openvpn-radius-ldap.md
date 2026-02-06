@@ -1,3 +1,8 @@
+---
+layout: default
+title: "OpenVPN with RADIUS and LDAP for ZTNA"
+---
+
 # OpenVPN with RADIUS and LDAP for ZTNA
 
 This guide explains how to implement Zero Trust Network Access (ZTNA) using OpenVPN, FreeRADIUS and OpenLDAP. It enables the enforcement of VPN access policies based on LDAP group membership or specific LDAP attributes.

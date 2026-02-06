@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Linux Automation with Ansible and Containerlab"
+---
+
 # Linux Automation with Ansible and Containerlab
 
 This guide demonstrates how to automate the configuration of Linux servers using Ansible in a Containerlab environment. We will use the same lab topology as in the [Build custom Ubuntu node for Containerlab](build-ubuntu-clab.md) guide to install and configure a web server on Ubuntu.

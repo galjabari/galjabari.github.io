@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Get system information with Ansible facts"
+---
+
 # Get system information with Ansible facts
 
 This guide assumes you have already installed [Ansible on your control node](linux-automation.md) and you need to gather facts or variables containing information about your remote hosts using Ansible.

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Network Automation with Ansible"
+---
+
 # Network Automation with Ansible
 
 To automate network tasks across a wide range of network devices and platforms, you can use Ansible.

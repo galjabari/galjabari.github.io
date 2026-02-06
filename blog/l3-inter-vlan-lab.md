@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Configure Inter-VLAN Routing with a Layer 3 Switch"
+---
+
 # Configure Inter-VLAN Routing with a Layer 3 Switch
 
 This guide demonstrates how to configure inter-VLAN routing using a Layer 3 switch on Containerlab. The lab consists of a Layer 3 switch that handles both routing and DHCP services for two separate VLANs.

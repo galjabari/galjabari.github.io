@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Configure FreeRADIUS with SQL for AAA"
+---
+
 # Configure FreeRADIUS with SQL for AAA
 
 Before configuring FreeRADIUS to use SQL database as the backend for authentication, authorization, and accounting (AAA), you need to complete the following guides:

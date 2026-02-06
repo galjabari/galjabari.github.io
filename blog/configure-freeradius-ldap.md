@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Configure FreeRADIUS with LDAP authentication"
+---
+
 # Configure FreeRADIUS with LDAP authentication
 
 Before configuring FreeRADIUS to use an LDAP server for authentication, you need to complete the following guides:

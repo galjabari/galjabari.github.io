@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Install and manage a Database Server on Ubuntu"
+---
+
 # Install and manage a Database Server on Ubuntu
 
 First, update package lists to ensure you have the latest versions available:

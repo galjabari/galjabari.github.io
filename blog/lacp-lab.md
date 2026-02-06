@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Configure Port Channel on Arista cEOS"
+---
+
 # Configure Port Channel on Arista cEOS
 
 Link Aggregation Control Protocol (LACP) is a standardized protocol that allows multiple physical Ethernet links to be combined into a single logical link—called a Port Channel or EtherChannel—to increase bandwidth and provide redundancy.

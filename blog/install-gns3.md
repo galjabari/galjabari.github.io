@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Install GNS3 on Ubuntu"
+---
+
 # Install GNS3 on Ubuntu
 
 This guide provides step-by-step instructions for installing the GNS3 network emulator on Ubuntu, along with essential components like Docker and VNC for full functionality.

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Configure Mail Server with Active Directory"
+---
+
 # Configure Mail Server with Active Directory
 
 Before integrating the mail server with Active Directory for LDAP authentication, you need to have a working mail server and Active Directory Domain Controller.

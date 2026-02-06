@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Install and Configure a DHCP Server on Ubuntu"
+---
+
 # Install and Configure a DHCP Server on Ubuntu
 
 Before setting up the DHCP server, ensure that your system has a static IP address (for example, `192.168.1.5/24`).

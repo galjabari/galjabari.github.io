@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Deploy a DNS Server with Containerlab"
+---
+
 # Deploy a DNS Server with Containerlab
 
 This guide walks you through setting up a DNS server with Containerlab. The lab includes a DNS server, a web server, and a client for testing DNS resolution.

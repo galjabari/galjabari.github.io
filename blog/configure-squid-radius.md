@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Configure Squid proxy with RADIUS authentication"
+---
+
 # Configure Squid proxy with RADIUS authentication
 
 Before configuring Squid proxy to authenticate users against a RADIUS server, you need to complete the following guides:

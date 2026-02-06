@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Diagram as Code in Python"
+---
+
 # Diagram as Code in Python
 
 To create a diagram for prototyping a new system architecture, you can use [Diagrams](https://diagrams.mingrammer.com) library in Python.

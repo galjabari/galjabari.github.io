@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Configure FreeRADIUS with LDAP for dynamic VLAN assignment"
+---
+
 # Configure FreeRADIUS with LDAP for dynamic VLAN assignment
 
 This guide assumes you have already configured [FreeRADIUS with LDAP authentication](configure-freeradius-ldap.md) and you need to assign VLANs to users based on LDAP group membership.

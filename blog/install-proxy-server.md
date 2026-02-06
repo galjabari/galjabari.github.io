@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Install a Proxy Server on Ubuntu"
+---
+
 # Install a Proxy Server on Ubuntu
 
 Update package lists and install Squid proxy server.

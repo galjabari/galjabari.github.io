@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Build custom Ubuntu node for Containerlab"
+---
+
 # Build custom Ubuntu node for Containerlab
 
 This guide explains how to build a custom Ubuntu image for Containerlab. The image allows you to run Ubuntu containers as host nodes in your lab deployments.

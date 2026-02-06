@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Install and configure Mail Server on Ubuntu"
+---
+
 # Install and configure Mail Server on Ubuntu
 
 Before setting up a mail server on Ubuntu, you need to complete the following guide:

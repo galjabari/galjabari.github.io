@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Install and configure RADIUS Server on Ubuntu"
+---
+
 # Install and configure RADIUS Server on Ubuntu
 
 First, update the package lists to ensure you have the latest versions available:

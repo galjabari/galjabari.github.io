@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Configure FreeRADIUS with LDAP authorization"
+---
+
 # Configure FreeRADIUS with LDAP authorization
 
 This guide assumes you have already configured [FreeRADIUS with LDAP authentication](configure-freeradius-ldap.md) and you need to authorize users based on LDAP group membership.

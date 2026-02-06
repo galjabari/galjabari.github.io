@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Linux Automation with Ansible"
+---
+
 # Linux Automation with Ansible
 
 To automate tasks on Linux systems such as installing software, configuring services, and managing users, you can use Ansible automation tool.

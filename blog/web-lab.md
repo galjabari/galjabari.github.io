@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Deploy a Web Server with Containerlab"
+---
+
 # Deploy a Web Server with Containerlab
 
 This guide demonstrates how to deploy a web server using Containerlab in a data center topology. The lab consists of a three routers, a desktop client, and a web server.

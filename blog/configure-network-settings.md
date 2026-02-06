@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Configure network settings on Ubuntu"
+---
+
 # Configure network settings on Ubuntu
 
 Ubuntu provides graphical utilities for configuring network interfaces. To manage network settings from the command-line interface (CLI), you can use tools like `ip addr` or `ifconfig`.

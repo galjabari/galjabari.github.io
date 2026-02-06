@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Install VS Code on Ubuntu"
+---
+
 # Install VS Code on Ubuntu
 
 Visual Studio Code (VS Code) is a popular code editor that supports various programming languages and extensions. It is available for multiple platforms, including Linux. In this guide, we will walk through the steps to install VS Code on Ubuntu.

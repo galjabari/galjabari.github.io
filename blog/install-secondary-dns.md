@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Install and configure a secondary DNS Server on Ubuntu"
+---
+
 # Install and configure a secondary DNS Server on Ubuntu
 
 This guide assumes you have already configured [DNS Server](install-dns-server.md) as a primary server, and you need to set up a secondary server to maintain the availability of the domain if the primary becomes unavailable.

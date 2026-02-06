@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Deploy LibreNMS with Docker"
+---
+
 # Deploy LibreNMS with Docker
 
 LibreNMS is a network monitoring system that can be easily deployed using Docker. This guide will help you set up LibreNMS using Docker Compose, allowing you to monitor network devices with SNMP and other protocols.

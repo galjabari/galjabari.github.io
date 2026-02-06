@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Network Automation with Ansible and Containerlab"
+---
+
 # Network Automation with Ansible and Containerlab
         This guide walks through automating network device configuration using Ansible and Containerlab. We will use the same lab topology as in the [Lab as Code with Containerlab](lab-as-code.md) guide, but this time, we'll use Ansible to configure the Arista cEOS routers.
         First, ensure you have Containerlab and Ansible installed on your Linux system. You can verify the installations by running:

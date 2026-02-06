@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Install and Configure LDAP Server on Ubuntu"
+---
+
 # Install and Configure LDAP Server on Ubuntu
 
 First, set the hostname within your domain. Replace `example.com` with your actual domain.

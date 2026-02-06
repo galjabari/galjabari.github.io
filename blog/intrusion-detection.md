@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Intrusion Detection with Suricata"
+---
+
 # Intrusion Detection with Suricata
 
 First, update package lists to ensure you have the latest versions of all packages:

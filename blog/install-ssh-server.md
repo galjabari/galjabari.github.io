@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Install and configure an SSH Server on Ubuntu"
+---
+
 # Install and configure an SSH Server on Ubuntu
 
 First, update your package lists to ensure you have the latest versions available:

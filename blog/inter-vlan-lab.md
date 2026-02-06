@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Configure Inter-VLAN Routing with a Router"
+---
+
 # Configure Inter-VLAN Routing with a Router
 
 This guide demonstrates how to configure inter-VLAN routing using Containerlab with Arista cEOS. The lab consists of two VLANs, each with its own subnet, and a router that routes traffic between them.

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Install and configure Webmail client on Ubuntu"
+---
+
 # Install and configure Webmail client on Ubuntu
 
 This guide assumes that you have an existing mail server with the hostname `mail.example.com` and you need to deploy a webmail client for users to access the mail server using a web browser.

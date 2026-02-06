@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Configure Squid proxy with LDAP authentication"
+---
+
 # Configure Squid proxy with LDAP authentication
 
 Before configuring Squid proxy to use an LDAP server for authentication, you need to complete the following guides:

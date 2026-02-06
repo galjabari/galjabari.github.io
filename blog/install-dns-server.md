@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Install and configure an authoritative DNS Server on Ubuntu"
+---
+
 # Install and configure an authoritative DNS Server on Ubuntu
 
 Before setting up the DNS server, ensure that your system has a static IP address (for example, `192.168.1.10/24`).

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Lab as Code with Containerlab"
+---
+
 # Lab as Code with Containerlab
 
 Containerlab is a tool for deploying networking labs with Docker. It allows you to define your lab's topology in a YAML file and deploy it with a single command.

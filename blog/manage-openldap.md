@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Manage OpenLDAP directory on Ubuntu"
+---
+
 # Manage OpenLDAP directory on Ubuntu
 
 You can manage the OpenLDAP directory on Linux using command-line utilities such as `ldapadd`, `ldapmodify`, and `ldapdelete`. For graphical management, tools like phpLDAPadmin and Apache Directory Studio provide user-friendly interfaces.

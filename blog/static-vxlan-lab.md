@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Configure a static VXLAN on Arista cEOS"
+---
+
 # Configure a static VXLAN on Arista cEOS
 
 VXLAN is a network virtualization technology that enables scalable Layer 2 overlays across Layer 3 infrastructure using UDP encapsulation.

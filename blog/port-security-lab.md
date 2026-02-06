@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Configure Port Security on Arista cEOS"
+---
+
 # Configure Port Security on Arista cEOS
 
 Port security is a network security feature that restricts the devices that can connect to a switch port. It helps prevent unauthorized access and attacks by limiting the number of MAC addresses that can be learned on a port and by taking action when a violation occurs.

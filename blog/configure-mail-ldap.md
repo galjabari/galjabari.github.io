@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Configure Mail server with LDAP authentication"
+---
+
 # Configure Mail server with LDAP authentication
 
 Before integrating the mail server with an LDAP directory for user authentication, you need to complete the following guides:

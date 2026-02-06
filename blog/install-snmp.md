@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Install and configure SNMP on Ubuntu"
+---
+
 # Install and configure SNMP on Ubuntu
 
 Simple Network Management Protocol (SNMP) is used for monitoring network devices and servers.
