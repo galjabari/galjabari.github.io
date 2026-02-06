@@ -70,7 +70,7 @@ nano ping.yml
 
 Add the following lines in the playbook:
 
-```
+```yaml
 ---
 - hosts: all
   gather_facts: false
@@ -95,7 +95,7 @@ nano install_apache.yml
 
 Add the following lines to install Apache web server:
 
-```
+```yaml
 ---
 - name: Install Apache on Ubuntu
   hosts: webserver
@@ -131,7 +131,7 @@ nano config_vhost.yml
 Add the following content:
 
 {% raw %}
-```
+```yaml
 ---
 - name: Configure Apache virtual host
   hosts: webserver
