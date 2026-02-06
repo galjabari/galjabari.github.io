@@ -21,7 +21,7 @@ I'm Ghannam Aljabari, a Network and Systems Engineer passionate about technology
 - [Deploy a Mail Server with Docker](blog/deploy-mail-docker.md)
 - [Deploy LibreNMS with Docker](blog/deploy-librenms-docker.md)
 
-### Linux System Administration
+### System Administration
 - [Install GNS3 on Ubuntu](blog/install-gns3.md)
 - [Configure network settings on Ubuntu](blog/configure-network-settings.md)
 - [Install and configure an SSH Server on Ubuntu](blog/install-ssh-server.md)
