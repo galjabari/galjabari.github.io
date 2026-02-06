@@ -7,6 +7,8 @@ title: Home
 
 I'm Ghannam Aljabari, a Network and Systems Engineer passionate about Network Automation, Cybersecurity, and Cloud Computing.
 
+[About Me](about.md)
+
 ## Blog Posts
 
 <ul>
@@ -16,5 +18,3 @@ I'm Ghannam Aljabari, a Network and Systems Engineer passionate about Network Au
   {% endif %}
 {% endfor %}
 </ul>
-
-[About Me](about.md)
