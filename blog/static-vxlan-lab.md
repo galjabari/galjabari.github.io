@@ -13,7 +13,7 @@ This guide demonstrates how to configure a static VXLAN in a data center topolog
 
 To create the spine-leaf topology, you can use the following YAML configuration (`vxlan.clab.yml`):
 
-```
+```yaml
 name: vxlan
 topology:
   nodes:

@@ -11,7 +11,7 @@ This guide demonstrates how to configure inter-VLAN routing using a Layer 3 swit
 
 To create a network topology with two VLANs and a Layer 3 switch, you can use the following YAML configuration (`layer3.clab.yml`):
 
-```
+```yaml
 name: layer3
 topology:
   nodes:

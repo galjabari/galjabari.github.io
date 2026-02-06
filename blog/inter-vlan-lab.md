@@ -11,7 +11,7 @@ This guide demonstrates how to configure inter-VLAN routing using Containerlab w
 
 To create a network topology with two VLANs, you can use the following YAML configuration (`vlan.clab.yml`):
 
-```
+```yaml
 name: vlan
 topology:
   nodes:

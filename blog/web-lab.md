@@ -11,7 +11,7 @@ This guide demonstrates how to deploy a web server using Containerlab in a data 
 
 The lab topology is defined in the `web.clab.yml` file:
 
-```
+```yaml
 name: web
 topology:
   nodes:

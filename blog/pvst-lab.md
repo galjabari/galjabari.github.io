@@ -11,7 +11,7 @@ Per-VLAN Spanning Tree (PVST) is a Cisco proprietary protocol that runs a separa
 
 To create a network topology, use the following Containerlab configuration file named `pvst.clab.yml`:
 
-```
+```yaml
 name: pvst
 topology:
   nodes:

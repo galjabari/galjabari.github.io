@@ -13,7 +13,7 @@ In this lab, we will create a simple topology with three Arista switches, config
 
 Use the following YAML configuration (`stp.clab.yml`) to define the lab topology:
 
-```
+```yaml
 name: stp
 topology:
   nodes:

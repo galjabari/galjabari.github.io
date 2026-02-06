@@ -13,7 +13,7 @@ This guide demonstrates how to configure a Port Channel on Arista cEOS switches 
 
 To create a network topology, use the following Containerlab configuration file named `lacp.clab.yml`:
 
-```
+```yaml
 name: lacp
 topology:
   nodes:

@@ -11,7 +11,7 @@ This guide demonstrates how to configure VLANs and VLAN trunking on Arista cEOS 
 
 To create a network topology, use the following Containerlab configuration file named `trunk.clab.yml`:
 
-```
+```yaml
 name: layer3
 topology:
   nodes:

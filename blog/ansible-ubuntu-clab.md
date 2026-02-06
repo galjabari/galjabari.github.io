@@ -9,7 +9,7 @@ This guide demonstrates how to automate the configuration of Linux servers using
 
 First, create the lab topology file named `ubuntu.clab.yml`:
 
-```
+```yaml
 name: ubuntu
 topology:
   nodes:

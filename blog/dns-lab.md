@@ -53,7 +53,7 @@ Next, define the lab topology in a YAML file. The lab consists of an Arista cEOS
 
 Create a file named `dns.clab.yml` and add the following content:
 
-```
+```yaml
 name: dns
 topology:
   nodes:
