@@ -6,8 +6,8 @@ title: "Configure Squid proxy with LDAP authentication"
 # Configure Squid proxy with LDAP authentication
 
 Before configuring Squid proxy to use an LDAP server for authentication, you need to complete the following guides:
-[Install and configure LDAP Server on Ubuntu](install-ldap-server.md)
-[Install and configure Proxy Server on Ubuntu](install-proxy-server.md)
+- [Install and configure LDAP Server on Ubuntu](install-ldap-server.md)
+- [Install and configure Proxy Server on Ubuntu](install-proxy-server.md)
 
 Next, edit the Squid configuration file using the following command:
 

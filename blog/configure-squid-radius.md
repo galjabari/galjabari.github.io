@@ -6,8 +6,8 @@ title: "Configure Squid proxy with RADIUS authentication"
 # Configure Squid proxy with RADIUS authentication
 
 Before configuring Squid proxy to authenticate users against a RADIUS server, you need to complete the following guides:
-[Install and configure RADIUS Server on Ubuntu](install-radius-server.md)
-[Install and configure Proxy Server on Ubuntu](install-proxy-server.md)
+- [Install and configure RADIUS Server on Ubuntu](install-radius-server.md)
+- [Install and configure Proxy Server on Ubuntu](install-proxy-server.md)
 
 Next, edit the Squid configuration file using the following command:
 
