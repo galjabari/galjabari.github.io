@@ -159,7 +159,7 @@ Deploy the topology with the following command:
 clab deploy -t trunk.clab.yml
 ```
 
-![](../assets/trunk.png)
+![img](../assets/trunk.png)
 
 After the lab is deployed, you can test connectivity between clients. For example, to test communication between clients in the same VLAN but on different switches, access `client1` and ping `client3`. You can access the client with the following command:
 

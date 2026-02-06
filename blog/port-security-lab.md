@@ -105,7 +105,7 @@ Deploy the topology with the following command:
 clab deploy -t portsec.clab.yml
 ```
 
-![](../assets/portsec.png)
+![img](../assets/portsec.png)
 
 After the lab is deployed, you can test the port security configuration. Access `client1` and try to ping `client2`. Then, access the `attacker` and try to ping `client2`. The ping from the attacker should fail, and the port on `switch2` should be shut down.
 

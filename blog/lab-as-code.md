@@ -144,7 +144,7 @@ To deploy the lab, run the following command in the same directory where you cre
 containerlab deploy -t demo.clab.yml
 ```
 
-![](../assets/clab.png)
+![img](../assets/clab.png)
 
 After the lab is deployed, you can test the connectivity between the clients. Open a new terminal and connect to client1:
 

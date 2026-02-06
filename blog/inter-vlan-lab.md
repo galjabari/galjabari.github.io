@@ -115,7 +115,7 @@ To deploy the network topology, run the following command:
 containerlab deploy -t vlan.clab.yml
 ```
 
-![](../assets/vlan.png)
+![img](../assets/vlan.png)
 
 After the lab is deployed, you can test connectivity between the clients. Open a new terminal and connect to client1:
 

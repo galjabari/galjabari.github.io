@@ -69,4 +69,4 @@ python3 diagram.py
 
 The diagram will be saved as `web_service.png` on your working directory.
 
-![](../assets/web_service.png)
+![img](../assets/web_service.png)

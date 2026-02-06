@@ -178,7 +178,7 @@ To deploy the network topology, run the following command:
 clab deploy -t vxlan.clab.yml
 ```
 
-![](../assets/vxlan.png)
+![img](../assets/vxlan.png)
 
 After the lab is deployed, you can test connectivity between the clients. Open a new terminal and connect to client1:
 
