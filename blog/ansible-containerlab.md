@@ -4,15 +4,15 @@ title: "Network Automation with Ansible and Containerlab"
 ---
 
 # Network Automation with Ansible and Containerlab
-        This guide walks through automating network device configuration using Ansible and Containerlab. We will use the same lab topology as in the [Lab as Code with Containerlab](lab-as-code.md) guide, but this time, we'll use Ansible to configure the Arista cEOS routers.
-        First, ensure you have Containerlab and Ansible installed on your Linux system. You can verify the installations by running:
-        ```
+This guide walks through automating network device configuration using Ansible and Containerlab. We will use the same lab topology as in the [Lab as Code with Containerlab](lab-as-code.md) guide, but this time, we'll use Ansible to configure the Arista cEOS routers.
+First, ensure you have Containerlab and Ansible installed on your Linux system. You can verify the installations by running:
+```
 containerlab version
 ansible --version
 ```
-        ###### 1. Create the lab topology with Containerlab
-        The lab consists of two Arista cEOS routers and two Linux clients. Create a file named `demo.clab.yml` and add the following configuration:
-        ```
+## 1. Create the lab topology with Containerlab
+The lab consists of two Arista cEOS routers and two Linux clients. Create a file named `demo.clab.yml` and add the following configuration:
+```yaml
 name: demo
 topology:
   nodes:
@@ -46,9 +46,9 @@ topology:
     # Link between router2 and client2
     - endpoints: ["router2:eth2", "client2:eth1"]
 ```
-        ###### 2. Create Ansible playbooks for router configuration
-        Next, create a playbook file named `router1.yml` to configure `router1`:
-        ```
+## 2. Create Ansible playbooks for router configuration
+Next, create a playbook file named `router1.yml` to configure `router1`:
+```yaml
 ---
 - name: Configure Arista cEOS Router 1
   hosts: clab-demo-router1
@@ -98,8 +98,8 @@ topology:
               remote_as: "65001"
         state: merged
 ```
-        Then, create a second playbook file, `router2.yml`, to configure `router2`:
-        ```
+Then, create a second playbook file, `router2.yml`, to configure `router2`:
+```yaml
 ---
 - name: Configure Arista cEOS Router 2
   hosts: clab-demo-router2
@@ -149,19 +149,19 @@ topology:
               remote_as: "65001"
         state: merged
 ```
-        ###### 3. Deploy and configure the lab
-        Deploy the lab using Containerlab:
-        ```
+## 3. Deploy and configure the lab
+Deploy the lab using Containerlab:
+```
 containerlab deploy -t demo.clab.yml
 ```
-        Containerlab automatically generates an Ansible inventory file in the lab directory (e.g., `clab-demo/ansible-inventory.yml`). Use this inventory to run the Ansible playbooks:
-        ```
+Containerlab automatically generates an Ansible inventory file in the lab directory (e.g., `clab-demo/ansible-inventory.yml`). Use this inventory to run the Ansible playbooks:
+```
 ansible-playbook -i clab-demo/ansible-inventory.yml router1.yml
 ansible-playbook -i clab-demo/ansible-inventory.yml router2.yml
 ```
-        After the playbooks have run, you can connect to the clients and routers to test connectivity and inspect the routing tables.
-        To verify the BGP routing table using Ansible, create a playbook named `verify.yml`:
-        ```
+After the playbooks have run, you can connect to the clients and routers to test connectivity and inspect the routing tables.
+To verify the BGP routing table using Ansible, create a playbook named `verify.yml`:
+```yaml
 ---
 - name: Show BGP routing table on Arista cEOS routers
   hosts: arista_ceos
@@ -181,12 +181,12 @@ ansible-playbook -i clab-demo/ansible-inventory.yml router2.yml
       ansible.builtin.debug:
         var: bgp_output.stdout_lines
 ```
-        Run the playbook:
-        ```
+Run the playbook:
+```
 ansible-playbook -i clab-demo/ansible-inventory.yml verify.yml
 ```
-        This will display the BGP routing table for both routers.
-        To destroy the lab and remove all related files, run the following command:
-        ```
+This will display the BGP routing table for both routers.
+To destroy the lab and remove all related files, run the following command:
+```
 containerlab destroy -t demo.clab.yml --cleanup
 ```
