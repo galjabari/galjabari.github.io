@@ -67,7 +67,7 @@ nano docker-compose.yml
 
 Add the following content:
 
-```
+```yaml
 networks:
   lab_network:
     driver: bridge

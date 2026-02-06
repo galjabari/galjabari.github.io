@@ -25,7 +25,7 @@ sudo mysql -u root -p
 
 When prompted enter the `root` password to create the RADIUS database and user:
 
-```
+```sql
 CREATE DATABASE radius;
 GRANT ALL ON radius.* TO radius@localhost IDENTIFIED BY "radpass";
 exit
