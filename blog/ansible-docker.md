@@ -38,6 +38,7 @@ nano install_docker.yml
 
 Add the following lines into the playbook:
 
+{% raw %}
 ```yaml
 ---
 - name: Install Docker on Ubuntu
@@ -90,6 +91,7 @@ Add the following lines into the playbook:
       ansible.builtin.debug:
         var: docker_version.stdout
 ```
+{% endraw %}
 
 Run the playbook:
 

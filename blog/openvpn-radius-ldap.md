@@ -37,11 +37,13 @@ sudo nano /etc/freeradius/3.0/mods-available/ldap
 
 Then, modify the following parameters:
 
+{% raw %}
 ```
 filter = '(objectClass=groupOfNames)'
 name_attribute = cn
 membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-User-Name}:-%{User-Name}}))"
 ```
+{% endraw %}
 
 For example, to restrict VPN access to members of a specific LDAP group (e.g., `group1`), modify the FreeRADIUS configuration file:
 

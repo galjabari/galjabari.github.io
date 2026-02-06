@@ -130,6 +130,7 @@ nano config_vhost.yml
 
 Add the following content:
 
+{% raw %}
 ```
 ---
 - name: Configure Apache virtual host
@@ -170,6 +171,7 @@ Add the following content:
         name: apache2
         state: reloaded
 ```
+{% endraw %}
 
 Replace `example.com` with your desired domain name for the new virtual host.
 
@@ -181,6 +183,7 @@ nano vhost.conf.j2
 
 Add the following content:
 
+{% raw %}
 ```
 <VirtualHost *:80>
     ServerAdmin webmaster@{{ site_domain }}
@@ -191,6 +194,7 @@ Add the following content:
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
+{% endraw %}
 
 Run the playbook:
 

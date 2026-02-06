@@ -36,6 +36,7 @@ nano system_info.yml
 
 Add the following lines into the playbook:
 
+{% raw %}
 ```yaml
 ---
 - name: Gather facts and print system information
@@ -66,6 +67,7 @@ Add the following lines into the playbook:
           MAC Address: {{ ansible_facts['default_ipv4']['macaddress'] }}
           Default Gateway: {{ ansible_facts['default_ipv4']['gateway'] }}
 ```
+{% endraw %}
 
 Run the playbook:
 

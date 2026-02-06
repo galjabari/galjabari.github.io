@@ -37,11 +37,13 @@ nano /etc/freeradius/3.0/mods-available/ldap
 
 Uncomment and update the following lines:
 
+{% raw %}
 ```
 filter = '(objectClass=groupOfNames)'
 name_attribute = cn
 membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-User-Name}:-%{User-Name}}))"
 ```
+{% endraw %}
 
 ## Configure authorization policies
 
