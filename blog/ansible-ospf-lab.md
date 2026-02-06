@@ -9,7 +9,7 @@ This guide demonstrates how to deploy and configure a basic OSPF lab using Ansib
 
 The topology is defined in the `ospf.clab.yml` file:
 
-```
+```yaml
 name: ospf
 topology:
   nodes:

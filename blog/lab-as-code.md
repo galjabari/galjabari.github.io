@@ -35,7 +35,7 @@ To get started with Containerlab, let's create a network lab consisting of two A
 
 Create a file named `demo.clab.yml` and add the following content:
 
-```
+```yaml
 name: demo
 topology:
   nodes:
