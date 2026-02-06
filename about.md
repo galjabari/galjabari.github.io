@@ -2,11 +2,6 @@
 layout: default
 title: About
 ---
-
-# Ghannam Aljabari
-
-*I'm a Network and Systems Engineer, passionate about leveraging technology to drive innovation. My current focus areas include Network Automation, Cybersecurity, and Cloud Computing.*
-
 # Experience
 
 9-2020 to date
