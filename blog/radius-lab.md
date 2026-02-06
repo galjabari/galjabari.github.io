@@ -1,8 +1,3 @@
----
-title: "Deploy RADIUS with Containerlab"
-description: "Learn how to deploy RADIUS server using Containerlab and configure AAA on Arista cEOS switch."
----
-
 # Deploy a RADIUS Server with Containerlab
 
 This guide walks you through setting up a RADIUS server with Containerlab and configuring AAA on an Arista cEOS switch to authenticate users using RADIUS.

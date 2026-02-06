@@ -1,8 +1,3 @@
----
-title: "Install and Configure a DHCP Server on Ubuntu"
-description: "A step-by-step guide on how to install and configure a DHCP server on Ubuntu 20.04/22.04"
----
-
 # Install and Configure a DHCP Server on Ubuntu
 
 Before setting up the DHCP server, ensure that your system has a static IP address (for example, `192.168.1.5/24`).

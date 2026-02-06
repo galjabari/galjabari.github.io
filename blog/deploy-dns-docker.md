@@ -1,8 +1,3 @@
----
-title: "Deploy an Authoritative DNS Server with Docker"
-description: "A step-by-step guide on how to deploy an authoritative DNS server with Docker."
----
-
 # Deploy an Authoritative DNS Server with Docker
 
 This guide will walk you through deploying an authoritative DNS server using Docker and BIND 9. We will create a docker network and set up a DNS server, a web server, and a client to test the configuration.

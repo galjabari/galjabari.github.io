@@ -1,7 +1,3 @@
----
-title: "Install OpenVPN Server on Ubuntu"
----
-
 # Install OpenVPN Server on Ubuntu
 
 OpenVPN is a popular VPN solution that allows you to create secure point-to-point or site-to-site connections. It uses SSL/TLS for key exchange and supports a wide range of encryption algorithms.

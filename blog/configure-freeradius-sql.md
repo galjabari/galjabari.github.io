@@ -1,8 +1,3 @@
----
-title: "Configure FreeRADIUS with SQL for AAA"
-description: "A step-by-step guide on how to integrate FreeRADIUS with MariaDB on Ubuntu 20.04/22.04 to authenticate and authorize users in the database"
----
-
 # Configure FreeRADIUS with SQL for AAA
 
 Before configuring FreeRADIUS to use SQL database as the backend for authentication, authorization, and accounting (AAA), you need to complete the following guides:

@@ -1,7 +1,3 @@
----
-title: "Install Portainer CE with Docker"
----
-
 # Install Portainer CE with Docker
 
 Portainer is a lightweight management UI which allows you to easily manage your Docker host or Swarm cluster. It is available as a Docker container, making it easy to deploy and manage.

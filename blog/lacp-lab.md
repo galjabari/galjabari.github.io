@@ -1,8 +1,3 @@
----
-title: "Configure Port Channel on Arista cEOS"
-description: "Learn how to configure a Port Channel using LACP on Arista cEOS switches using Containerlab to aggregate multiple links into a single logical link."
----
-
 # Configure Port Channel on Arista cEOS
 
 Link Aggregation Control Protocol (LACP) is a standardized protocol that allows multiple physical Ethernet links to be combined into a single logical link—called a Port Channel or EtherChannel—to increase bandwidth and provide redundancy.

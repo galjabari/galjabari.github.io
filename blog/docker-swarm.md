@@ -1,7 +1,3 @@
----
-title: "Create Docker Swarm using Terraform and Ansible"
----
-
 # Create Docker Swarm using Terraform and Ansible
 
 To create a Docker Swarm cluster on Proxmox, you can use Terraform to provision the infrastructure and Ansible to configure and manage the Docker hosts.

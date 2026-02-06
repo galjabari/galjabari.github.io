@@ -1,8 +1,3 @@
----
-title: "Configure Mail Server with Active Directory"
-description: "A step-by-step guide on how to integrate a mail server on Ubuntu 20.04/22.04 with Active Directory for LDAP authentication."
----
-
 # Configure Mail Server with Active Directory
 
 Before integrating the mail server with Active Directory for LDAP authentication, you need to have a working mail server and Active Directory Domain Controller.

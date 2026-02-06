@@ -1,8 +1,3 @@
----
-title: "Configure network settings on Ubuntu"
-description: "A step-by-step guide on how to configure network interfaces on Ubuntu 20.04/22.04"
----
-
 # Configure network settings on Ubuntu
 
 Ubuntu provides graphical utilities for configuring network interfaces. To manage network settings from the command-line interface (CLI), you can use tools like `ip addr` or `ifconfig`.

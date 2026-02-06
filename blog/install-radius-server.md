@@ -1,8 +1,3 @@
----
-title: "Install and configure RADIUS Server on Ubuntu"
-description: "A step-by-step guide on how to install and configure RADIUS server on Ubuntu 20.04/22.04 using FreeRADIUS"
----
-
 # Install and configure RADIUS Server on Ubuntu
 
 First, update the package lists to ensure you have the latest versions available:

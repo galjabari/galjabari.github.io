@@ -1,8 +1,3 @@
----
-title: "Intrusion Detection with Suricata"
-description: "A step-by-step guide on how to install and configure Suricata IDS/IPS on Ubuntu 20.04/22.04"
----
-
 # Intrusion Detection with Suricata
 
 First, update package lists to ensure you have the latest versions of all packages:

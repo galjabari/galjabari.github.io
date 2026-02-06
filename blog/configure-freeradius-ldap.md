@@ -1,8 +1,3 @@
----
-title: "Configure FreeRADIUS with LDAP authentication"
-description: "A step-by-step guide on how to configure FreeRADIUS server on Ubuntu 20.04/22.04 to authenticate users in the LDAP directory"
----
-
 # Configure FreeRADIUS with LDAP authentication
 
 Before configuring FreeRADIUS to use an LDAP server for authentication, you need to complete the following guides:

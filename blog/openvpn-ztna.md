@@ -1,8 +1,3 @@
----
-title: "OpenVPN with RADIUS for ZTNA"
-description: "A step-by-step guide on how to implement OpenVPN with FreeRADIUS for Zero Trust Network Access."
----
-
 # OpenVPN with RADIUS for ZTNA
 
 This guide explains how to implement Zero Trust Network Access (ZTNA) using OpenVPN and FreeRADIUS, with the goal of enforcing a zero trust approach: never trust, always verify.

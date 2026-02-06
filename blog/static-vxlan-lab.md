@@ -1,8 +1,3 @@
----
-title: "Configure a static VXLAN on Arista cEOS"
-description: "Learn how to configure a static VXLAN in a data center topology using Containerlab with Arista cEOS."
----
-
 # Configure a static VXLAN on Arista cEOS
 
 VXLAN is a network virtualization technology that enables scalable Layer 2 overlays across Layer 3 infrastructure using UDP encapsulation.

@@ -1,7 +1,3 @@
----
-title: "Infrastructure as Code with Terraform"
----
-
 # Infrastructure as Code with Terraform
 
 To automate and manage resources in Proxmox or on any cloud provider, you can use Terraform for infrastructure as code.

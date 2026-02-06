@@ -1,7 +1,3 @@
----
-title: "Install Docker on Ubuntu"
----
-
 # Install Docker on Ubuntu
 
 To get started quickly, you can install Docker using the official script:

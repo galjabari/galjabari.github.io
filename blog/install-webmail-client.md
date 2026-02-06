@@ -1,8 +1,3 @@
----
-title: "Install and configure Webmail client on Ubuntu"
-description: "A step-by-step guide on how to install and configure Roundcube webmail client on Ubuntu 20.04/22.04"
----
-
 # Install and configure Webmail client on Ubuntu
 
 This guide assumes that you have an existing mail server with the hostname `mail.example.com` and you need to deploy a webmail client for users to access the mail server using a web browser.

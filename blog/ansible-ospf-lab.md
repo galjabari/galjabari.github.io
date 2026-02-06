@@ -1,8 +1,3 @@
----
-title: "Deploy OSPF Lab with Ansible and Containerlab"
-description: "Learn how to deploy and configure an OSPF lab using Ansible and Containerlab"
----
-
 # Deploy OSPF Lab with Ansible and Containerlab
 
 This guide demonstrates how to deploy and configure a basic OSPF lab using Ansible and Containerlab. The lab uses a 3-router topology with one spine and two leaf routers, all running Arista cEOS.

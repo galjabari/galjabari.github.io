@@ -1,8 +1,3 @@
----
-title: "Install and configure an SSH Server on Ubuntu"
-description: "step-by-step guide on how to install SSH server on Ubuntu 20.04/22.04 to remotely access your system"
----
-
 # Install and configure an SSH Server on Ubuntu
 
 First, update your package lists to ensure you have the latest versions available:

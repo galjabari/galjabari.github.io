@@ -1,8 +1,3 @@
----
-title: "Configure FreeRADIUS with LDAP for dynamic VLAN assignment"
-description: "A step-by-step guide on how to configure FreeRADIUS on Ubuntu 20.04/22.04 to assign VLANs to users based on LDAP group membership"
----
-
 # Configure FreeRADIUS with LDAP for dynamic VLAN assignment
 
 This guide assumes you have already configured [FreeRADIUS with LDAP authentication](configure-freeradius-ldap.md) and you need to assign VLANs to users based on LDAP group membership.

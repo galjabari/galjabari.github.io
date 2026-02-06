@@ -1,8 +1,3 @@
----
-title: "Deploy a Mail Server with Docker"
-description: "A step-by-step guide on how to deploy a mail server with Docker."
----
-
 # Deploy a Mail Server with Docker
 
 This guide will walk you through deploying a mail server using Docker, featuring Roundcube webmail and a BIND DNS server.

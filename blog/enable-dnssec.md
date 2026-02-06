@@ -1,8 +1,3 @@
----
-title: "Enable DNSSEC with BIND on Ubuntu"
-description: "A step-by-step guide on how to enable DNSSEC with BIND 9 on Ubuntu 20.04/22.04."
----
-
 # Enable DNSSEC with BIND on Ubuntu
 
 DNSSEC is a security extension for DNS that adds a layer of authentication to prevent DNS spoofing and cache poisoning attacks.

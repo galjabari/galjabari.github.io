@@ -1,8 +1,3 @@
----
-title: "Configure OpenVPN with RADIUS authentication"
-description: "A step-by-step guide on how to set up OpenVPN with RADIUS authentication on Ubuntu."
----
-
 # Configure OpenVPN with RADIUS authentication
 
 This guide walks you through setting up OpenVPN with RADIUS authentication. It assumes you have a working OpenVPN server and a FreeRADIUS server installed on Ubuntu.

@@ -1,8 +1,3 @@
----
-title: "Install and configure an authoritative DNS Server on Ubuntu"
-description: "A step-by-step guide on how to install and configure an authoritative DNS server on Ubuntu 20.04/22.04 using BIND"
----
-
 # Install and configure an authoritative DNS Server on Ubuntu
 
 Before setting up the DNS server, ensure that your system has a static IP address (for example, `192.168.1.10/24`).

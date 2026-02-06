@@ -1,7 +1,3 @@
----
-title: "Network Automation with Python"
----
-
 # Network Automation with Python
 
 To automate network device configuration such as interface settings, VLAN configurations, or routing protocols, you can use Netmiko library in Python.

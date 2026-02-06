@@ -1,7 +1,3 @@
----
-title: "Deploy Docker containers with Ansible"
----
-
 # Deploy Docker containers with Ansible
 
 This guide assumes you have already installed [Ansible on your control node](linux-automation.md) and you need to automate the deployment of Docker containers using Ansible.

@@ -1,8 +1,3 @@
----
-title: "Lab as Code with Containerlab"
-description: "Learn how to deploy a network lab using Containerlab with Arista cEOS routers and Linux clients."
----
-
 # Lab as Code with Containerlab
 
 Containerlab is a tool for deploying networking labs with Docker. It allows you to define your lab's topology in a YAML file and deploy it with a single command.

@@ -1,8 +1,3 @@
----
-title: "Install and configure Mail Server on Ubuntu"
-description: "A step-by-step guide on how to setup a mail server on Ubuntu 20.04/22.04 using Postfix and Dovecot"
----
-
 # Install and configure Mail Server on Ubuntu
 
 Before setting up a mail server on Ubuntu, you need to complete the following guide:

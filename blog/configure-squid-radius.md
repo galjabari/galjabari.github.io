@@ -1,8 +1,3 @@
----
-title: "Configure Squid proxy with RADIUS authentication"
-description: "A step-by-step guide on how to configure Squid proxy server on Ubuntu 20.04/22.04 to authenticate users using RADIUS"
----
-
 # Configure Squid proxy with RADIUS authentication
 
 Before configuring Squid proxy to authenticate users against a RADIUS server, you need to complete the following guides:

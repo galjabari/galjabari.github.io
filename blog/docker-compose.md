@@ -1,7 +1,3 @@
----
-title: "Create containers using Docker Compose"
----
-
 # Create containers using Docker Compose
 
 To clone the repository, run the following command:

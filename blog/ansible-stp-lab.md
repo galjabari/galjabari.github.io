@@ -1,8 +1,3 @@
----
-title: "Deploy STP Lab with Containerlab and Ansible"
-description: "Learn how to deploy a Spanning Tree Protocol (STP) lab using Containerlab and verify configuration with Ansible."
----
-
 # Deploy an STP Lab with Containerlab and Ansible
 
 This guide demonstrates how to deploy a Spanning Tree Protocol (STP) lab using Containerlab and verify the configuration with Ansible.

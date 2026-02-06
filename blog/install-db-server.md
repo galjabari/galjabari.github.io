@@ -1,8 +1,3 @@
----
-title: "Install and manage a Database Server on Ubuntu"
-description: "A step-by-step guide on how to install and manage a database server on Ubuntu 20.04/22.04 using MariaDB"
----
-
 # Install and manage a Database Server on Ubuntu
 
 First, update package lists to ensure you have the latest versions available:

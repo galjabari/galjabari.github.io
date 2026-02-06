@@ -1,8 +1,3 @@
----
-title: "Configure VLAN Trunking on Arista cEOS"
-description: "Learn how to configure VLAN trunking on Arista cEOS switches using Containerlab."
----
-
 # Configure VLAN Trunking on Arista cEOS
 
 This guide demonstrates how to configure VLANs and VLAN trunking on Arista cEOS switches using Containerlab. The lab includes a Layer 3 switch providing routing and DHCP services, along with two Layer 2 switches that extend VLANs to connected client devices.

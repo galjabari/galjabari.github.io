@@ -1,8 +1,3 @@
----
-title: "Install a Proxy Server on Ubuntu"
-description: "A step-by-step guide on how to install and configure a proxy server on Ubuntu 20.04/22.04 using Squid."
----
-
 # Install a Proxy Server on Ubuntu
 
 Update package lists and install Squid proxy server.

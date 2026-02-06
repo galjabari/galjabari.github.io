@@ -1,8 +1,3 @@
----
-title: "Configure Squid proxy with LDAP authentication"
-description: "A step-by-step guide on how to configure Squid proxy server on Ubuntu 20.04/22.04 to authenticate users in the LDAP directory"
----
-
 # Configure Squid proxy with LDAP authentication
 
 Before configuring Squid proxy to use an LDAP server for authentication, you need to complete the following guides:

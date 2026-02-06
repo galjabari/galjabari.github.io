@@ -1,8 +1,3 @@
----
-title: "Configure FreeRADIUS with SQL for dynamic ACL assignment"
-description: "A step-by-step guide on how to configure FreeRADIUS with SQL backend to assign ACLs to users based on group membership"
----
-
 # Configure FreeRADIUS with SQL for dynamic ACL assignment
 
 This guide assumes you have already configured [FreeRADIUS with SQL backend](configure-freeradius-sql.md) and you need to assign access control lists (ACLs) for users in the SQL database based on group membership.

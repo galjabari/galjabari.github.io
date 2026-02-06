@@ -1,8 +1,3 @@
----
-title: "Configure Per-VLAN Spanning Tree on Arista cEOS"
-description: "Learn how to configure Per-VLAN Spanning Tree (PVST) on Arista cEOS switches using Containerlab to load balance traffic across redundant links."
----
-
 # Configure Per-VLAN Spanning Tree on Arista cEOS
 
 Per-VLAN Spanning Tree (PVST) is a Cisco proprietary protocol that runs a separate instance of the STP for each VLAN. This allows for load balancing of traffic for different VLANs on the same set of links. This guide demonstrates how to configure PVST on Arista cEOS switches using Containerlab.

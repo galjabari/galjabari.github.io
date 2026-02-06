@@ -1,8 +1,3 @@
----
-title: "Install and Configure LDAP Server on Ubuntu"
-description: "A step-by-step guide on how to install and configure OpenLDAP server on Ubuntu 20.04/22.04 and how to add entries to the directory"
----
-
 # Install and Configure LDAP Server on Ubuntu
 
 First, set the hostname within your domain. Replace `example.com` with your actual domain.

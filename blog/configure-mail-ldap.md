@@ -1,8 +1,3 @@
----
-title: "Configure Mail server with LDAP authentication"
-description: "A step-by-step guide on how to integrate mail server with the LDAP directory for user authentication on Ubuntu 20.04/22.04"
----
-
 # Configure Mail server with LDAP authentication
 
 Before integrating the mail server with an LDAP directory for user authentication, you need to complete the following guides:
