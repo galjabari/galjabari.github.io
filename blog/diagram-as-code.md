@@ -41,7 +41,7 @@ nano diagram.py
 
 Add the following code to generate a diagram for on-premise web service:
 
-```
+```py
 from diagrams import Diagram, Cluster
 from diagrams.onprem.compute import Server
 from diagrams.onprem.database import MySQL

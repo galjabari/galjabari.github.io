@@ -6,8 +6,8 @@ title: "Configure Mail server with LDAP authentication"
 # Configure Mail server with LDAP authentication
 
 Before integrating the mail server with an LDAP directory for user authentication, you need to complete the following guides:
-[Install and configure LDAP Server on Ubuntu](install-ldap-server.md)
-[Install and configure Mail Server on Ubuntu](install-mail-server.md)
+- [Install and configure LDAP Server on Ubuntu](install-ldap-server.md)
+- [Install and configure Mail Server on Ubuntu](install-mail-server.md)
 
 Next, create a system user on the mail server to host virtual mail accounts.
 
