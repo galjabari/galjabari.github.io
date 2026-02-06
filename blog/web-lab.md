@@ -157,6 +157,8 @@ clab deploy -t web.clab.yml
 
 This command creates the lab topology and configures the devices with the specified startup configurations.
 
+![](../assets/web.png)
+
 To access the desktop client, open a web browser and navigate to `http://localhost:3000` or `https://localhost:3001`.
 
 From the desktop client, you can access the web server by navigating to `http://192.168.20.2` in its browser.

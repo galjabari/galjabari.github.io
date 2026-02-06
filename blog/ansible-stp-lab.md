@@ -65,6 +65,8 @@ containerlab deploy -t stp.clab.yml
 
 This command will deploy the lab topology using Docker containers.
 
+![](../assets/stp.png)
+
 ## 3. Verify the configuration with Ansible
 
 Use the following Ansible playbook (`show_stp.yml`) to verify the STP status on all switches:
