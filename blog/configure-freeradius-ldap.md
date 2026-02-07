@@ -6,8 +6,8 @@ title: "Configure FreeRADIUS with LDAP authentication"
 # Configure FreeRADIUS with LDAP authentication
 
 Before configuring FreeRADIUS to use an LDAP server for authentication, you need to complete the following guides:
-[Install and configure LDAP Server on Ubuntu](install-ldap-server.md)
-[Install and configure RADIUS Server on Ubuntu](install-radius-server.md)
+- [Install and configure LDAP Server on Ubuntu](install-ldap-server.md)
+- [Install and configure RADIUS Server on Ubuntu](install-radius-server.md)
 
 Next, install the LDAP module for FreeRADIUS:
 

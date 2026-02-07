@@ -6,8 +6,8 @@ title: "Configure FreeRADIUS with SQL for AAA"
 # Configure FreeRADIUS with SQL for AAA
 
 Before configuring FreeRADIUS to use SQL database as the backend for authentication, authorization, and accounting (AAA), you need to complete the following guides:
-[Install and manage a Database Server on Ubuntu](install-db-server.md)
-[Install and configure RADIUS Server on Ubuntu](install-radius-server.md)
+- [Install and manage a Database Server on Ubuntu](install-db-server.md)
+- [Install and configure RADIUS Server on Ubuntu](install-radius-server.md)
 
 First, install the SQL module for FreeRADIUS:
 
