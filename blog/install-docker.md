@@ -25,3 +25,9 @@ sudo usermod -aG docker $USER
 ```
 
 You may need to log out and log back in for this change to take effect.
+
+Check Docker version:
+
+```
+docker --version
+```
