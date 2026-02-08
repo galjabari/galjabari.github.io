@@ -5,7 +5,7 @@ title: Home
 
 # Welcome
 
-I'm Ghannam Aljabari, a Network and Systems Engineer passionate about technology to drive innovation.
+I'm Ghannam Aljabari, a Cybersecurity and Network Engineer passionate about technology to drive innovation.
 
 [About Me](about.md)
 
