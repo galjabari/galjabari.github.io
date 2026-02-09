@@ -9,19 +9,19 @@ To create a diagram for prototyping a new system architecture, you can use [Diag
 
 First, you need to install [Graphviz](https://graphviz.gitlab.io) to render the diagram. To install Graphviz on Ubuntu:
 
-```
+```bash
 sudo apt install graphviz -y
 ```
 
 After installing Graphviz, create a folder for Python code:
 
-```
+```bash
 mkdir diagrams
 ```
 
 Inside the folder, create a virtual environment and activate it:
 
-```
+```bash
 cd diagrams
 python3 -m venv .venv
 source .venv/bin/activate
@@ -29,13 +29,13 @@ source .venv/bin/activate
 
 Install the `diagrams` using package installer for Python:
 
-```
+```bash
 pip install diagrams
 ```
 
 Now, you can generate diagrams with Python. For example, create a new Python file using your preferred editor:
 
-```
+```bash
 nano diagram.py
 ```
 
@@ -63,7 +63,7 @@ with Diagram("Web Service", show=False, direction="LR"):
 
 After saving and closing the file, run your Python code:
 
-```
+```bash
 python3 diagram.py
 ```
 

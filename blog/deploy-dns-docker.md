@@ -9,13 +9,13 @@ This guide will walk you through deploying an authoritative DNS server using Doc
 
 First, create a directory for the configuration files.
 
-```
+```bash
 mkdir bind
 ```
 
 Create the main BIND configuration file.
 
-```
+```bash
 nano bind/named.conf
 ```
 
@@ -39,7 +39,7 @@ zone "example.com." {
 
 Create the zone file for your domain. Replace `example.com` with your actual domain.
 
-```
+```bash
 nano bind/db.example.com
 ```
 
@@ -61,7 +61,7 @@ www   IN  CNAME   example.com.
 
 Create the `docker-compose.yml` file to define Docker containers.
 
-```
+```bash
 nano docker-compose.yml
 ```
 
@@ -111,19 +111,19 @@ services:
 
 Deploy the services using Docker Compose.
 
-```
+```bash
 docker compose up -d
 ```
 
 Access the client container to test DNS resolution.
 
-```
+```bash
 docker exec -it alpine sh
 ```
 
 Test DNS resolution for `example.com`.
 
-```
+```bash
 nslookup example.com
 ```
 
@@ -131,7 +131,7 @@ This should return the IP address of `example.com`.
 
 Test web server access.
 
-```
+```bash
 wget -O- http://example.com
 ```
 
@@ -139,6 +139,6 @@ This should return the Nginx welcome page.
 
 To clean up everything after you are done, use:
 
-```
+```bash
 docker compose down
 ```

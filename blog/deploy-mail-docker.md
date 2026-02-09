@@ -9,13 +9,13 @@ This guide will walk you through deploying a mail server using Docker, featuring
 
 First, create directories for the BIND, mailserver, and Roundcube containers.
 
-```
+```bash
 mkdir bind mail roundcube
 ```
 
 Create the main BIND configuration file.
 
-```
+```bash
 nano bind/named.conf
 ```
 
@@ -39,7 +39,7 @@ zone "example.com." {
 
 Create the zone file for `example.com`. This includes the MX record for the mail server.
 
-```
+```bash
 nano bind/db.example.com
 ```
 
@@ -61,7 +61,7 @@ mail  IN  A       192.168.10.12
 
 Create the `docker-compose.yml` file to define the Docker containers.
 
-```
+```bash
 nano docker-compose.yml
 ```
 
@@ -132,13 +132,13 @@ services:
 
 Deploy the services using Docker Compose.
 
-```
+```bash
 docker compose up -d
 ```
 
 Before using the mail server, you need to create a user account. Use the following command to create an email account for `user1@example.com` with the password `pass@123`.
 
-```
+```bash
 docker exec -it mailserver setup email add user1@example.com pass@123
 ```
 
@@ -146,6 +146,6 @@ You can now access the Roundcube webmail client by navigating to `http://localho
 
 To clean up everything after you are done, use:
 
-```
+```bash
 docker compose down
 ```
