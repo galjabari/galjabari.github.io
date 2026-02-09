@@ -9,7 +9,7 @@ Ubuntu provides graphical utilities for configuring network interfaces. To manag
 
 To identify all available network interfaces, run the following command:
 
-```
+```bash
 ip a
 ```
 
@@ -19,13 +19,13 @@ The system identifies Ethernet interfaces with logical names such as `ens3` or `
 
 Netplan configuration files are located in the `/etc/netplan/` directory and use the `.yaml` format. To configure an interface to use DHCP, edit the relevant configuration file. For example:
 
-```
+```bash
 sudo nano /etc/netplan/50-cloud-init.yaml
 ```
 
 Add the following configuration:
 
-```
+```yaml
 network:
   version: 2
   ethernets:
@@ -37,7 +37,7 @@ This configuration enables dynamic IP address assignment (DHCP) for the Ethernet
 
 To apply the configuration, run the following command:
 
-```
+```bash
 sudo netplan apply
 ```
 
@@ -45,13 +45,13 @@ sudo netplan apply
 
 To assign a static IP address, edit the Netplan configuration file:
 
-```
+```bash
 sudo nano /etc/netplan/50-cloud-init.yaml
 ```
 
 For example, add the following configuration:
 
-```
+```yaml
 network:
   version: 2
   ethernets:
@@ -70,7 +70,7 @@ Adjust the settings, such as the IP address, default gateway, search domain, and
 
 Apply the configuration:
 
-```
+```bash
 sudo netplan apply
 ```
 
@@ -78,13 +78,13 @@ sudo netplan apply
 
 To configure multiple network interfaces, edit the Netplan configuration file:
 
-```
+```bash
 sudo nano /etc/netplan/50-cloud-init.yaml
 ```
 
 For example, add the following configuration for two interfaces:
 
-```
+```yaml
 network:
   version: 2
   ethernets:
@@ -97,6 +97,6 @@ network:
 
 Apply the configuration:
 
-```
+```bash
 sudo netplan apply
 ```

@@ -7,19 +7,19 @@ title: "Install and configure an SSH Server on Ubuntu"
 
 First, update your package lists to ensure you have the latest versions available:
 
-```
+```bash
 sudo apt update
 ```
 
 Next, install the OpenSSH server package:
 
-```
+```bash
 sudo apt install openssh-server -y
 ```
 
 Once the installation is complete, the SSH server should start automatically. You can verify its status by running:
 
-```
+```bash
 sudo systemctl status ssh.service
 ```
 
@@ -29,7 +29,7 @@ If the service is active, you are ready to connect.
 
 To connect to the SSH server from another machine, you will need the server's IP address and a valid username. For example, if the server's IP is `192.168.1.10` and your username is `ubuntu`, use the following command:
 
-```
+```bash
 ssh ubuntu@192.168.1.10
 ```
 
@@ -41,7 +41,7 @@ For a more secure and convenient way to log in, you can set up SSH key-based aut
 
 On your local (client) machine, generate an SSH key pair by running:
 
-```
+```bash
 ssh-keygen
 ```
 
@@ -49,19 +49,19 @@ You can accept the default location (`~/.ssh/id_ed25519`) and optionally set a p
 
 Next, copy the public key to the remote server. The easiest way is to use the `ssh-copy-id` utility:
 
-```
+```bash
 ssh-copy-id ubuntu@192.168.1.10
 ```
 
 Alternatively, you can copy the key manually. First, display the public key on your local machine:
 
-```
+```bash
 cat ~/.ssh/id_ed25519.pub
 ```
 
 Then, on the server, open the `authorized_keys` file in a text editor:
 
-```
+```bash
 nano ~/.ssh/authorized_keys
 ```
 
@@ -69,7 +69,7 @@ Paste your public key into this file and save it.
 
 You should now be able to connect to the server using your SSH key:
 
-```
+```bash
 ssh ubuntu@192.168.1.10
 ```
 

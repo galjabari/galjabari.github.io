@@ -9,19 +9,19 @@ Before setting up the DHCP server, ensure that your system has a static IP addre
 
 First, update your system's package lists by running:
 
-```
+```bash
 sudo apt update
 ```
 
 Install the DHCP server package:
 
-```
+```bash
 sudo apt install isc-dhcp-server -y
 ```
 
 Open the DHCP server configuration file in the `nano` text editor:
 
-```
+```bash
 sudo nano /etc/dhcp/dhcpd.conf
 ```
 
@@ -44,7 +44,7 @@ After making changes, save the file by pressing Ctrl + O, then press Enter, and 
 
 If you have multiple network interfaces, you need to specify which interface the DHCP server should listen on. Edit the following file:
 
-```
+```bash
 sudo nano /etc/default/isc-dhcp-server
 ```
 
@@ -58,13 +58,13 @@ Replace `ens37` with your actual network interface name (use `ip a` to check).
 
 Restart the DHCP service to apply the new configuration:
 
-```
+```bash
 sudo systemctl restart isc-dhcp-server.service
 ```
 
 Verify that the DHCP service is running without errors by checking its status:
 
-```
+```bash
 sudo systemctl status isc-dhcp-server.service
 ```
 
@@ -74,7 +74,7 @@ It will now assign IP addresses automatically to devices on your network.
 
 To list the DHCP leases on the DHCP server, you can run the following command:
 
-```
+```bash
 dhcp-lease-list
 ```
 
@@ -82,7 +82,7 @@ This command is used to monitor IP address assignments within your network.
 
 To assign a static IP address to a device in the DHCP server, you need to edit the DHCP configuration file:
 
-```
+```bash
 sudo nano /etc/dhcp/dhcpd.conf
 ```
 
@@ -99,7 +99,7 @@ In this example, a printer with the MAC address `00:11:22:33:44:55` is assigned 
 
 Restart the DHCP server to apply the changes:
 
-```
+```bash
 sudo systemctl restart isc-dhcp-server.service
 ```
 
