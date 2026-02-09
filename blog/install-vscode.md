@@ -9,7 +9,7 @@ Visual Studio Code (VS Code) is a popular code editor that supports various prog
 
 First, add the Microsoft repository to get the latest version:
 
-```
+```bash
 sudo apt update
 sudo apt install wget gpg apt-transport-https software-properties-common -y
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
@@ -20,7 +20,7 @@ echo -e "Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: st
 
 Next, update the package list and install VS Code:
 
-```
+```bash
 sudo apt update
 sudo apt install code -y
 ```

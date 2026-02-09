@@ -9,32 +9,32 @@ This guide provides step-by-step instructions for installing the GNS3 network em
 
 First, add the official GNS3 repository to get the latest version:
 
-```
+```bash
 sudo add-apt-repository ppa:gns3/ppa -y
 sudo apt update
 ```
 
 Next, install the GNS3 graphical interface and the server component:
 
-```
+```bash
 sudo apt install gns3-gui gns3-server -y
 ```
 
 To connect to the graphical console of certain network appliances within GNS3, install a VNC client:
 
-```
+```bash
 sudo apt install tigervnc-standalone-server tigervnc-viewer -y
 ```
 
 GNS3 can run Docker containers as nodes in your network topologies. Install Docker using the official script:
 
-```
+```bash
 curl -fsSL https://get.docker.com | sh
 ```
 
 After installation, add your user to the `docker` group to run Docker commands without `sudo`:
 
-```
+```bash
 sudo usermod -aG docker $USER
 ```
 

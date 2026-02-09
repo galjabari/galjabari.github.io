@@ -11,13 +11,13 @@ In this guide, we will install Portainer Community Edition (CE) on a Docker host
 
 First, create a persistent volume for Portainer data:
 
-```
+```bash
 sudo docker volume create portainer_data
 ```
 
 Next, run the Portainer container with the following command:
 
-```
+```bash
 sudo docker run -d \
   -p 8000:8000 \
   -p 9443:9443 \
