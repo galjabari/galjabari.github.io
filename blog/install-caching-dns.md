@@ -9,19 +9,19 @@ Before setting up the DNS server, ensure that your system has a static IP addres
 
 First, update the package list to ensure you have the latest version of packages available:
 
-```
+```bash
 sudo apt update
 ```
 
 Install the BIND package, which is the DNS server software:
 
-```
+```bash
 sudo apt install bind9 -y
 ```
 
 Edit the BIND configuration file named `named.conf.options` using a text editor. Here, we'll use `nano`:
 
-```
+```bash
 sudo nano /etc/bind/named.conf.options
 ```
 
@@ -40,19 +40,19 @@ Save the changes and exit the text editor (in `nano`, press Ctrl + X, then Y, an
 
 To apply the changes made to the configuration file, restart the BIND service:
 
-```
+```bash
 sudo systemctl restart bind9.service
 ```
 
 Check the status of the BIND service to ensure it restarted without errors:
 
-```
+```bash
 sudo systemctl status bind9.service
 ```
 
 Finally, test the DNS resolution using the `dig` command. Here's an example with www.google.com:
 
-```
+```bash
 dig www.google.com
 ```
 
@@ -60,7 +60,7 @@ You should see output containing information about the DNS query, including the 
 
 To query a specific DNS server directly, use the @ symbol followed by the IP address of the server. For example:
 
-```
+```bash
 dig www.google.com @192.168.1.10
 ```
 

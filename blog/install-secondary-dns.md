@@ -11,7 +11,7 @@ This guide assumes you have already configured [DNS Server](install-dns-server.m
 
 First, on the primary server, edit the BIND configuration file.
 
-```
+```bash
 sudo nano /etc/bind/named.conf.local
 ```
 
@@ -30,7 +30,7 @@ Replace `192.168.1.11` with the IP address of your secondary server.
 
 Edit the zone file for your domain.
 
-```
+```bash
 sudo nano /etc/bind/db.example.com
 ```
 
@@ -43,19 +43,19 @@ ns2     IN      A       192.168.1.11
 
 After making changes, restart the BIND service to apply the configuration.
 
-```
+```bash
 sudo systemctl restart bind9.service
 ```
 
 Verify that BIND is running without errors.
 
-```
+```bash
 sudo systemctl status bind9.service
 ```
 
 Finally, test DNS resolution to list nameserver records for your domain.
 
-```
+```bash
 dig NS example.com
 ```
 
@@ -67,19 +67,19 @@ Before setting up the secondary DNS server, ensure that your system has a static
 
 Next, update the package lists, similar to the primary server.
 
-```
+```bash
 sudo apt update
 ```
 
 Install the BIND DNS server package.
 
-```
+```bash
 sudo apt install bind9 -y
 ```
 
 Edit the BIND configuration file to define the zone.
 
-```
+```bash
 sudo nano /etc/bind/named.conf.local
 ```
 
@@ -97,13 +97,13 @@ Replace `192.168.1.10` with the IP address of your primary server.
 
 To apply the changes, restart the BIND service.
 
-```
+```bash
 sudo systemctl restart bind9.service
 ```
 
 To query your secondary DNS server directly, use the `dig` command with the @ symbol followed by the hostname or IP address of the server:
 
-```
+```bash
 dig www.example.com @192.168.1.11
 ```
 

@@ -9,19 +9,19 @@ Before setting up the DNS server, ensure that your system has a static IP addres
 
 First, update the package lists to ensure you install the latest versions of packages.
 
-```
+```bash
 sudo apt update
 ```
 
 Install the BIND DNS server package.
 
-```
+```bash
 sudo apt install bind9 -y
 ```
 
 Edit the BIND configuration file to define the zone.
 
-```
+```bash
 sudo nano /etc/bind/named.conf.local
 ```
 
@@ -36,13 +36,13 @@ zone "example.com" {
 
 Copy the default zone file and create a new one for your domain.
 
-```
+```bash
 sudo cp /etc/bind/db.local /etc/bind/db.example.com
 ```
 
 Edit the newly created zone file for your domain.
 
-```
+```bash
 sudo nano /etc/bind/db.example.com
 ```
 
@@ -63,19 +63,19 @@ ns1     IN      A       192.168.1.10
 
 After making changes, restart the BIND service to apply the configuration.
 
-```
+```bash
 sudo systemctl restart bind9.service
 ```
 
 Verify that BIND is running without errors.
 
-```
+```bash
 sudo systemctl status bind9.service
 ```
 
 Finally, test DNS resolution for your domain.
 
-```
+```bash
 dig example.com
 ```
 
@@ -83,7 +83,7 @@ You should see the DNS records returned by your authoritative DNS server.
 
 To add a new DNS record for `www.example.com` pointing to `example.com`, edit the zone file.
 
-```
+```bash
 sudo nano /etc/bind/db.example.com
 ```
 
@@ -95,13 +95,13 @@ www     IN      CNAME   example.com.
 
 After adding the new DNS record, restart the BIND service to apply the changes.
 
-```
+```bash
 sudo systemctl restart bind9.service
 ```
 
 Finally, test DNS resolution for the newly added domain name.
 
-```
+```bash
 dig www.example.com
 ```
 
@@ -109,7 +109,7 @@ You should see the DNS records returned by your authoritative DNS server.
 
 To query your DNS server directly, use the @ symbol followed by the IP address of the server:
 
-```
+```bash
 dig www.example.com @192.168.1.10
 ```
 
