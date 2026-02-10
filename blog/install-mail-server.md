@@ -6,11 +6,11 @@ title: "Install and configure Mail Server on Ubuntu"
 # Install and configure Mail Server on Ubuntu
 
 Before setting up a mail server on Ubuntu, you need to complete the following guide:
-[Install and configure an authoritative DNS Server on Ubuntu](install-dns-server.md)
+- [Install and configure an authoritative DNS Server on Ubuntu](install-dns-server.md)
 
 Next, edit the DNS zone file.
 
-```
+```bash
 sudo nano /etc/bind/db.example.com
 ```
 
@@ -27,19 +27,19 @@ Replace `mail.example.com`  and `192.168.1.10` with your mail server's hostname 
 
 After making changes, restart the BIND service to apply the configuration.
 
-```
+```bash
 sudo systemctl restart bind9.service
 ```
 
 Verify that BIND is running without errors.
 
-```
+```bash
 sudo systemctl status bind9.service
 ```
 
 Finally, test DNS resolution to list MX records for your domain:
 
-```
+```bash
 dig MX example.com
 ```
 
@@ -47,7 +47,7 @@ dig MX example.com
 
 First, update package lists and install Postfix which functions as an SMTP server.
 
-```
+```bash
 sudo apt update
 sudo apt install postfix -y
 ```
@@ -56,7 +56,7 @@ During installation, you will be prompted to configure Postfix. Choose "Internet
 
 To reconfigure Postfix, run the following command:
 
-```
+```bash
 sudo dpkg-reconfigure postfix
 ```
 
@@ -72,25 +72,25 @@ Step 9: Enter `all` to use both IPv4 and IPv6 addresses.
 
 Set the hostname for your mail server using the following command:
 
-```
+```bash
 sudo postconf -e 'myhostname = mail.example.com'
 ```
 
 Set the mailbox format to `Maildir` using the following command:
 
-```
+```bash
 sudo postconf -e 'home_mailbox = Maildir/'
 ```
 
 Restart the Postfix service to apply the changes.
 
-```
+```bash
 sudo systemctl restart postfix.service
 ```
 
 Check the status of the Postfix service to ensure it restarted without errors.
 
-```
+```bash
 sudo systemctl status postfix.service
 ```
 
@@ -98,13 +98,13 @@ sudo systemctl status postfix.service
 
 First, install Dovecot SASL for authenticating users when they send emails through the SMTP server.
 
-```
+```bash
 sudo apt install dovecot-core -y
 ```
 
 Next, edit the Dovecot master configuration file.
 
-```
+```bash
 sudo nano /etc/dovecot/conf.d/10-master.conf
 ```
 
@@ -121,7 +121,7 @@ unix_listener /var/spool/postfix/private/auth {
 
 Edit the Postfix main configuration file.
 
-```
+```bash
 sudo nano /etc/postfix/main.cf
 ```
 
@@ -136,14 +136,14 @@ smtpd_recipient_restrictions = permit_sasl_authenticated, permit_mynetworks, rej
 
 Restart Dovecot and Postfix to apply the new configurations:
 
-```
+```bash
 sudo systemctl restart dovecot.service
 sudo systemctl restart postfix.service
 ```
 
 To test the SMTP server, you can use the `telnet` command.
 
-```
+```bash
 telnet mail.example.com 25
 ```
 
@@ -159,13 +159,13 @@ Exit the connection by pressing Ctrl + ] and Type quit.
 
 First, install Dovecot IMAP and POP3 server.
 
-```
+```bash
 sudo apt install dovecot-imapd dovecot-pop3d -y
 ```
 
 Edit the mail configuration file.
 
-```
+```bash
 sudo nano /etc/dovecot/conf.d/10-mail.conf
 ```
 
@@ -177,7 +177,7 @@ mail_location = maildir:~/Maildir
 
 Edit the authentication configuration file.
 
-```
+```bash
 sudo nano /etc/dovecot/conf.d/10-auth.conf
 ```
 
@@ -190,25 +190,25 @@ auth_mechanisms = plain login
 
 Restart the Dovecot service to apply the changes.
 
-```
+```bash
 sudo systemctl restart dovecot.service
 ```
 
 Check the status of the Dovecot service to ensure it restarted without errors.
 
-```
+```bash
 sudo systemctl status dovecot.service
 ```
 
 You can test the IMAP server using `telnet` command.
 
-```
+```bash
 telnet mail.example.com 143
 ```
 
 Similarly, you can test the POP3 server.
 
-```
+```bash
 telnet mail.example.com 110
 ```
 
@@ -216,7 +216,7 @@ telnet mail.example.com 110
 
 Each email account corresponds to a system user on the mail server. Create users using the `adduser` command:
 
-```
+```bash
 sudo adduser user1
 ```
 
@@ -226,7 +226,7 @@ To test sending and receiving emails using the mail server, you can configure an
 
 To install Thunderbird on Ubuntu, you can use the following command:
 
-```
+```bash
 sudo apt-get install thunderbird -y
 ```
 
@@ -234,7 +234,7 @@ Configure the email client to connect to the mail server's hostname. Use the ful
 
 To monitor logs related to email services in real time, you can use the following command:
 
-```
+```bash
 tail -f /var/log/mail.log
 ```
 

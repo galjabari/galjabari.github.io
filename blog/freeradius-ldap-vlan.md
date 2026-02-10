@@ -9,7 +9,7 @@ This guide assumes you have already configured [FreeRADIUS with LDAP authenticat
 
 First, ensure that the LDAP module is enabled in the FreeRADIUS configuration by editing the `default` site configuration file:
 
-```
+```bash
 sudo nano /etc/freeradius/3.0/sites-available/default
 ```
 
@@ -25,7 +25,7 @@ authorize {
 
 Edit the LDAP module configuration to set up group lookups:
 
-```
+```bash
 sudo nano /etc/freeradius/3.0/mods-available/ldap
 ```
 
@@ -43,7 +43,7 @@ membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-U
 
 Edit the FreeRADIUS `default` site configuration to add VLAN assignment logic:
 
-```
+```bash
 sudo nano /etc/freeradius/3.0/sites-available/default
 ```
 
@@ -88,13 +88,13 @@ interface GigabitEthernet0/1
 
 Restart FreeRADIUS to apply the changes:
 
-```
+```bash
 sudo systemctl restart freeradius.service
 ```
 
 Test authentication with a user from each group:
 
-```
+```bash
 radtest user1 secret localhost 0 testing123
 ```
 

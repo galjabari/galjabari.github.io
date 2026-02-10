@@ -17,19 +17,19 @@ To set up the domain controller on Windows Server:
 
 Next, verify that the mail server can access the domain controller over LDAP.
 
-```
+```bash
 ldapsearch -H ldap://dc.example.com -x -D admin@example.com -W -b "DC=example,DC=com"
 ```
 
 Create a system user on the mail server to host virtual mail accounts.
 
-```
+```bash
 sudo useradd -u 5000 -s /usr/sbin/nologin -d /var/mail vmail
 ```
 
 Set permissions for virtual mail directories.
 
-```
+```bash
 sudo chown -R vmail:vmail /var/mail
 ```
 
@@ -37,13 +37,13 @@ sudo chown -R vmail:vmail /var/mail
 
 Install the LDAP module for Postfix.
 
-```
+```bash
 sudo apt install postfix-ldap -y
 ```
 
 Edit the Postfix main configuration file.
 
-```
+```bash
 sudo nano /etc/postfix/main.cf
 ```
 
@@ -65,7 +65,7 @@ Make sure to remove the following line by commenting it out to deliver emails fo
 
 Create the LDAP configuration file for mail account lookup.
 
-```
+```bash
 sudo nano /etc/postfix/ad-mailboxes.cf
 ```
 
@@ -86,7 +86,7 @@ result_format = %d/%u/
 
 Restart the Postfix service to apply the changes.
 
-```
+```bash
 sudo systemctl restart postfix.service
 ```
 
@@ -94,13 +94,13 @@ sudo systemctl restart postfix.service
 
 Install the LDAP module for Dovecot.
 
-```
+```bash
 sudo apt install dovecot-ldap -y
 ```
 
 Edit the Dovecot authentication configuration file:
 
-```
+```bash
 sudo nano /etc/dovecot/conf.d/10-auth.conf
 ```
 
@@ -118,7 +118,7 @@ To use only LDAP authentication, you may need to comment out the following line:
 
 Edit the LDAP configuration for Dovecot.
 
-```
+```bash
 sudo nano /etc/dovecot/dovecot-ldap.conf.ext
 ```
 
@@ -139,7 +139,7 @@ pass_attrs = userPassword=password
 
 Edit the Dovecot mail configuration file:
 
-```
+```bash
 sudo nano /etc/dovecot/conf.d/10-mail.conf
 ```
 
@@ -153,7 +153,7 @@ mail_gid = 5000
 
 Restart the Dovecot service to apply the changes.
 
-```
+```bash
 sudo systemctl restart dovecot.service
 ```
 

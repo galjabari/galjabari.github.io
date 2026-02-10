@@ -11,13 +11,13 @@ Before integrating the mail server with an LDAP directory for user authenticatio
 
 Next, create a system user on the mail server to host virtual mail accounts.
 
-```
+```bash
 sudo useradd -u 5000 -s /usr/sbin/nologin -d /var/mail vmail
 ```
 
 Set permissions for virtual mail directories.
 
-```
+```bash
 sudo chown -R vmail:vmail /var/mail
 ```
 
@@ -25,13 +25,13 @@ sudo chown -R vmail:vmail /var/mail
 
 Install LDAP module for Postfix.
 
-```
+```bash
 sudo apt install postfix-ldap -y
 ```
 
 Edit the Postfix main configuration file.
 
-```
+```bash
 sudo nano /etc/postfix/main.cf
 ```
 
@@ -53,7 +53,7 @@ Make sure to remove the following line by commenting it out to deliver emails fo
 
 Create the LDAP configuration file for mail account lookup.
 
-```
+```bash
 sudo nano /etc/postfix/ldap-mailboxes.cf
 ```
 
@@ -76,7 +76,7 @@ Replace the LDAP server details such as base DN, admin credentials, and hostname
 
 Restart the Postfix service to apply the changes.
 
-```
+```bash
 sudo systemctl restart postfix.service
 ```
 
@@ -84,13 +84,13 @@ sudo systemctl restart postfix.service
 
 Install LDAP module for Dovecot.
 
-```
+```bash
 sudo apt install dovecot-ldap -y
 ```
 
 Edit the Dovecot authentication configuration file:
 
-```
+```bash
 sudo nano /etc/dovecot/conf.d/10-auth.conf
 ```
 
@@ -108,7 +108,7 @@ To use only LDAP authentication, you may need to comment out the following line:
 
 Edit the LDAP configuration for Dovecot:
 
-```
+```bash
 sudo nano /etc/dovecot/dovecot-ldap.conf.ext
 ```
 
@@ -130,7 +130,7 @@ Replace the LDAP server details such as base DN, admin credentials, and hostname
 
 Edit the Dovecot mail configuration file:
 
-```
+```bash
 sudo nano /etc/dovecot/conf.d/10-mail.conf
 ```
 
@@ -144,7 +144,7 @@ mail_gid = 5000
 
 Restart the Dovecot service to apply the changes.
 
-```
+```bash
 sudo systemctl restart dovecot.service
 ```
 

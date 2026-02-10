@@ -52,7 +52,7 @@ In this example, users belong to `group1` can access all services and users belo
 
 Finally, use `radtest` command to ensure that users are being authenticated and assigned the correct ACLs.
 
-```
+```bash
 radtest user2 secret localhost 0 testing123
 ```
 

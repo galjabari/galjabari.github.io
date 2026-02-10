@@ -9,13 +9,13 @@ This guide assumes that you have an existing mail server with the hostname `mail
 
 First, install the required packages on your server to deploy Roundcube webmail using the following command:
 
-```
+```bash
 sudo apt-get install apache2 mariadb-server roundcube -y
 ```
 
 Next, you need to configure Apache web server to enable access to Roundcube:
 
-```
+```bash
 sudo nano /etc/apache2/conf-enabled/roundcube.conf
 ```
 
@@ -27,13 +27,13 @@ Alias /roundcube /var/lib/roundcube/public_html
 
 Restart Apache to apply the changes:
 
-```
+```bash
 sudo systemctl restart apache2.service
 ```
 
 Now, edit the Roundcube configuration file:
 
-```
+```bash
 sudo nano /etc/roundcube/config.inc.php
 ```
 

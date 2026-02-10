@@ -9,13 +9,13 @@ This guide assumes you have already configured [FreeRADIUS with LDAP authenticat
 
 First, switch to the `root` user to modify the configuration files of FreeRADIUS:
 
-```
+```bash
 sudo -i
 ```
 
 Edit the FreeRADIUS configuration file:
 
-```
+```bash
 nano /etc/freeradius/3.0/sites-available/default
 ```
 
@@ -31,7 +31,7 @@ authorize {
 
 Edit the LDAP module configuration file to configure LDAP group lookups:
 
-```
+```bash
 nano /etc/freeradius/3.0/mods-available/ldap
 ```
 
@@ -49,7 +49,7 @@ membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-U
 
 To define the access policies that grant or deny access based on LDAP group membership, edit the FreeRADIUS configuration file:
 
-```
+```bash
 nano /etc/freeradius/3.0/sites-available/default
 ```
 
@@ -65,19 +65,19 @@ if (LDAP-Group == "group1") {
 
 To apply the changes, restart the FreeRADIUS service:
 
-```
+```bash
 systemctl restart freeradius.service
 ```
 
 Check the status of the FreeRADIUS service to ensure it restarted without errors.
 
-```
+```bash
 systemctl status freeradius.service
 ```
 
 Finally, use `radtest` command to ensure that users are being authenticated and authorized correctly based on LDAP group membership.
 
-```
+```bash
 radtest user1 secret localhost 0 testing123
 ```
 
@@ -87,7 +87,7 @@ If `user1` is a member of the `group1` group, FreeRADIUS should grant access. If
 
 To restrict access based on LDAP groups, you can also define a policy in user profiles by editing the following file:
 
-```
+```bash
 nano /etc/freeradius/3.0/mods-config/files/authorize
 ```
 
@@ -99,13 +99,13 @@ DEFAULT LDAP-Group == "group2", Auth-Type := Reject
 
 To apply the changes, restart the FreeRADIUS service.
 
-```
+```bash
 systemctl restart freeradius.service
 ```
 
 Test the configuration using `radtest` command.
 
-```
+```bash
 radtest user2 secret localhost 0 testing123
 ```
 

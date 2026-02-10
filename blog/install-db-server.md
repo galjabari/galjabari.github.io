@@ -7,25 +7,25 @@ title: "Install and manage a Database Server on Ubuntu"
 
 First, update package lists to ensure you have the latest versions available:
 
-```
+```bash
 sudo apt update
 ```
 
 You can install MariaDB server using the following command:
 
-```
+```bash
 sudo apt install mariadb-server -y
 ```
 
 Once the installation is complete, the MariaDB server should be started automatically. You can check MariaDB service status by typing:
 
-```
+```bash
 sudo systemctl status mariadb.service
 ```
 
 Log in to the MariaDB server:
 
-```
+```bash
 sudo mysql -u root -p
 ```
 
@@ -33,7 +33,7 @@ Press Enter to access the MariaDB server without a password. Type `exit` to quit
 
 After installing MariaDB, it's recommended to run the following script to secure the installation:
 
-```
+```bash
 sudo mysql_secure_installation
 ```
 
@@ -41,7 +41,7 @@ Follow the prompts to set up a root password, remove anonymous users, disallow r
 
 To manage MariaDB using a web browser, you can use phpMyAdmin tool. To install phpMyAdmin on Ubuntu run the following command:
 
-```
+```bash
 sudo apt install phpmyadmin -y
 ```
 
