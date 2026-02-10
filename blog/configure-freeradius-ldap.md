@@ -11,19 +11,19 @@ Before configuring FreeRADIUS to use an LDAP server for authentication, you need
 
 Next, install the LDAP module for FreeRADIUS:
 
-```
+```bash
 sudo apt-get install freeradius-ldap -y
 ```
 
 Switch to the `root` user to modify the configuration files of FreeRADIUS:
 
-```
+```bash
 sudo -i
 ```
 
 Edit the FreeRADIUS configuration file to add LDAP support:
 
-```
+```bash
 nano /etc/freeradius/3.0/sites-available/default
 ```
 
@@ -37,7 +37,7 @@ Auth-Type LDAP {
 
 Edit the LDAP module configuration file to add LDAP server settings:
 
-```
+```bash
 nano /etc/freeradius/3.0/mods-available/ldap
 ```
 
@@ -54,19 +54,19 @@ Replace the LDAP server details such as base DN, admin credentials, and hostname
 
 Create a symbolic link to enable the LDAP module:
 
-```
+```bash
 ln -s /etc/freeradius/3.0/mods-available/ldap /etc/freeradius/3.0/mods-enabled/ldap
 ```
 
 To apply the changes, restart the FreeRADIUS service:
 
-```
+```bash
 systemctl restart freeradius.service
 ```
 
 Finally, test LDAP authentication using the `radtest` command:
 
-```
+```bash
 radtest user1 secret localhost 0 testing123
 ```
 

@@ -7,25 +7,25 @@ title: "Install and configure RADIUS Server on Ubuntu"
 
 First, update the package lists to ensure you have the latest versions available:
 
-```
+```bash
 sudo apt update
 ```
 
 Install FreeRADIUS server using the following command:
 
-```
+```bash
 sudo apt-get install freeradius -y
 ```
 
 Switch to the `root` user to modify the configuration files of FreeRADIUS:
 
-```
+```bash
 sudo -i
 ```
 
 Edit the clients configuration file using a text editor:
 
-```
+```bash
 nano /etc/freeradius/3.0/clients.conf
 ```
 
@@ -44,7 +44,7 @@ Replace `switch1` client with your own client identifier, IP address, and shared
 
 Edit the users configuration file:
 
-```
+```bash
 nano /etc/freeradius/3.0/users
 ```
 
@@ -58,7 +58,7 @@ Replace `bob` user and `secret` password with your own username and password.
 
 Edit the EAP configuration file:
 
-```
+```bash
 nano /etc/freeradius/3.0/mods-available/eap
 ```
 
@@ -72,19 +72,19 @@ This configuration is used to ensure compatibility with a broader range of devic
 
 Restart the FreeRADIUS service to apply the changes:
 
-```
+```bash
 systemctl restart freeradius.service
 ```
 
 Enable the FreeRADIUS service to start automatically on system boot:
 
-```
+```bash
 systemctl enable freeradius.service
 ```
 
 To verify that your RADIUS server is configured correctly, run the following command:
 
-```
+```bash
 radtest bob hello localhost 0 testing123
 ```
 
@@ -92,14 +92,14 @@ The output of `radtest` will indicate whether the authentication message was suc
 
 To monitor the RADIUS server's activity in real-time, stop the FreeRADIUS service temporarily and run the FreeRADIUS in debug mode:
 
-```
+```bash
 systemctl stop freeradius.service
 freeradius -X
 ```
 
 Open another terminal window and test the connection using the `radtest` command. Exit FreeRADIUS debug mode by pressing Ctrl + C in the terminal running FreeRADIUS and start the FreeRADIUS service:
 
-```
+```bash
 systemctl start freeradius.service
 ```
 

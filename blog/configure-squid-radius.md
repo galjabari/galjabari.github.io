@@ -11,7 +11,7 @@ Before configuring Squid proxy to authenticate users against a RADIUS server, yo
 
 Next, edit the Squid configuration file using the following command:
 
-```
+```bash
 sudo nano /etc/squid/squid.conf
 ```
 
@@ -36,7 +36,7 @@ Remove the following line by commenting it out to restrict access to authenticat
 
 After making changes, reload the Squid service to apply the configuration:
 
-```
+```bash
 sudo systemctl reload squid.service
 ```
 

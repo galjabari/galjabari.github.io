@@ -7,13 +7,13 @@ title: "Install and Configure LDAP Server on Ubuntu"
 
 First, set the hostname within your domain. Replace `example.com` with your actual domain.
 
-```
+```bash
 sudo hostname ldap.example.com
 ```
 
 Next, update package lists and install OpenLDAP and related utilities.
 
-```
+```bash
 sudo apt update
 sudo apt install slapd ldap-utils -y
 ```
@@ -22,7 +22,7 @@ After installation, you will be prompted to configure the OpenLDAP server. When 
 
 You can also reconfigure the OpenLDAP server anytime using:
 
-```
+```bash
 sudo dpkg-reconfigure slapd
 ```
 
@@ -35,7 +35,7 @@ Step 6: Select Yes if you want to move existing LDAP files.
 
 Create a file named `base.ldif` using your preferred text editor. This file defines the base organizational units for your LDAP directory.
 
-```
+```bash
 nano base.ldif
 ```
 
@@ -53,7 +53,7 @@ ou: Groups
 
 Use the `ldapadd` command to add entries to the LDAP directory.
 
-```
+```bash
 ldapadd -x -D cn=admin,dc=example,dc=com -W -f base.ldif
 ```
 
@@ -61,7 +61,7 @@ You will be prompted to enter the LDAP administrator's password.
 
 Create a file named `account.ldif` to define user entries.
 
-```
+```bash
 nano account.ldif
 ```
 
@@ -87,13 +87,13 @@ userPassword: secret
 
 Use the `ldapadd` command to add entries to the LDAP directory.
 
-```
+```bash
 ldapadd -x -D cn=admin,dc=example,dc=com -W -f account.ldif
 ```
 
 Create a file named `group.ldif` to define group entries.
 
-```
+```bash
 nano group.ldif
 ```
 
@@ -111,7 +111,7 @@ member: uid=user2,ou=People,dc=example,dc=com
 
 Use the `ldapadd` command to add entries to the LDAP directory.
 
-```
+```bash
 ldapadd -x -D cn=admin,dc=example,dc=com -W -f group.ldif
 ```
 
@@ -119,7 +119,7 @@ You can use the `ldapsearch` command to test the LDAP connection and perform que
 
 Here's how you can test:
 
-```
+```bash
 ldapsearch -x -LLL -H ldap://localhost -b dc=example,dc=com
 ```
 

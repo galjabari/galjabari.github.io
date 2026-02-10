@@ -11,7 +11,7 @@ Before configuring FreeRADIUS to use SQL database as the backend for authenticat
 
 First, install the SQL module for FreeRADIUS:
 
-```
+```bash
 sudo apt-get install freeradius-mysql -y
 ```
 
@@ -19,7 +19,7 @@ sudo apt-get install freeradius-mysql -y
 
 Log in to the database server:
 
-```
+```bash
 sudo mysql -u root -p
 ```
 
@@ -33,13 +33,13 @@ exit
 
 Import the RADIUS database schema using the following command:
 
-```
+```bash
 sudo mysql -u root -p radius < /etc/freeradius/3.0/mods-config/sql/main/mysql/schema.sql
 ```
 
 Edit the `default` site configuration file and enable `sql` in the `authorize` and `accounting` sections:
 
-```
+```bash
 nano /etc/freeradius/3.0/sites-available/default
 ```
 
@@ -59,13 +59,13 @@ accounting {
 
 Similarly, edit `inner-tunnel` configuration file and enable `sql` in the `authorize` and `accounting` sections:
 
-```
+```bash
 nano /etc/freeradius/3.0/sites-available/inner-tunnel
 ```
 
 Edit the SQL module configuration file:
 
-```
+```bash
 nano /etc/freeradius/3.0/mods-available/sql
 ```
 
@@ -85,13 +85,13 @@ Replace `localhost` with your database server's hostname or IP address. Ensure t
 
 Create a symbolic link to enable the SQL module:
 
-```
+```bash
 ln -s /etc/freeradius/3.0/mods-available/sql /etc/freeradius/3.0/mods-enabled/sql
 ```
 
 Edit the EAP configuration file to send reply attributes with PEAP authentication method:
 
-```
+```bash
 nano /etc/freeradius/3.0/mods-available/eap
 ```
 
@@ -107,13 +107,13 @@ peap {
 
 To apply the changes, restart the FreeRADIUS service:
 
-```
+```bash
 systemctl restart freeradius.service
 ```
 
 To verify your configuration, log in to the database server:
 
-```
+```bash
 mysql -u radius -p
 ```
 
@@ -127,7 +127,7 @@ exit
 
 Finally, test the configuration using the `radtest` command:
 
-```
+```bash
 radtest user1 secret localhost 0 testing123
 ```
 

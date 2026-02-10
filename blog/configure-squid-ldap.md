@@ -11,7 +11,7 @@ Before configuring Squid proxy to use an LDAP server for authentication, you nee
 
 Next, edit the Squid configuration file using the following command:
 
-```
+```bash
 sudo nano /etc/squid/squid.conf
 ```
 
@@ -39,7 +39,7 @@ Remove the following line by commenting it out to restrict access to authenticat
 
 After making changes, reload the Squid service to apply the configuration:
 
-```
+```bash
 sudo systemctl reload squid.service
 ```
 
@@ -47,7 +47,7 @@ You can now connect to proxy server from your client devices using LDAP username
 
 To configure Squid for group-based access control using LDAP, you need to define an external ACL type for LDAP group. Edit the Squid configuration file again:
 
-```
+```bash
 sudo nano /etc/squid/squid.conf
 ```
 
@@ -72,7 +72,7 @@ Make sure to remove the following line by commenting it out to restrict access t
 
 After making changes, reload the Squid service to apply the configuration:
 
-```
+```bash
 sudo systemctl reload squid.service
 ```
 

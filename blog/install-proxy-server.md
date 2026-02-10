@@ -7,14 +7,14 @@ title: "Install a Proxy Server on Ubuntu"
 
 Update package lists and install Squid proxy server.
 
-```
+```bash
 sudo apt update
 sudo apt install squid -y
 ```
 
 Edit the Squid configuration file using a text editor.
 
-```
+```bash
 sudo nano /etc/squid/squid.conf
 ```
 
@@ -28,13 +28,13 @@ http_access allow localnet
 
 To apply the changes made to the configuration file, save the file and restart the Squid service.
 
-```
+```bash
 sudo systemctl restart squid.service
 ```
 
 Check the status of the Squid service to ensure it restarts without errors.
 
-```
+```bash
 sudo systemctl status squid.service
 ```
 
@@ -42,13 +42,13 @@ You can now connect to this proxy server from your client devices. Enter the IP 
 
 To monitor access to your proxy server in real-time, you can tail the access log.
 
-```
+```bash
 sudo tail -f /var/log/squid/access.log
 ```
 
 To block specific websites, edit the Squid configuration file again.
 
-```
+```bash
 sudo nano /etc/squid/squid.conf
 ```
 
@@ -61,7 +61,7 @@ http_access deny blocklist
 
 After updating the configuration file, you will need to save the file and reload the Squid service for changes to take effect.
 
-```
+```bash
 sudo systemctl reload squid.service
 ```
 

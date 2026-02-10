@@ -11,7 +11,7 @@ You can manage the OpenLDAP directory on Linux using command-line utilities such
 
 Update package lists and install phpLDAPadmin.
 
-```
+```bash
 sudo apt update
 sudo apt install phpldapadmin -y
 ```
@@ -22,7 +22,7 @@ During installation, the Apache web server may be automatically installed and co
 
 Update package lists and install Java.
 
-```
+```bash
 sudo apt update
 sudo apt install default-jre -y
 ```
