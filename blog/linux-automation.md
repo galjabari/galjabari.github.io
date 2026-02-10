@@ -11,7 +11,7 @@ To automate tasks on Linux systems such as installing software, configuring serv
 
 To install Ansible on your Linux machine (control node), run the following commands:
 
-```
+```bash
 sudo apt update
 sudo apt install software-properties-common -y
 sudo add-apt-repository --yes --update ppa:ansible/ansible
@@ -20,7 +20,7 @@ sudo apt install ansible -y
 
 Verify the installation by checking the Ansible version:
 
-```
+```bash
 ansible --version
 ```
 
@@ -28,7 +28,7 @@ ansible --version
 
 To manage and configure Linux systems with Ansible, you need to create an inventory file that lists target Linux hosts along with their settings:
 
-```
+```bash
 nano hosts.ini
 ```
 
@@ -64,7 +64,7 @@ You can generate SSH keys on your machine to connect to the target hosts using t
 
 To verify connectivity with the target hosts and ensure the ability to log in, you can use the `ping` module within an Ansible playbook:
 
-```
+```bash
 nano ping.yml
 ```
 
@@ -81,7 +81,7 @@ Add the following lines in the playbook:
 
 Run the playbook using the `ansible-playbook` command:
 
-```
+```bash
 ansible-playbook -i hosts.ini ping.yml
 ```
 
@@ -89,7 +89,7 @@ This will ping all hosts defined in the playbook and return a success response f
 
 To define system administration tasks using Ansible, you should create a playbook. For example:
 
-```
+```bash
 nano install_apache.yml
 ```
 
@@ -116,7 +116,7 @@ Add the following lines to install Apache web server:
 
 Run the playbook:
 
-```
+```bash
 ansible-playbook -i hosts.ini install_apache.yml
 ```
 
@@ -124,7 +124,7 @@ Open a web browser and enter the IP address of `webserver` in the address bar; y
 
 To configure a new virtual host or site on Apache, you need to create a new playbook file:
 
-```
+```bash
 nano config_vhost.yml
 ```
 
@@ -177,7 +177,7 @@ Replace `example.com` with your desired domain name for the new virtual host.
 
 Create a Jinja2 template file:
 
-```
+```bash
 nano vhost.conf.j2
 ```
 
@@ -198,7 +198,7 @@ Add the following content:
 
 Run the playbook:
 
-```
+```bash
 ansible-playbook -i hosts.ini config_vhost.yml
 ```
 

@@ -34,13 +34,13 @@ Make sure to choose a key size of 1024 bits or higher when prompted to generate 
 
 After setting up SSH on the Cisco switch, connect your Linux machine to the switch and create a folder for Python script:
 
-```
+```bash
 mkdir tasks
 ```
 
 Inside the folder, create a virtual environment and activate it:
 
-```
+```bash
 cd tasks
 python3 -m venv .venv
 source .venv/bin/activate
@@ -48,13 +48,13 @@ source .venv/bin/activate
 
 Install the `Netmiko` via `pip` if you haven't already:
 
-```
+```bash
 pip install netmiko
 ```
 
 Here's a Python script to configure a network device. Create a new Python file using your preferred editor:
 
-```
+```bash
 nano config_switch.py
 ```
 
@@ -88,7 +88,7 @@ net_connect.disconnect()
 
 Save the script and run it using Python:
 
-```
+```bash
 python3 config_switch.py
 ```
 
@@ -114,7 +114,7 @@ To connect to multiple network devices, you need to ensure SSH is configured on 
 
 Here's a Python script to configure multiple devices using Netmiko. Create a new Python file:
 
-```
+```bash
 nano config_vlans.py
 ```
 
@@ -162,6 +162,6 @@ for device in (switch1, switch2, switch3):
 
 Save the script and run it using Python:
 
-```
+```bash
 python3 config_vlans.py
 ```

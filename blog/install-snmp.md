@@ -11,14 +11,14 @@ This guide explains how to install and configure SNMP on Ubuntu.
 
 First, update your package list and install the SNMP daemon and SNMP tools.
 
-```
+```bash
 sudo apt update
 sudo apt install snmp snmpd -y
 ```
 
 Next, you need to configure the SNMP daemon.
 
-```
+```bash
 sudo nano /etc/snmp/snmpd.conf
 ```
 
@@ -35,26 +35,26 @@ This configuration sets the system location, contact information, the agent's li
 
 Restart the SNMP daemon for the changes to take effect.
 
-```
+```bash
 sudo systemctl restart snmpd
 ```
 
 Then, check its status and enable it to start on boot.
 
-```
+```bash
 sudo systemctl status snmpd
 sudo systemctl enable snmpd
 ```
 
 You can test the SNMP configuration using the `snmpwalk` command.
 
-```
+```bash
 snmpwalk -v2c -c public localhost
 ```
 
 Here are some examples using common Object Identifiers (OIDs):
 
-```
+```bash
 # Get system uptime
 snmpwalk -v2c -c public localhost 1.3.6.1.2.1.1.3
 # Get system contact
