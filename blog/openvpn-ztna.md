@@ -8,13 +8,13 @@ title: "OpenVPN with RADIUS for ZTNA"
 This guide explains how to implement Zero Trust Network Access (ZTNA) using OpenVPN and FreeRADIUS, with the goal of enforcing a zero trust approach: never trust, always verify.
 
 Before you begin, make sure to complete the following guide:
-[Configure OpenVPN with RADIUS authentication](openvpn-radius.md)
+- [Configure OpenVPN with RADIUS authentication](openvpn-radius.md)
 
 ## 1. Configure RADIUS server
 
 Edit the users configuration file of FreeRADIUS:
 
-```
+```bash
 sudo nano /etc/freeradius/3.0/users
 ```
 
@@ -28,19 +28,19 @@ vpnuser Cleartext-Password := "secret"
 
 Restart the FreeRADIUS service to apply the changes:
 
-```
+```bash
 sudo systemctl restart freeradius.service
 ```
 
 Check the status to ensure it is running correctly:
 
-```
+```bash
 sudo systemctl status freeradius.service
 ```
 
 Test the RADIUS user authentication:
 
-```
+```bash
 radtest vpnuser secret localhost 0 testing123
 ```
 
@@ -48,13 +48,13 @@ radtest vpnuser secret localhost 0 testing123
 
 Create a directory for client-specific configurations in OpenVPN:
 
-```
+```bash
 sudo mkdir -p /etc/openvpn/ccd
 ```
 
 Edit the OpenVPN server configuration file:
 
-```
+```bash
 sudo nano /etc/openvpn/server/server.conf
 ```
 
@@ -72,7 +72,7 @@ This configuration pushes the route to the internal LAN, sets the DNS server for
 
 Edit the OpenVPN RADIUS plugin configuration file:
 
-```
+```bash
 sudo nano /etc/openvpn/radiusplugin.cnf
 ```
 
@@ -84,13 +84,13 @@ client-config-dir /etc/openvpn/ccd
 
 Restart the OpenVPN server to apply the changes:
 
-```
+```bash
 sudo systemctl restart openvpn-server@server.service
 ```
 
 Check the status to ensure it is running correctly:
 
-```
+```bash
 sudo systemctl status openvpn-server@server.service
 ```
 
@@ -100,7 +100,7 @@ To verify the setup, connect to the VPN using the configured user credentials. O
 
 To enhance logging and monitoring, you can create a script that logs connection and disconnection events. For example, edit the server configuration file:
 
-```
+```bash
 sudo nano /etc/openvpn/server/server.conf
 ```
 
@@ -114,13 +114,13 @@ client-disconnect /etc/openvpn/client-events.sh
 
 Create the script file:
 
-```
+```bash
 sudo nano /etc/openvpn/client-events.sh
 ```
 
 Add the following content:
 
-```
+```bash
 #!/bin/bash
 LOGFILE="/var/log/openvpn/clients.log"
 DATE_TIME=$(date +"%Y-%m-%d %H:%M:%S")
@@ -137,20 +137,20 @@ exit 0
 
 Make sure the script is executable:
 
-```
+```bash
 sudo chmod +x /etc/openvpn/client-events.sh
 ```
 
 Create the log file and set permissions:
 
-```
+```bash
 sudo touch /var/log/openvpn/clients.log
 sudo chown nobody:nogroup /var/log/openvpn/clients.log
 ```
 
 Restart the OpenVPN server to apply the changes:
 
-```
+```bash
 sudo systemctl restart openvpn-server@server.service
 ```
 
