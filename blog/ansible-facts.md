@@ -9,7 +9,7 @@ This guide assumes you have already installed [Ansible on your control node](lin
 
 To view system information for a target host with Ansible, you need to create an inventory file listing target hosts:
 
-```
+```bash
 nano hosts.ini
 ```
 
@@ -30,7 +30,7 @@ Ensure that the SSH service is installed and properly configured on the target h
 
 Create a playbook to gather facts about your target hosts. For example:
 
-```
+```bash
 nano system_info.yml
 ```
 
@@ -71,7 +71,7 @@ Add the following lines into the playbook:
 
 Run the playbook:
 
-```
+```bash
 ansible-playbook -i hosts.ini system_info.yml
 ```
 

@@ -11,7 +11,7 @@ This guide assumes you have already installed [Ansible on your control node](lin
 
 To install Docker on your target hosts with Ansible, you need to create an inventory file listing target hosts:
 
-```
+```bash
 nano hosts.ini
 ```
 
@@ -32,7 +32,7 @@ Ensure that the SSH service is installed and properly configured on the target h
 
 Create a playbook with tasks to install Docker on the target hosts. For example:
 
-```
+```bash
 nano install_docker.yml
 ```
 
@@ -95,7 +95,7 @@ Add the following lines into the playbook:
 
 Run the playbook:
 
-```
+```bash
 ansible-playbook -i hosts.ini install_docker.yml
 ```
 
@@ -105,7 +105,7 @@ After running the playbook, you should be able to pull Docker images and run con
 
 Create a playbook to automate the deployment of Docker containers (e.g., nginx):
 
-```
+```bash
 nano deploy_nginx.yml
 ```
 
@@ -148,7 +148,7 @@ Add the following lines into the playbook:
 
 Run the playbook:
 
-```
+```bash
 ansible-playbook -i hosts.ini deploy_nginx.yml
 ```
 

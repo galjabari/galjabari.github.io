@@ -11,13 +11,13 @@ First, you need to install [Ansible](linux-automation.md) and [Terraform](infras
 
 To automate the deployment of a Docker Swarm cluster, you need to clone my repository to your machine:
 
-```
+```bash
 git clone https://github.com/galjabari/cloud-computing.git
 ```
 
 Run Terraform to provision the infrastructure:
 
-```
+```bash
 cd cloud-computing/swarm
 terraform init
 terraform apply -auto-approve
@@ -27,7 +27,7 @@ This will create a Swarm cluster with one manager node and two worker nodes. Rep
 
 Run Ansible playbook to configure the Docker Swarm cluster:
 
-```
+```bash
 ansible-playbook -i hosts.ini create_swarm.yml
 ```
 
@@ -35,6 +35,6 @@ The playbook includes tasks to install Docker on the nodes, initialize the Swarm
 
 Run Ansible playbook to deploy a service and verify the cluster:
 
-```
+```bash
 ansible-playbook -i hosts.ini deploy_nginx.yml
 ```

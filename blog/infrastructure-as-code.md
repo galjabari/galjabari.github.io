@@ -18,7 +18,7 @@ First, set up Proxmox VE and configure API access with appropriate user permissi
 
 To install Terraform on your Linux machine, run the following commands:
 
-```
+```bash
 wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 sudo apt update && sudo apt install terraform -y
@@ -26,7 +26,7 @@ sudo apt update && sudo apt install terraform -y
 
 Verify the installation by checking the Terraform version:
 
-```
+```bash
 terraform --version
 ```
 
@@ -34,7 +34,7 @@ terraform --version
 
 To define the Proxmox provider and API access in Terraform, you need to create a `main.tf` configuration file:
 
-```
+```bash
 nano main.tf
 ```
 
@@ -61,7 +61,7 @@ Replace `192.168.1.10` with the IP address or hostname of your Proxmox server. P
 
 Run the following command to install the Proxmox provider:
 
-```
+```bash
 terraform init
 ```
 
@@ -71,7 +71,7 @@ Terraform can be used with Proxmox to automate the deployment of virtual machine
 
 To define and manage LXC containers using Terraform, create a Terraform configuration file:
 
-```
+```bash
 nano lxc.tf
 ```
 
@@ -104,13 +104,13 @@ Make sure to download the specified container image or template on Proxmox befor
 
 Run the following command to view the planned changes:
 
-```
+```bash
 terraform plan
 ```
 
 Run the following command to apply the changes:
 
-```
+```bash
 terraform apply -auto-approve
 ```
 
@@ -122,7 +122,7 @@ To deploy a virtual machine (VM) in Proxmox with Terraform, you need to create a
 
 You can create a VM template from a cloud image in Proxmox by executing the following commands:
 
-```
+```bash
 # install the necessary tools to manage disk images
 apt update && apt install libguestfs-tools -y
 # download Ubuntu 22.04 cloud image
@@ -155,7 +155,7 @@ qm template 9000
 
 In Terraform, create a configuration file:
 
-```
+```bash
 nano vm.tf
 ```
 
