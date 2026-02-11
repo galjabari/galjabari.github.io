@@ -11,19 +11,19 @@ This guide provides a simple way to install OpenVPN server using a bash script. 
 
 Download the OpenVPN installation script.
 
-```
+```bash
 wget https://git.io/vpn -O openvpn-install.sh
 ```
 
 Make the script executable.
 
-```
+```bash
 chmod +x openvpn-install.sh
 ```
 
 Execute the script with root privileges:
 
-```
+```bash
 sudo ./openvpn-install.sh
 ```
 

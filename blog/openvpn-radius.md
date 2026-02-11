@@ -8,14 +8,14 @@ title: "Configure OpenVPN with RADIUS authentication"
 This guide walks you through setting up OpenVPN with RADIUS authentication. It assumes you have a working OpenVPN server and a FreeRADIUS server installed on Ubuntu.
 
 Before proceeding, ensure you have completed the following guides:
-[Install and configure RADIUS Server on Ubuntu](install-radius-server.md)
-[Install OpenVPN Server on Ubuntu](install-openvpn.md)
+- [Install and configure RADIUS Server on Ubuntu](install-radius-server.md)
+- [Install OpenVPN Server on Ubuntu](install-openvpn.md)
 
 ## 1. Configure RADIUS server
 
 Edit the FreeRADIUS client configuration file:
 
-```
+```bash
 sudo nano /etc/freeradius/3.0/clients.conf
 ```
 
@@ -30,7 +30,7 @@ client openvpn {
 
 Restart the FreeRADIUS service to apply the changes:
 
-```
+```bash
 sudo systemctl restart freeradius.service
 ```
 
@@ -38,19 +38,19 @@ sudo systemctl restart freeradius.service
 
 Install the OpenVPN RADIUS authentication plugin:
 
-```
+```bash
 sudo apt-get install openvpn-auth-radius -y
 ```
 
 Copy the example configuration file for the RADIUS plugin:
 
-```
+```bash
 sudo cp /usr/share/doc/openvpn-auth-radius/examples/radiusplugin.cnf /etc/openvpn/radiusplugin.cnf
 ```
 
 Edit the RADIUS plugin configuration file:
 
-```
+```bash
 sudo nano /etc/openvpn/radiusplugin.cnf
 ```
 
@@ -78,7 +78,7 @@ server
 
 Edit the OpenVPN server configuration file:
 
-```
+```bash
 sudo nano /etc/openvpn/server/server.conf
 ```
 
@@ -90,13 +90,13 @@ plugin /usr/lib/openvpn/radiusplugin.so /etc/openvpn/radiusplugin.cnf
 
 Restart the OpenVPN server service to apply the changes:
 
-```
+```bash
 sudo systemctl restart openvpn-server@server.service
 ```
 
 Check the status of the OpenVPN server service:
 
-```
+```bash
 sudo systemctl status openvpn-server@server.service
 ```
 
@@ -104,7 +104,7 @@ sudo systemctl status openvpn-server@server.service
 
 To connect an OpenVPN client to the server, modify the client configuration file (e.g., `client.ovpn`):
 
-```
+```bash
 sudo nano client.ovpn
 ```
 
