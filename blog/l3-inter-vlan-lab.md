@@ -100,29 +100,29 @@ This configuration enables IP routing, creates two VLANs with corresponding Laye
 
 To deploy the network topology, run the following command:
 
-```
+```bash
 clab deploy -t layer3.clab.yml
 ```
 
 After the lab is deployed, you can test connectivity between the clients. Open a new terminal and connect to client1:
 
-```
+```bash
 docker exec -it clab-layer3-client1 sh
 ```
 
 Check the IP address assigned by the DHCP server:
 
-```
+```sh
 ip addr show eth1
 ```
 
 Do the same for client2 in another terminal:
 
-```
+```bash
 docker exec -it clab-layer3-client2 sh
 ```
 
-```
+```sh
 ip addr show eth1
 ```
 
@@ -130,19 +130,19 @@ Once you have the IP address of client2, ping it from client1 to test inter-VLAN
 
 To access the switch CLI:
 
-```
+```bash
 docker exec -it clab-layer3-switch Cli
 ```
 
 Verify the routing table on the switch:
 
-```
+```sh
 show ip route
 ```
 
 Verify DHCP server leases:
 
-```
+```sh
 show dhcp server leases
 ```
 
@@ -150,6 +150,6 @@ show dhcp server leases
 
 After testing, you can clean up the lab environment. To remove the lab and all related files, run:
 
-```
+```bash
 clab destroy -t layer3.clab.yml --cleanup
 ```

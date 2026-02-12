@@ -9,7 +9,7 @@ This guide walks you through setting up a RADIUS server with Containerlab and co
 
 First, create the directory structure for the RADIUS server configuration files.
 
-```
+```bash
 mkdir -p raddb/mods-config/files
 ```
 
@@ -84,13 +84,13 @@ This configuration sets up the switch to use the RADIUS server at `192.168.10.10
 
 Deploy the lab using Containerlab:
 
-```
+```bash
 clab deploy -t radius.clab.yml
 ```
 
 To verify the RADIUS authentication, connect to the Arista switch using SSH:
 
-```
+```bash
 ssh clab@clab-radius-switch
 ```
 
@@ -98,7 +98,7 @@ Enter the password `clab` when prompted. You should be able to log in and see th
 
 To view the RADIUS server logs, check the output of the RADIUS server container:
 
-```
+```bash
 docker logs clab-radius-server
 ```
 

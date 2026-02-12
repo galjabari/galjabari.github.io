@@ -9,7 +9,7 @@ This guide walks you through setting up a DNS server with Containerlab. The lab 
 
 First, create the directory structure for the BIND DNS server configuration files.
 
-```
+```bash
 mkdir -p bind/zones
 ```
 
@@ -112,20 +112,20 @@ end
 
 Deploy the lab using Containerlab:
 
-```
+```bash
 clab deploy -t dns.clab.yml
 ```
 
 To verify DNS resolution, connect to the client container and attempt to ping the web server using its DNS name:
 
-```
+```bash
 docker exec -it clab-dns-client sh
 ping www.example.com
 ```
 
 Test web server access:
 
-```
+```sh
 wget -O- http://www.example.com
 ```
 

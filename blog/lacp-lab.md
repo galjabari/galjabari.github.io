@@ -67,7 +67,7 @@ This configuration file sets up two VLANs (10 and 20) and configures Ethernet1 a
 
 Deploy the topology with the following command:
 
-```
+```bash
 clab deploy -t lacp.clab.yml
 ```
 
@@ -75,7 +75,7 @@ After the lab is deployed, you can verify the LACP configuration. Access `switch
 
 To access `switch1`, use the following command:
 
-```
+```bash
 docker exec -it clab-lacp-switch1 Cli
 ```
 
@@ -97,6 +97,6 @@ show interfaces Port-Channel1
 
 When you are finished, you can destroy the lab environment and remove all related files with the following command:
 
-```
+```bash
 clab destroy -t lacp.clab.yml --cleanup
 ```

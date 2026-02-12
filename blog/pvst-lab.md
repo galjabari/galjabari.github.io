@@ -67,7 +67,7 @@ This configuration sets up two VLANs (10 and 20) and enables Rapid PVST. The por
 
 Deploy the topology with the following command:
 
-```
+```bash
 clab deploy -t pvst.clab.yml
 ```
 
@@ -77,7 +77,7 @@ After the lab is deployed, you can verify the PVST configuration. Access `switch
 
 To access `switch1`, use the following command:
 
-```
+```bash
 docker exec -it clab-pvst-switch1 Cli
 ```
 
@@ -97,6 +97,6 @@ show spanning-tree vlan 20
 
 When you are finished, you can destroy the lab environment and remove all related files with the following command:
 
-```
+```bash
 clab destroy -t pvst.clab.yml --cleanup
 ```

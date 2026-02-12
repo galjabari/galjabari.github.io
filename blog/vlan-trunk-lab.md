@@ -155,7 +155,7 @@ end
 
 Deploy the topology with the following command:
 
-```
+```bash
 clab deploy -t trunk.clab.yml
 ```
 
@@ -163,21 +163,21 @@ clab deploy -t trunk.clab.yml
 
 After the lab is deployed, you can test connectivity between clients. For example, to test communication between clients in the same VLAN but on different switches, access `client1` and ping `client3`. You can access the client with the following command:
 
-```
+```bash
 docker exec -it clab-trunk-client1 sh
 ```
 
 To access the CLI for each switch, use the following commands:
 
-```
+```bash
 docker exec -it clab-trunk-spine Cli
 ```
 
-```
+```bash
 docker exec -it clab-trunk-leaf1 Cli
 ```
 
-```
+```bash
 docker exec -it clab-trunk-leaf2 Cli
 ```
 
@@ -205,6 +205,6 @@ show interfaces trunk
 
 When you are finished, you can destroy the lab environment and remove all related files with the following command:
 
-```
+```bash
 clab destroy -t trunk.clab.yml --cleanup
 ```

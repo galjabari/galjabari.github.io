@@ -174,7 +174,7 @@ In this configuration, leaf1 is also set up to use VXLAN with a VNI of 10010, al
 
 To deploy the network topology, run the following command:
 
-```
+```bash
 clab deploy -t vxlan.clab.yml
 ```
 
@@ -182,27 +182,27 @@ clab deploy -t vxlan.clab.yml
 
 After the lab is deployed, you can test connectivity between the clients. Open a new terminal and connect to client1:
 
-```
+```bash
 docker exec -it clab-vxlan-client1 sh
 ```
 
 Ping client2 to test the VXLAN tunnel:
 
-```
+```sh
 ping 192.168.10.2
 ```
 
 To access the switches:
 
-```
+```bash
 ssh clab-vxlan-leaf1
 ```
 
-```
+```bash
 ssh clab-vxlan-leaf2
 ```
 
-```
+```bash
 ssh clab-vxlan-spine
 ```
 
@@ -220,6 +220,6 @@ show vxlan address-table
 
 After testing, you can clean up the lab environment. To remove the lab and all related files, run:
 
-```
+```bash
 clab destroy -t vxlan.clab.yml --cleanup
 ```

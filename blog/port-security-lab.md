@@ -101,7 +101,7 @@ This configuration enables port security on `switch2`, allowing only one MAC add
 
 Deploy the topology with the following command:
 
-```
+```bash
 clab deploy -t portsec.clab.yml
 ```
 
@@ -111,31 +111,31 @@ After the lab is deployed, you can test the port security configuration. Access 
 
 To access `client1`, use the following command:
 
-```
+```bash
 docker exec -it clab-portsec-client1 sh
 ```
 
 On `client1`, you can ping `client2`:
 
-```
+```sh
 ping 192.168.10.102
 ```
 
 To access `attacker`, use the following command:
 
-```
+```bash
 docker exec -it clab-portsec-attacker sh
 ```
 
 On the attacker, you can try to ping `client2`:
 
-```
+```sh
 ping 192.168.10.102
 ```
 
 Now, access `switch2` to verify the port status:
 
-```
+```bash
 docker exec -it clab-portsec-switch2 Cli
 ```
 
@@ -149,6 +149,6 @@ show port-security
 
 When you are finished, you can destroy the lab environment and remove all related files with the following command:
 
-```
+```bash
 clab destroy -t portsec.clab.yml --cleanup
 ```
