@@ -11,19 +11,19 @@ Containerlab is a tool for deploying networking labs with Docker. It allows you 
 
 First, install Docker on your Linux machin by running:
 
-```
+```bash
 curl -fsSL https://get.docker.com | sh
 ```
 
 To install Containerlab on your Linux machine, run the following command:
 
-```
+```bash
 curl -sL https://get.containerlab.dev | bash
 ```
 
 Ensure your user has root (or sudo) privileges to execute Docker commands:
 
-```
+```bash
 sudo usermod -aG docker $USER
 ```
 
@@ -140,7 +140,7 @@ This lab uses BGP as the dynamic routing protocol, but you can also use OSPF as 
 
 To deploy the lab, run the following command in the same directory where you created the files:
 
-```
+```bash
 containerlab deploy -t demo.clab.yml
 ```
 
@@ -148,19 +148,19 @@ containerlab deploy -t demo.clab.yml
 
 After the lab is deployed, you can test the connectivity between the clients. Open a new terminal and connect to client1:
 
-```
+```bash
 docker exec -it clab-demo-client1 sh
 ```
 
 Ping client2 from client1:
 
-```
+```sh
 ping 192.168.20.2
 ```
 
 Connect to router1 CLI:
 
-```
+```bash
 docker exec -it clab-demo-router1 Cli
 ```
 
@@ -172,7 +172,7 @@ show ip route
 
 To generate a graph of the network topology, use the following command:
 
-```
+```bash
 containerlab graph -t demo.clab.yml
 ```
 
@@ -182,12 +182,12 @@ This command creates an interactive HTML-based graph that you can access in a we
 
 After testing, you can clean up the lab environment. To destroy the lab, run:
 
-```
+```bash
 containerlab destroy -t demo.clab.yml
 ```
 
 This command removes all containers in the lab. To remove the lab and all related files, run:
 
-```
+```bash
 containerlab destroy -t ceos.clab.yml --cleanup
 ```

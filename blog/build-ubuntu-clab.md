@@ -54,7 +54,7 @@ CMD ["/usr/sbin/sshd", "-D"]
 
 Once the `Dockerfile` is created, build the Docker image with the following command:
 
-```
+```bash
 docker build -t clab-ubuntu:latest .
 ```
 
@@ -64,7 +64,7 @@ Next, define the lab topology in a YAML file. In this example, the lab consists 
 
 Create a file named `ubuntu.clab.yml` and add the following content:
 
-```
+```yaml
 name: ubuntu
 topology:
   nodes:
@@ -107,24 +107,24 @@ end
 
 Deploy the lab using Containerlab:
 
-```
+```bash
 clab deploy -t ubuntu.clab.yml
 ```
 
 After deployment, test the connectivity between the client and the server. Connect to the client:
 
-```
+```bash
 ssh clab@clab-ubuntu-client
 ```
 
 Ping the server from the client:
 
-```
+```sh
 ping 192.168.10.3
 ```
 
 To destroy the lab and remove all containers, run:
 
-```
+```bash
 clab destroy -t ubuntu.clab.yml --cleanup
 ```

@@ -92,6 +92,7 @@ end
 The leaf routers are configured similarly, with different IP addresses and loopback addresses.
 
 Here are the configurations for leaf1 router (`leaf1.cfg`):
+
 ```
 !
 enable
@@ -120,6 +121,7 @@ router ospf 1
 end
 ```
 And for leaf2 router (`leaf2.cfg`):
+
 ```
 !
 enable
@@ -151,7 +153,7 @@ end
 
 To deploy the lab, navigate to the directory containing the files and run:
 
-```
+```bash
 clab deploy -t web.clab.yml
 ```
 

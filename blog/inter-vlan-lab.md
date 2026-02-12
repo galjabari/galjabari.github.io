@@ -111,7 +111,7 @@ This configuration enables inter-VLAN routing on the router by creating sub-inte
 
 To deploy the network topology, run the following command:
 
-```
+```bash
 containerlab deploy -t vlan.clab.yml
 ```
 
@@ -119,19 +119,19 @@ containerlab deploy -t vlan.clab.yml
 
 After the lab is deployed, you can test connectivity between the clients. Open a new terminal and connect to client1:
 
-```
+```bash
 docker exec -it clab-vlan-client1 sh
 ```
 
 Ping client2 from client1:
 
-```
+```sh
 ping 192.168.20.2
 ```
 
 To access the router CLI:
 
-```
+```bash
 docker exec -it clab-vlan-router Cli
 ```
 
@@ -145,6 +145,6 @@ show ip route
 
 After testing, you can clean up the lab environment. To remove the lab and all related files, run:
 
-```
+```bash
 containerlab destroy -t vlan.clab.yml --cleanup
 ```

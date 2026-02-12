@@ -29,7 +29,7 @@ topology:
 
 First, deploy the topology with Containerlab.
 
-```
+```bash
 containerlab deploy -t ospf.clab.yml
 ```
 
@@ -201,7 +201,7 @@ Create a playbook (`leaf2.yml`) to configure the second leaf router:
 
 Next, execute the playbooks for each device:
 
-```
+```bash
 ansible-playbook -i clab-ospf/ansible-inventory.yml leaf1.yml
 ansible-playbook -i clab-ospf/ansible-inventory.yml leaf2.yml
 ansible-playbook -i clab-ospf/ansible-inventory.yml spine.yml
@@ -232,6 +232,6 @@ You can verify the OSPF routing tables using the following Ansible playbook (`ve
 
 Run the playbook:
 
-```
+```bash
 ansible-playbook -i clab-ospf/ansible-inventory.yml verify.yml
 ```

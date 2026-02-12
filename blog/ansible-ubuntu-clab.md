@@ -80,30 +80,30 @@ Create an Ansible playbook named `nginx.yml` to install and configure Nginx on t
 
 Deploy the lab:
 
-```
+```bash
 clab deploy -t ubuntu.clab.yml
 ```
 
 Run the Ansible playbook:
 
-```
+```bash
 ansible-playbook -i clab-ubuntu/ansible-inventory.yml nginx.yml
 ```
 
 After the playbook execution, verify the Nginx installation by connecting to the client and accessing the server's web page:
 
-```
+```bash
 ssh clab@clab-ubuntu-client
 ```
 
 From the client, use `curl` to check the Nginx default page:
 
-```
+```sh
 curl http://192.168.10.3
 ```
 
 To destroy the lab, run:
 
-```
+```bash
 clab destroy -t ubuntu.clab.yml --cleanup
 ```
