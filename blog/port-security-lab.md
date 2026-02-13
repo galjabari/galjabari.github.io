@@ -13,7 +13,7 @@ This guide demonstrates how to configure port security on Arista cEOS switches u
 
 To create a network topology, use the following Containerlab configuration file named `portsec.clab.yml`:
 
-```
+```yaml
 name: portsec
 topology:
   nodes:
