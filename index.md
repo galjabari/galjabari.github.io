@@ -83,9 +83,9 @@ I'm Ghannam Aljabari, a Cybersecurity and Network Engineer passionate about tech
 - [Deploy a DNS Server with Containerlab](blog/dns-lab.md)
 
 ### Windows Server Administration
-- [Networking Basics](blog/ps-networking-basics.md)
+- [Networking Basics using PowerShell](blog/ps-networking-basics.md)
 - [Initial System Configuration](blog/ps-initial-configuration.md)
-- [DHCP Server](blog/ps-dhcp-server.md)
-- [DNS Server](blog/ps-dns-server.md)
-- [File Server](blog/ps-file-server.md)
+- [DHCP Server on Windows Server](blog/ps-dhcp-server.md)
+- [DNS Server on Windows Server](blog/ps-dns-server.md)
+- [File Server on Windows Server](blog/ps-file-server.md)
 - [Active Directory](blog/ps-active-directory.md)
