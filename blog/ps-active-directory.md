@@ -5,7 +5,7 @@ categories: ["Windows Server Administration", "Active Directory"]
 tags: ["Windows Server", "Active Directory", "AD DS", "PowerShell"]
 ---
 
-# Active Directory 
+# Active Directory on Windows Server
 
 This lab provides a step-by-step guide to installing and configuring Active Directory Domain Services (AD DS) on Windows Server 2022, including domain promotion, DHCP integration, joining client computers, and managing Organizational Units (OUs), groups, and users.
 

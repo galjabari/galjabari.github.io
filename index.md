@@ -84,8 +84,8 @@ I'm Ghannam Aljabari, a Cybersecurity and Network Engineer passionate about tech
 
 ### Windows Server Administration
 - [Networking Basics using PowerShell](blog/ps-networking-basics.md)
-- [Initial System Configuration](blog/ps-initial-configuration.md)
+- [Initial Configuration of Windows Server](blog/ps-initial-configuration.md)
 - [DHCP Server on Windows Server](blog/ps-dhcp-server.md)
 - [DNS Server on Windows Server](blog/ps-dns-server.md)
 - [File Server on Windows Server](blog/ps-file-server.md)
-- [Active Directory](blog/ps-active-directory.md)
+- [Active Directory on Windows Server](blog/ps-active-directory.md)

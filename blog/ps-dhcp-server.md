@@ -5,7 +5,7 @@ categories: ["Windows Server Administration", "DHCP Server"]
 tags: ["Windows Server", "DHCP", "PowerShell"]
 ---
 
-# DHCP Server 
+# DHCP Server on Windows Server
 
 This lab provides a comprehensive guide to setting up and managing a DHCP server on Windows Server 2022 using PowerShell.
 

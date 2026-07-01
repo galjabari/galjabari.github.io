@@ -5,7 +5,7 @@ categories: ["Windows Server Administration", "File Server"]
 tags: ["Windows Server", "File Server", "Storage", "PowerShell"]
 ---
 
-# File Server 
+# File Server on Windows Server
 
 This lab guides you through setting up a basic file server on Windows Server 2022, including creating a new volume, managing local users and groups, configuring NTFS permissions, and creating a shared folder.
 

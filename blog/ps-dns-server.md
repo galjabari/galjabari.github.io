@@ -5,7 +5,7 @@ categories: ["Windows Server Administration", "DNS Server"]
 tags: ["Windows Server", "DNS", "PowerShell"]
 ---
 
-# DNS Server 
+# DNS Server on Windows Server
 
 This lab covers the installation and configuration of a DNS server on Windows Server 2022, including managing forward and reverse lookup zones, and various DNS record types.
 

@@ -5,7 +5,7 @@ categories: ["Windows Server Administration", "Initial System Configuration"]
 tags: ["Windows Server", "Configuration", "PowerShell"]
 ---
 
-# Initial System Configuration
+# Initial Configuration of Windows Server
 
 This lab guides you through the initial configuration of a Windows Server 2022 instance, covering network settings, computer naming, time zone, RDP, and Windows updates.
 

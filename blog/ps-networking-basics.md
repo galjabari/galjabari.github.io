@@ -5,7 +5,7 @@ categories: ["Windows Server Administration", "Networking Basics"]
 tags: ["Windows Server", "Networking", "PowerShell"]
 ---
 
-# Networking Basics
+# Networking Basics using PowerShell
 
 This lab covers the fundamental networking commands in Windows Server 2022 using PowerShell.
 
