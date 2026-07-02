@@ -34,7 +34,6 @@ pvesm list local --content iso
 
 ## 2. Create a Virtual Machine
 
-### Create VM
 Creating a VM involves several steps, from defining its basic parameters to attaching storage and boot media. The `qm create` command initializes a new VM, and `qm set` is used for further configuration.
 
 - `qm create <vmid> --name <name> --memory <MiB> --cores <n> --net0 virtio,bridge=vmbr0`: Creates a new VM with a specified ID, name, memory, CPU cores, and a network interface connected to `vmbr0` using the `virtio` driver.
@@ -147,7 +146,6 @@ qm clone <source-vmid> <new-vmid> --name <new-name> --full
 
 ## 7. Remove VM
 
-### Remove VM
 To permanently delete a virtual machine, including all its associated disks, use `qm destroy`. The `--purge` flag ensures all configuration files and disks are removed.
 ```bash
 qm destroy <vmid> --purge

@@ -11,7 +11,6 @@ This lab guides you through the essential initial configuration steps for a Prox
 
 ## 1. Verify Proxmox VE Version
 
-### Show system version
 It's always good practice to verify the installed Proxmox VE version. This command displays detailed version information about your Proxmox installation and its components.
 ```bash
 pveversion
@@ -61,7 +60,6 @@ apt-get dist-upgrade -y
 
 Accurate time synchronization is vital for many system services and logging. Set your server's timezone to reflect your geographical location.
 
-### Set system timezone
 Replace `<Region/City>` with your desired timezone (e.g., `Asia/Gaza`). You can list available timezones using `timedatectl list-timezones`.
 ```bash
 timedatectl set-timezone <Region/City>
@@ -71,7 +69,6 @@ timedatectl set-timezone <Region/City>
 
 Proxmox VE displays a subscription reminder in the web interface for systems without an active subscription. This step removes that message.
 
-### Remove subscription message
 This `sed` command modifies the `proxmoxlib.js` file to hide the subscription status message. A backup of the original file is created (`.bak`). After modifying the file, the `pveproxy.service` needs to be restarted for the change to take effect.
 ```bash
 sed -i.bak '/.*res\.data\.status.*/{s/!//; s/active/NoMoreNagging/}' /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
