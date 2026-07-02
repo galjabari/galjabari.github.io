@@ -41,7 +41,6 @@ Creating a VM involves several steps, from defining its basic parameters to atta
 - `qm set <vmid> --ide2 local:iso/<filename>,media=cdrom`: Attaches an ISO image as a CD-ROM drive for installation.
 - `qm set <vmid> --boot "order=scsi0;ide2"`: Sets the boot order, prioritizing the SCSI hard disk and then the CD-ROM.
 
-### Example
 Here's a complete example of creating an Alpine Linux VM:
 ```bash
 cd /var/lib/vz/template/iso

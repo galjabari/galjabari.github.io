@@ -57,7 +57,6 @@ Creating an LXC container involves specifying a VMID, the template to use, root 
 - `pct create <vmid> local:vztmpl/<filename> --rootfs local-lvm:<GiB> --password <password>`: Creates a new container with a specified ID, using a local template, allocating root file system storage from `local-lvm`, and setting a root password.
 - `pct set <vmid> --hostname <name> --memory <MiB> --cores <n> --net0 name=eth0,bridge=vmbr0,ip=dhcp`: Configures the container's hostname, memory, CPU cores, and a network interface (`eth0`) connected to `vmbr0` with DHCP.
 
-### Example 
 Here's a complete example of downloading an Ubuntu 24.04 template and creating a new container:
 ```bash
 pveam download local ubuntu-24.04-standard_24.04-2_amd64.tar.zst
