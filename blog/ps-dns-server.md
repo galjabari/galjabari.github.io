@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "DNS Server"
+title: "DNS Server on Windows Server"
 categories: ["Windows Server Administration", "DNS Server"]
 tags: ["Windows Server", "DNS", "PowerShell"]
 ---

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Networking Basics"
+title: "Networking Basics using PowerShell"
 categories: ["Windows Server Administration", "Networking Basics"]
 tags: ["Windows Server", "Networking", "PowerShell"]
 ---

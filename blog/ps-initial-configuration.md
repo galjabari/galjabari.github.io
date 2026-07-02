@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Initial System Configuration"
+title: "Initial Configuration of Windows Server"
 categories: ["Windows Server Administration", "Initial System Configuration"]
 tags: ["Windows Server", "Configuration", "PowerShell"]
 ---

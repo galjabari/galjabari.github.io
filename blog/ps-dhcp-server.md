@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "DHCP Server"
+title: "DHCP Server on Windows Server"
 categories: ["Windows Server Administration", "DHCP Server"]
 tags: ["Windows Server", "DHCP", "PowerShell"]
 ---
