@@ -93,3 +93,7 @@ I'm Ghannam Aljabari, a Cybersecurity and Network Engineer passionate about tech
 ### Data Center
 - [Proxmox VE Initial Configuration](blog/pve-initial-configuration.md)
 - [Virtual Machine Management in Proxmox VE](blog/pve-vm-management.md)
+- [Linux Container Management in Proxmox VE](blog/pve-lxc-management.md)
+- [Software-Defined Networking in Proxmox VE](blog/pve-sdn.md)
+- [Local Storage in Proxmox VE](blog/pve-local-storage.md)
+- [Proxmox VE Clustering](blog/pve-clustering.md)
