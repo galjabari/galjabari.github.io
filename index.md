@@ -90,6 +90,6 @@ I'm Ghannam Aljabari, a Cybersecurity and Network Engineer passionate about tech
 - [File Server on Windows Server](blog/ps-file-server.md)
 - [Active Directory on Windows Server](blog/ps-active-directory.md)
 
-### Proxmox VE Administration
+### Data Center
 - [Proxmox VE Initial Configuration](blog/pve-initial-configuration.md)
 - [Virtual Machine Management in Proxmox VE](blog/pve-vm-management.md)
