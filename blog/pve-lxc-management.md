@@ -9,7 +9,7 @@ tags: ["Proxmox VE", "LXC", "Containers", "CLI"]
 
 This lab focuses on managing Linux Containers (LXC) within Proxmox VE using the command-line interface. You'll learn how to list, download, create, configure, and control containers.
 
-## 1. List and Manage Container Templates
+## 1. Download Container Templates
 
 Container templates are base images used to quickly deploy new LXC containers.
 
@@ -49,7 +49,7 @@ To free up storage space, you can remove downloaded templates that are no longer
 pveam remove local:vztmpl/<filename>
 ```
 
-## 2. Create and Configure a Linux Container
+## 2. Create a Linux Container
 
 ### Create container
 Creating an LXC container involves specifying a VMID, the template to use, root file system size, and a password. The `pct create` command initializes the container, and `pct set` is used for additional configuration.

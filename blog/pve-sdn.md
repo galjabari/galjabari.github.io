@@ -21,7 +21,7 @@ apt install dnsmasq
 systemctl disable --now dnsmasq
 ```
 
-## 2. Configure SDN Zones and Virtual Networks
+## 2. Create SDN Zones and Virtual Networks
 
 SDN in Proxmox VE is built around zones and virtual networks. Zones define the underlying network technology, while VNets create isolated network segments.
 

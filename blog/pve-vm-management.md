@@ -9,7 +9,7 @@ tags: ["Proxmox VE", "VM", "Virtualization", "CLI"]
 
 This lab provides a comprehensive guide to managing virtual machines (VMs) in Proxmox VE using the command-line interface. You will learn how to list, create, configure, and control the lifecycle of your VMs.
 
-## 1. List and Manage ISO Images
+## 1. Download ISO Images
 
 Before creating VMs, you often need to download and manage ISO images for installation.
 
