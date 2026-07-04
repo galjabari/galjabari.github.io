@@ -2,7 +2,7 @@
 layout: default
 title: "AGDLP Principle with PowerShell"
 categories: ["Windows Server Administration", "Active Directory"]
-tags: ["Windows Server", "Active Directory", "AGDLP", "PowerShell", "Permissions"]
+tags: ["Windows Server", "Active Directory", "AGDLP", "PowerShell"]
 ---
 
 # AGDLP Principle with PowerShell
