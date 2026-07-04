@@ -88,3 +88,5 @@ Get-ADGroupMember -Identity "HRFilesDLG"
 # Verify NTFS permissions
 Get-Acl -Path "D:\HR Files" | Select-Object -ExpandProperty Access
 ```
+
+![img](../assets/agdlp.png)
