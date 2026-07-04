@@ -7,7 +7,8 @@ title: "Configure Mail Server with Active Directory"
 
 Before integrating the mail server with Active Directory for LDAP authentication, you need to have a working mail server and Active Directory Domain Controller.
 
-You can follow this guide to set up the mail server: [Install and configure Mail Server on Ubuntu](install-mail-server.md).
+You can follow this guide to set up the mail server: 
+[Install and configure Mail Server on Ubuntu](install-mail-server.md)
 
 To set up the domain controller on Windows Server:
 - Rename the server to `dc.example.com`.
