@@ -73,4 +73,4 @@
 71. [Software-Defined Networking in Proxmox VE](blog/pve-sdn.md)
 72. [Local Storage in Proxmox VE](blog/pve-local-storage.md)
 73. [Proxmox VE Clustering](blog/pve-clustering.md)
-74. [AGDLP Principle with PowerShell](blog/ps-agdpl.md)
+74. [AGDLP Principle with PowerShell](blog/ps-agdlp.md)

@@ -89,7 +89,7 @@ I'm Ghannam Aljabari, a Cybersecurity and Network Engineer passionate about tech
 - [DNS Server on Windows Server](blog/ps-dns-server.md)
 - [File Server on Windows Server](blog/ps-file-server.md)
 - [Active Directory on Windows Server](blog/ps-active-directory.md)
-- [AGDLP Principle with PowerShell](blog/ps-agdpl.md)
+- [AGDLP Principle with PowerShell](blog/ps-agdlp.md)
 
 ### Data Center
 - [Proxmox VE Initial Configuration](blog/pve-initial-configuration.md)
