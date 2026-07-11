@@ -63,6 +63,7 @@ I'm Ghannam Aljabari, a Cybersecurity and Network Engineer passionate about tech
 - [OpenVPN with RADIUS for ZTNA](blog/openvpn-ztna.md)
 - [OpenVPN with RADIUS and LDAP for ZTNA](blog/openvpn-radius-ldap.md)
 - [Enable DNSSEC with BIND on Ubuntu](blog/enable-dnssec.md)
+- [Secure a Server with Fail2Ban](blog/secure-fail2ban.md)
 
 ### Networking Labs
 - [Lab as Code with Containerlab](blog/lab-as-code.md)

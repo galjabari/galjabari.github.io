@@ -74,3 +74,4 @@
 72. [Local Storage in Proxmox VE](blog/pve-local-storage.md)
 73. [Proxmox VE Clustering](blog/pve-clustering.md)
 74. [AGDLP Principle with PowerShell](blog/ps-agdlp.md)
+75. [Secure a Server with Fail2Ban](blog/secure-fail2ban.md)
