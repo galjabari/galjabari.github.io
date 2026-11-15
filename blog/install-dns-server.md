@@ -61,6 +61,18 @@ ns1     IN      A       192.168.1.10
 @       IN      A       192.168.1.12
 ```
 
+Before restarting the DNS service, check your configuration and zone files for syntax errors.
+
+Check the main BIND configuration syntax (no output means there are no errors):
+```bash
+sudo named-checkconf
+```
+
+Check the forward zone file for errors (replace `example.com` with your domain):
+```bash
+sudo named-checkzone example.com /etc/bind/db.example.com
+```
+
 After making changes, restart the BIND service to apply the configuration.
 
 ```bash
