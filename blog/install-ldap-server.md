@@ -107,10 +107,12 @@ Add the following content to the file:
 ```
 dn: cn=group1,ou=Groups,dc=example,dc=com
 objectClass: groupOfNames
+cn: group1
 member: uid=user1,ou=People,dc=example,dc=com
 
 dn: cn=group2,ou=Groups,dc=example,dc=com
 objectClass: groupOfNames
+cn: group2
 member: uid=user2,ou=People,dc=example,dc=com
 ```
 
