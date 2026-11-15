@@ -27,15 +27,10 @@ sudo dpkg-reconfigure slapd
 ```
 
 Step 1: Select No if you want to omit the OpenLDAP server configuration.
-
 Step 2: Enter your domain name, which will become your base Distinguished Name (DN). If you enter `example.com`, it is converted to `dc=example,dc=com`.
-
 Step 3: Enter your organization name, such as "Example".
-
 Step 4: Enter your LDAP administrator password and confirm it.
-
 Step 5: Select Yes if you want to remove the database files.
-
 Step 6: Select Yes if you want to move existing LDAP files.
 
 Create a file named `base.ldif` using your preferred text editor. This file defines the base organizational units for your LDAP directory.
